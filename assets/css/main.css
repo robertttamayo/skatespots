@@ -1,0 +1,47 @@
+body {
+    margin: 0;
+}
+body * {
+    box-sizing: border-box;
+}
+header {
+    width: 100%;
+    padding: 20px;
+    background: #efefef;
+    border-bottom: 1px solid silver;
+}
+footer {
+    width: 100%;
+    padding: 20px;
+    background: #efefef;
+    border-top: 1px solid silver;
+}
+.app-body {
+    padding: 20px;
+}
+.locator-wrap {
+    height: 600px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.locator-list {
+    width: 320px;
+    border-top: 1px solid silver;
+    padding-top: 20px;
+}
+.list-item {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid silver;
+}
+.locator-map {
+    width: calc(100% - 340px);
+}
+#map {
+    width: 100%;
+    height: 100%;
+}
+.reporter-wrap {
+    margin-bottom: 20px;
+}
