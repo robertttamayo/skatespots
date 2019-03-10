@@ -4,10 +4,17 @@ class Reporter extends React.Component {
         super(props);
         this.generate = this.generate.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.compress = this.compress.bind(this);
+        this.activate = this.activate.bind(this);
 
         this.endpoint = "https://www.roberttamayo.com/skate/up.php";
         this.state = {
-            spot_name: ''
+            spot_name: '',
+            spot_description: '',
+            image_file: null,
+            image_height: 300,
+            image_width: 400,
+            active: false
         };
     }
     generate(event){
@@ -36,16 +43,85 @@ class Reporter extends React.Component {
             [event.target.name]: event.target.value
         });
     }
+    compress(event) {
+        const fileName = event.target.files[0].name;
+        const reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+        reader.onload = event => {
+            const img = new Image();
+            img.src = event.target.result;
+            img.onload = () => {
+                    const elem = document.createElement('canvas');
+                    let width = 400;
+                    let scaleFactor = width / img.width;
+                    let height = Math.floor(img.height * scaleFactor);
+                    elem.width = width;
+                    elem.height = height;
+                    const ctx = elem.getContext('2d');
+                    ctx.drawImage(img, 0, 0, img.width, img.height);
+                    ctx.drawImage(elem, 0, 0, width, height);
+                    ctx.canvas.toBlob((blob) => {
+                        const file = new File([blob], fileName, {
+                            type: 'image/jpeg',
+                            lastModified: Date.now()
+                        });
+                        let image_preview_canvas = document.getElementById('image-preview-canvas');
+                        let ctx = image_preview_canvas.getContext('2d');
+                        this.setState({
+                            image_file: file,
+                            image_height: height,
+                            image_width: width
+                        });
+                        ctx.drawImage(img, 0,0,width, height);
+                    }, 'image/jpeg', 1);
+                },
+                reader.onerror = error => console.log(error);
+        };
+    }
+    activate() {
+        console.log('activating form');
+        this.setState({
+            active: true
+        })
+    }
     render() {
-        return (
-            <div class="reporter-wrap">
-                <div class="reporter-cta">Up this spot</div>
-                <form class="reporter-form" onSubmit={this.generate}>
-                    <input type="text" onChange={this.handleChange} value={this.state.spot_name} placeholder="Spot name" name="spot_name"/>
-                    <button type="submit">Add</button>
-                </form>
-            </div>
-        );
+        let rendered = "not rendered";
+        if (this.state.image_file !== null) {
+            rendered = "rendered";
+        }
+        if (!this.state.active) {
+            return (
+                <div className="reporter-wrap">
+                    <div className="reporter-cta button-cta" onClick={this.activate}>Up this spot</div>
+                </div>
+            );
+        } else {
+            return (
+                <div className="reporter-wrap">
+                    <div className="reporter-title">Adding new spot</div>
+                    <form className="reporter-form" onSubmit={this.generate}>
+                        <div>
+                            <label className="standard-label" for="spot_name">Name</label>
+                            <input type="text" onChange={this.handleChange} value={this.state.spot_name} placeholder="Spot name" id="spot_name" name="spot_name"/>
+                        </div>
+                        <div>
+                            <label className="standard-label" for="spot_description">Description (Optional)</label>
+                            <input type="text" onChange={this.handleChange} value={this.state.spot_description} placeholder="Describe this spot (rails, stairs, etc)" id="spot_description" name="spot_description"/>
+                        </div>
+                        <div>
+                            <label for="image_file" className="file-label">Upload an image</label>
+                            <input id="image_file" name="image_file" onChange={this.compress} type="file" accept="image/*"/>
+                        </div>
+                        <div className="image-preview">
+                            <canvas width={this.state.image_width} height={this.state.image_height} id="image-preview-canvas"></canvas>
+                        </div>
+                        <div>
+                            <button type="submit" className="button-cta">Submit spot</button>
+                        </div>
+                    </form>
+                </div>
+            );
+        }
     }
 }
 
@@ -55,7 +131,9 @@ class Header extends React.Component {
     }
     render() {
         return (
-            <header class="header-wrap">Header</header>
+            <header className="header-wrap">
+                <img src="https://www.roberttamayo.com/skate/assets/images/noskate.png" alt="no skateboarding"></img>
+            </header>
         );
     }
 }
@@ -67,12 +145,12 @@ class Lists extends React.Component {
     render(){
         // use props to render the list instead of state
         const listItems = this.props.items.map(item => 
-            <div class="list-item" data-item-id={item.spot_id}>
+            <div className="list-item" data-item-id={item.spot_id}>
                 {item.spot_name}
             </div>
         );
         return(
-            <div class="locator-list">
+            <div className="locator-list">
                 {listItems}
             </div>
         );
@@ -151,7 +229,7 @@ class Maps extends React.Component {
         this.preRender(this.props.items);
 
         return (
-            <div class="locator-map">
+            <div className="locator-map">
                 <div id="map" ref="map"></div>
             </div>
         );
@@ -170,7 +248,7 @@ class Locator extends React.Component {
         this.askUserLocation = this.askUserLocation.bind(this);
 
         this.state = {
-            items: []
+            items: [],
         };
     }
     gather() {
@@ -194,7 +272,6 @@ class Locator extends React.Component {
         return new Promise((resolve, reject)=> {
             if ("geolocation" in navigator) {
                 navigator.geolocation.getCurrentPosition((position) => {
-                    console.log(position);
                     this.user_lat = position.coords.latitude;
                     this.user_lng = position.coords.longitude;
                     resolve();
@@ -207,7 +284,7 @@ class Locator extends React.Component {
     }
     render() {
         return (
-            <div class="locator-wrap">
+            <div className="locator-wrap">
                 <Lists items={this.state.items} />
                 <Maps items={this.state.items} />
             </div>
@@ -232,7 +309,10 @@ class Footer extends React.Component {
     }
     render() {
         return (
-            <footer class="footer-wrap">Footer</footer>
+            <footer className="footer-wrap">
+                Footer
+                <a href="/credits.html">No Skating by b farias from the Noun Project</a>
+            </footer>
         );
     }
 }
@@ -262,7 +342,7 @@ class LoginForm extends React.Component {
     }
     render(){
         return (
-            <form class="login-form" onSubmit={this.handleLogin}>
+            <form className="login-form" onSubmit={this.handleLogin}>
                 <input type="text" value={this.state.user_name} onChange={this.handleChange} name="user_name" placeholder="Username"/>
                 <input type="password" value={this.state.user_magicword} name="user_magicword" onChange={this.handleChange} placeholder="Password" />
                 <button type="submit">Login</button>
@@ -302,7 +382,6 @@ class App extends React.Component {
                         user_name: data.user_name,
                         user_id: data.user_id
                     });
-                    console.log(cookie_data_string);
                     setCookie('user_data', cookie_data_string);
                     this.setState({
                         user_name: data.user_name,
@@ -329,10 +408,10 @@ class App extends React.Component {
     render() {
         if (this.state.signed_in) {
             return (
-                <div class="app-wrap">
+                <div className="app-wrap">
                     <Header />
 
-                    <div class="app-body">
+                    <div className="app-body">
                         <Reporter />
 
                         <Locator />
@@ -396,3 +475,13 @@ function getCookie(cname) {
     }
     return "";
 }
+/*
+<!-- HTML Part -->
+<input id="file" type="file" accept="image/*">
+<script>
+    document.getElementById("file").addEventListener("change", function (event) {
+	compress(event);
+});
+</script>
+*/
+

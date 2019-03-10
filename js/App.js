@@ -18,16 +18,23 @@ var Reporter = function (_React$Component) {
 
         _this.generate = _this.generate.bind(_this);
         _this.handleChange = _this.handleChange.bind(_this);
+        _this.compress = _this.compress.bind(_this);
+        _this.activate = _this.activate.bind(_this);
 
         _this.endpoint = "https://www.roberttamayo.com/skate/up.php";
         _this.state = {
-            spot_name: ''
+            spot_name: '',
+            spot_description: '',
+            image_file: null,
+            image_height: 300,
+            image_width: 400,
+            active: false
         };
         return _this;
     }
 
     _createClass(Reporter, [{
-        key: "generate",
+        key: 'generate',
         value: function generate(event) {
             var _this2 = this;
 
@@ -52,32 +59,134 @@ var Reporter = function (_React$Component) {
             }
         }
     }, {
-        key: "handleChange",
+        key: 'handleChange',
         value: function handleChange(event) {
             this.setState(_defineProperty({}, event.target.name, event.target.value));
         }
     }, {
-        key: "render",
+        key: 'compress',
+        value: function compress(event) {
+            var _this3 = this;
+
+            var fileName = event.target.files[0].name;
+            var reader = new FileReader();
+            reader.readAsDataURL(event.target.files[0]);
+            reader.onload = function (event) {
+                var img = new Image();
+                img.src = event.target.result;
+                img.onload = function () {
+                    var elem = document.createElement('canvas');
+                    var width = 400;
+                    var scaleFactor = width / img.width;
+                    var height = Math.floor(img.height * scaleFactor);
+                    elem.width = width;
+                    elem.height = height;
+                    var ctx = elem.getContext('2d');
+                    ctx.drawImage(img, 0, 0, img.width, img.height);
+                    ctx.drawImage(elem, 0, 0, width, height);
+                    ctx.canvas.toBlob(function (blob) {
+                        var file = new File([blob], fileName, {
+                            type: 'image/jpeg',
+                            lastModified: Date.now()
+                        });
+                        var image_preview_canvas = document.getElementById('image-preview-canvas');
+                        var ctx = image_preview_canvas.getContext('2d');
+                        _this3.setState({
+                            image_file: file,
+                            image_height: height,
+                            image_width: width
+                        });
+                        ctx.drawImage(img, 0, 0, width, height);
+                    }, 'image/jpeg', 1);
+                }, reader.onerror = function (error) {
+                    return console.log(error);
+                };
+            };
+        }
+    }, {
+        key: 'activate',
+        value: function activate() {
+            console.log('activating form');
+            this.setState({
+                active: true
+            });
+        }
+    }, {
+        key: 'render',
         value: function render() {
-            return React.createElement(
-                "div",
-                { "class": "reporter-wrap" },
-                React.createElement(
-                    "div",
-                    { "class": "reporter-cta" },
-                    "Up this spot"
-                ),
-                React.createElement(
-                    "form",
-                    { "class": "reporter-form", onSubmit: this.generate },
-                    React.createElement("input", { type: "text", onChange: this.handleChange, value: this.state.spot_name, placeholder: "Spot name", name: "spot_name" }),
+            var rendered = "not rendered";
+            if (this.state.image_file !== null) {
+                rendered = "rendered";
+            }
+            if (!this.state.active) {
+                return React.createElement(
+                    'div',
+                    { className: 'reporter-wrap' },
                     React.createElement(
-                        "button",
-                        { type: "submit" },
-                        "Add"
+                        'div',
+                        { className: 'reporter-cta button-cta', onClick: this.activate },
+                        'Up this spot'
                     )
-                )
-            );
+                );
+            } else {
+                return React.createElement(
+                    'div',
+                    { className: 'reporter-wrap' },
+                    React.createElement(
+                        'div',
+                        { className: 'reporter-title' },
+                        'Adding new spot'
+                    ),
+                    React.createElement(
+                        'form',
+                        { className: 'reporter-form', onSubmit: this.generate },
+                        React.createElement(
+                            'div',
+                            null,
+                            React.createElement(
+                                'label',
+                                { className: 'standard-label', 'for': 'spot_name' },
+                                'Name'
+                            ),
+                            React.createElement('input', { type: 'text', onChange: this.handleChange, value: this.state.spot_name, placeholder: 'Spot name', id: 'spot_name', name: 'spot_name' })
+                        ),
+                        React.createElement(
+                            'div',
+                            null,
+                            React.createElement(
+                                'label',
+                                { className: 'standard-label', 'for': 'spot_description' },
+                                'Description (Optional)'
+                            ),
+                            React.createElement('input', { type: 'text', onChange: this.handleChange, value: this.state.spot_description, placeholder: 'Describe this spot (rails, stairs, etc)', id: 'spot_description', name: 'spot_description' })
+                        ),
+                        React.createElement(
+                            'div',
+                            null,
+                            React.createElement(
+                                'label',
+                                { 'for': 'image_file', className: 'file-label' },
+                                'Upload an image'
+                            ),
+                            React.createElement('input', { id: 'image_file', name: 'image_file', onChange: this.compress, type: 'file', accept: 'image/*' })
+                        ),
+                        React.createElement(
+                            'div',
+                            { className: 'image-preview' },
+                            React.createElement('canvas', { width: this.state.image_width, height: this.state.image_height, id: 'image-preview-canvas' })
+                        ),
+                        React.createElement(
+                            'div',
+                            null,
+                            React.createElement(
+                                'button',
+                                { type: 'submit', className: 'button-cta' },
+                                'Submit spot'
+                            )
+                        )
+                    )
+                );
+            }
         }
     }]);
 
@@ -94,12 +203,12 @@ var Header = function (_React$Component2) {
     }
 
     _createClass(Header, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "header",
-                { "class": "header-wrap" },
-                "Header"
+                'header',
+                { className: 'header-wrap' },
+                React.createElement('img', { src: 'https://www.roberttamayo.com/skate/assets/images/noskate.png', alt: 'no skateboarding' })
             );
         }
     }]);
@@ -117,19 +226,19 @@ var Lists = function (_React$Component3) {
     }
 
     _createClass(Lists, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             // use props to render the list instead of state
             var listItems = this.props.items.map(function (item) {
                 return React.createElement(
-                    "div",
-                    { "class": "list-item", "data-item-id": item.spot_id },
+                    'div',
+                    { className: 'list-item', 'data-item-id': item.spot_id },
                     item.spot_name
                 );
             });
             return React.createElement(
-                "div",
-                { "class": "locator-list" },
+                'div',
+                { className: 'locator-list' },
                 listItems
             );
         }
@@ -144,25 +253,25 @@ var Maps = function (_React$Component4) {
     function Maps(props) {
         _classCallCheck(this, Maps);
 
-        var _this5 = _possibleConstructorReturn(this, (Maps.__proto__ || Object.getPrototypeOf(Maps)).call(this, props));
+        var _this6 = _possibleConstructorReturn(this, (Maps.__proto__ || Object.getPrototypeOf(Maps)).call(this, props));
 
-        _this5.create = _this5.create.bind(_this5);
-        _this5.preRender = _this5.preRender.bind(_this5);
+        _this6.create = _this6.create.bind(_this6);
+        _this6.preRender = _this6.preRender.bind(_this6);
 
-        _this5.map = {};
-        _this5.tileLayer = {};
-        _this5.lat = 39.5;
-        _this5.lng = -98.35;
-        _this5.zoom = 4;
+        _this6.map = {};
+        _this6.tileLayer = {};
+        _this6.lat = 39.5;
+        _this6.lng = -98.35;
+        _this6.zoom = 4;
 
-        _this5.state = {
-            items: _this5.props.items
+        _this6.state = {
+            items: _this6.props.items
         };
-        return _this5;
+        return _this6;
     }
 
     _createClass(Maps, [{
-        key: "create",
+        key: 'create',
         value: function create() {
             this.map = L.map(this.refs.map, {
                 attributionControl: false,
@@ -176,9 +285,9 @@ var Maps = function (_React$Component4) {
             }).addTo(this.map);
         }
     }, {
-        key: "preRender",
+        key: 'preRender',
         value: function preRender(items) {
-            var _this6 = this;
+            var _this7 = this;
 
             var lats = [];
             var lngs = [];
@@ -189,7 +298,7 @@ var Maps = function (_React$Component4) {
                 lats.push(lat);
                 lngs.push(lng);
 
-                L.marker([lat, lng]).addTo(_this6.map);
+                L.marker([lat, lng]).addTo(_this7.map);
             });
 
             lats.sort(function (a, b) {
@@ -220,18 +329,18 @@ var Maps = function (_React$Component4) {
             }
         }
     }, {
-        key: "render",
+        key: 'render',
         value: function render() {
             this.preRender(this.props.items);
 
             return React.createElement(
-                "div",
-                { "class": "locator-map" },
-                React.createElement("div", { id: "map", ref: "map" })
+                'div',
+                { className: 'locator-map' },
+                React.createElement('div', { id: 'map', ref: 'map' })
             );
         }
     }, {
-        key: "componentDidMount",
+        key: 'componentDidMount',
         value: function componentDidMount() {
             console.log('did mount');
             this.create();
@@ -247,25 +356,25 @@ var Locator = function (_React$Component5) {
     function Locator(props) {
         _classCallCheck(this, Locator);
 
-        var _this7 = _possibleConstructorReturn(this, (Locator.__proto__ || Object.getPrototypeOf(Locator)).call(this, props));
+        var _this8 = _possibleConstructorReturn(this, (Locator.__proto__ || Object.getPrototypeOf(Locator)).call(this, props));
 
-        _this7.endpoint = "https://www.roberttamayo.com/skate/down.php";
-        _this7.gather = _this7.gather.bind(_this7);
-        _this7.askUserLocation = _this7.askUserLocation.bind(_this7);
+        _this8.endpoint = "https://www.roberttamayo.com/skate/down.php";
+        _this8.gather = _this8.gather.bind(_this8);
+        _this8.askUserLocation = _this8.askUserLocation.bind(_this8);
 
-        _this7.state = {
+        _this8.state = {
             items: []
         };
-        return _this7;
+        return _this8;
     }
 
     _createClass(Locator, [{
-        key: "gather",
+        key: 'gather',
         value: function gather() {
-            var _this8 = this;
+            var _this9 = this;
 
             return new Promise(function (resolve, reject) {
-                $.ajax(_this8.endpoint, {
+                $.ajax(_this9.endpoint, {
                     method: "POST",
                     data: {}
                 }).then(function (response) {
@@ -281,16 +390,15 @@ var Locator = function (_React$Component5) {
             });
         }
     }, {
-        key: "askUserLocation",
+        key: 'askUserLocation',
         value: function askUserLocation() {
-            var _this9 = this;
+            var _this10 = this;
 
             return new Promise(function (resolve, reject) {
                 if ("geolocation" in navigator) {
                     navigator.geolocation.getCurrentPosition(function (position) {
-                        console.log(position);
-                        _this9.user_lat = position.coords.latitude;
-                        _this9.user_lng = position.coords.longitude;
+                        _this10.user_lat = position.coords.latitude;
+                        _this10.user_lng = position.coords.longitude;
                         resolve();
                     });
                 } else {
@@ -300,23 +408,23 @@ var Locator = function (_React$Component5) {
             });
         }
     }, {
-        key: "render",
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "div",
-                { "class": "locator-wrap" },
+                'div',
+                { className: 'locator-wrap' },
                 React.createElement(Lists, { items: this.state.items }),
                 React.createElement(Maps, { items: this.state.items })
             );
         }
     }, {
-        key: "componentDidMount",
+        key: 'componentDidMount',
         value: function componentDidMount() {
-            var _this10 = this;
+            var _this11 = this;
 
             this.gather().then(function (response) {
                 console.log('response in cdm', response);
-                _this10.setState({
+                _this11.setState({
                     items: response
                 });
             });
@@ -339,12 +447,17 @@ var Footer = function (_React$Component6) {
     }
 
     _createClass(Footer, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "footer",
-                { "class": "footer-wrap" },
-                "Footer"
+                'footer',
+                { className: 'footer-wrap' },
+                'Footer',
+                React.createElement(
+                    'a',
+                    { href: '/credits.html' },
+                    'No Skating by b farias from the Noun Project'
+                )
             );
         }
     }]);
@@ -358,22 +471,22 @@ var LoginForm = function (_React$Component7) {
     function LoginForm(props) {
         _classCallCheck(this, LoginForm);
 
-        var _this12 = _possibleConstructorReturn(this, (LoginForm.__proto__ || Object.getPrototypeOf(LoginForm)).call(this, props));
+        var _this13 = _possibleConstructorReturn(this, (LoginForm.__proto__ || Object.getPrototypeOf(LoginForm)).call(this, props));
 
         console.log(props);
-        _this12.handleLogin = _this12.handleLogin.bind(_this12);
-        _this12.handleChange = _this12.handleChange.bind(_this12);
-        _this12.state = {
-            user_name: _this12.props.user_name,
-            user_id: _this12.props.user_id,
-            user_magicword: _this12.props.user_magicword,
+        _this13.handleLogin = _this13.handleLogin.bind(_this13);
+        _this13.handleChange = _this13.handleChange.bind(_this13);
+        _this13.state = {
+            user_name: _this13.props.user_name,
+            user_id: _this13.props.user_id,
+            user_magicword: _this13.props.user_magicword,
             failed: false
         };
-        return _this12;
+        return _this13;
     }
 
     _createClass(LoginForm, [{
-        key: "handleChange",
+        key: 'handleChange',
         value: function handleChange(event) {
             this.props.onLoginChange({
                 name: event.target.name,
@@ -381,23 +494,23 @@ var LoginForm = function (_React$Component7) {
             });
         }
     }, {
-        key: "handleLogin",
+        key: 'handleLogin',
         value: function handleLogin(event) {
             event.preventDefault();
             this.props.onLogin();
         }
     }, {
-        key: "render",
+        key: 'render',
         value: function render() {
             return React.createElement(
-                "form",
-                { "class": "login-form", onSubmit: this.handleLogin },
-                React.createElement("input", { type: "text", value: this.state.user_name, onChange: this.handleChange, name: "user_name", placeholder: "Username" }),
-                React.createElement("input", { type: "password", value: this.state.user_magicword, name: "user_magicword", onChange: this.handleChange, placeholder: "Password" }),
+                'form',
+                { className: 'login-form', onSubmit: this.handleLogin },
+                React.createElement('input', { type: 'text', value: this.state.user_name, onChange: this.handleChange, name: 'user_name', placeholder: 'Username' }),
+                React.createElement('input', { type: 'password', value: this.state.user_magicword, name: 'user_magicword', onChange: this.handleChange, placeholder: 'Password' }),
                 React.createElement(
-                    "button",
-                    { type: "submit" },
-                    "Login"
+                    'button',
+                    { type: 'submit' },
+                    'Login'
                 )
             );
         }
@@ -412,27 +525,27 @@ var App = function (_React$Component8) {
     function App(props) {
         _classCallCheck(this, App);
 
-        var _this13 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+        var _this14 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-        _this13.handleLoginChange = _this13.handleLoginChange.bind(_this13);
-        _this13.handleLogin = _this13.handleLogin.bind(_this13);
+        _this14.handleLoginChange = _this14.handleLoginChange.bind(_this14);
+        _this14.handleLogin = _this14.handleLogin.bind(_this14);
 
-        _this13.endpoint = 'https://www.roberttamayo.com/skate/login.php';
+        _this14.endpoint = 'https://www.roberttamayo.com/skate/login.php';
 
-        _this13.state = {
-            user_data: _this13.props.user_data,
-            user_name: _this13.props.user_name,
-            user_id: _this13.props.user_id,
-            signed_in: _this13.props.signed_in,
+        _this14.state = {
+            user_data: _this14.props.user_data,
+            user_name: _this14.props.user_name,
+            user_id: _this14.props.user_id,
+            signed_in: _this14.props.signed_in,
             user_magicword: ''
         };
-        return _this13;
+        return _this14;
     }
 
     _createClass(App, [{
-        key: "handleLogin",
+        key: 'handleLogin',
         value: function handleLogin() {
-            var _this14 = this;
+            var _this15 = this;
 
             $.ajax(this.endpoint, {
                 method: "POST",
@@ -448,15 +561,14 @@ var App = function (_React$Component8) {
                             user_name: data.user_name,
                             user_id: data.user_id
                         });
-                        console.log(cookie_data_string);
                         setCookie('user_data', cookie_data_string);
-                        _this14.setState({
+                        _this15.setState({
                             user_name: data.user_name,
                             user_id: data.user_id,
                             signed_in: true
                         });
                     } else {
-                        _this14.setState({
+                        _this15.setState({
                             signed_in: false,
                             failed: true
                         });
@@ -466,21 +578,21 @@ var App = function (_React$Component8) {
             });
         }
     }, {
-        key: "handleLoginChange",
+        key: 'handleLoginChange',
         value: function handleLoginChange(data) {
             this.setState(_defineProperty({}, data.name, data.value));
         }
     }, {
-        key: "render",
+        key: 'render',
         value: function render() {
             if (this.state.signed_in) {
                 return React.createElement(
-                    "div",
-                    { "class": "app-wrap" },
+                    'div',
+                    { className: 'app-wrap' },
                     React.createElement(Header, null),
                     React.createElement(
-                        "div",
-                        { "class": "app-body" },
+                        'div',
+                        { className: 'app-body' },
                         React.createElement(Reporter, null),
                         React.createElement(Locator, null)
                     ),
@@ -539,3 +651,12 @@ function getCookie(cname) {
     }
     return "";
 }
+/*
+<!-- HTML Part -->
+<input id="file" type="file" accept="image/*">
+<script>
+    document.getElementById("file").addEventListener("change", function (event) {
+	compress(event);
+});
+</script>
+*/
