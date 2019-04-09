@@ -113,7 +113,7 @@ class Reporter extends React.Component {
                             <input id="image_file" name="image_file" onChange={this.compress} type="file" accept="image/*"/>
                         </div>
                         <div className="image-preview">
-                            <canvas width={this.state.image_width} height={this.state.image_height} id="image-preview-canvas"></canvas>
+                            <canvas style={`display: ${(this.state.image_file) ? 'default' : 'none'}`} width={this.state.image_width} height={this.state.image_height} id="image-preview-canvas"></canvas>
                         </div>
                         <div>
                             <button type="submit" className="button-cta">Submit spot</button>
@@ -132,7 +132,7 @@ class Header extends React.Component {
     render() {
         return (
             <header className="header-wrap">
-                <img src="https://www.roberttamayo.com/skate/assets/images/noskate.png" alt="no skateboarding"></img>
+                
             </header>
         );
     }
@@ -310,8 +310,7 @@ class Footer extends React.Component {
     render() {
         return (
             <footer className="footer-wrap">
-                Footer
-                <a href="/credits.html">No Skating by b farias from the Noun Project</a>
+                
             </footer>
         );
     }

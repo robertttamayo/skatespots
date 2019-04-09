@@ -173,7 +173,7 @@ var Reporter = function (_React$Component) {
                         React.createElement(
                             'div',
                             { className: 'image-preview' },
-                            React.createElement('canvas', { width: this.state.image_width, height: this.state.image_height, id: 'image-preview-canvas' })
+                            React.createElement('canvas', { style: 'display: ' + (this.state.image_file ? 'default' : 'none'), width: this.state.image_width, height: this.state.image_height, id: 'image-preview-canvas' })
                         ),
                         React.createElement(
                             'div',
@@ -205,11 +205,7 @@ var Header = function (_React$Component2) {
     _createClass(Header, [{
         key: 'render',
         value: function render() {
-            return React.createElement(
-                'header',
-                { className: 'header-wrap' },
-                React.createElement('img', { src: 'https://www.roberttamayo.com/skate/assets/images/noskate.png', alt: 'no skateboarding' })
-            );
+            return React.createElement('header', { className: 'header-wrap' });
         }
     }]);
 
@@ -449,16 +445,7 @@ var Footer = function (_React$Component6) {
     _createClass(Footer, [{
         key: 'render',
         value: function render() {
-            return React.createElement(
-                'footer',
-                { className: 'footer-wrap' },
-                'Footer',
-                React.createElement(
-                    'a',
-                    { href: '/credits.html' },
-                    'No Skating by b farias from the Noun Project'
-                )
-            );
+            return React.createElement('footer', { className: 'footer-wrap' });
         }
     }]);
 
