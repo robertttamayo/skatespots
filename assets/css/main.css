@@ -1,115 +1,194 @@
+/* line 31, main.scss */
 body {
-    margin: 0;
-    font-family: sans-serif;
-    font-size: 15px;
-    background: #71eeb8;
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 15px;
+  background: #71eeb8;
 }
+
+/* line 37, main.scss */
 body * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
+
+/* line 40, main.scss */
 header {
-    width: 100%;
-    padding: 5px 20px;
-    text-align: center;
+  width: 100%;
+  padding: 5px 20px;
+  text-align: center;
 }
+
+/* line 45, main.scss */
 header img {
-    /* width: 50px; */
+  /* width: 50px; */
 }
+
+/* line 48, main.scss */
 footer {
-    width: 100%;
-    padding: 20px;
-    background: #efefef;
-    border-top: 1px solid silver;
+  width: 100%;
+  padding: 20px;
+  background: #efefef;
+  border-top: 1px solid silver;
 }
+
+/* line 54, main.scss */
 .app-body {
-    padding: 20px;
+  padding: 20px;
 }
+
+/* line 57, main.scss */
 .locator-wrap {
-    height: 600px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+  height: 600px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
+
+/* line 63, main.scss */
 .locator-list {
-    width: 320px;
-    border-top: 1px solid silver;
-    padding-top: 20px;
+  width: 320px;
+  border-top: 1px solid silver;
+  padding-top: 20px;
 }
+
+/* line 68, main.scss */
 .list-item {
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid silver;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid silver;
 }
+
+/* line 73, main.scss */
 .locator-map {
-    width: calc(100% - 340px);
+  width: calc(100% - 340px);
 }
+
+/* line 76, main.scss */
 #map {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
+
+/* line 80, main.scss */
 .reporter-wrap {
-    margin-bottom: 20px;
-    padding: 10px;
-    border: 1px solid silver;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid silver;
 }
+
+/* line 85, main.scss */
 .image-preview {
-    margin: 20px 0;
+  margin: 20px 0;
 }
+
+/* line 88, main.scss */
 .image-preview canvas {
-    width: 100%;
-    max-width: 400px;
+  width: 100%;
+  max-width: 400px;
 }
+
 @media (max-width: 767px) {
-    .locator-map {
-        width: 100%;
-        position: absolute;
-    }
-}
-.reporter-title {
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid silver;
-}
-.reporter-form input[type=text] {
-    padding: 0 10px;
-    border: 1px solid silver;
-    margin-bottom: 20px;
-    height: 35px;
-    line-height: 35px;
+  /* line 93, main.scss */
+  .locator-map {
     width: 100%;
-    max-width: 320px;
+    position: absolute;
+  }
 }
+/* line 98, main.scss */
+.reporter-title {
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid silver;
+}
+
+/* line 103, main.scss */
+.reporter-form input[type=text] {
+  padding: 0 10px;
+  border: 1px solid silver;
+  margin-bottom: 20px;
+  height: 35px;
+  line-height: 35px;
+  width: 100%;
+  max-width: 320px;
+}
+
+/* line 112, main.scss */
 .reporter-form input[type=file] {
-    display: none;
+  display: none;
 }
+
+/* line 115, main.scss */
 .standard-label {
-    display: inline-block;
-    margin-bottom: 10px;
+  display: inline-block;
+  margin-bottom: 10px;
 }
+
+/* line 119, main.scss */
 .reporter-form .file-label {
-    background: silver;
-    padding: 0 20px;
-    height: 35px;
-    line-height: 35px;
-    color: black;
-    text-align: center;
-    border: 1px solid black;
-    display: inline-block;
-    font-size: 15px;
+  background: silver;
+  padding: 0 20px;
+  height: 35px;
+  line-height: 35px;
+  color: black;
+  text-align: center;
+  border: 1px solid black;
+  display: inline-block;
+  font-size: 15px;
 }
 
+/* line 131, main.scss */
 .button-cta {
-    background: black;
-    padding: 0 20px;
-    height: 35px;
-    line-height: 35px;
-    color: white;
-    text-transform: uppercase;
-    font-weight: bold;
-    text-align: center;
-    border: none;
-    display: inline-block;
-    font-size: 15px;
+  background: black;
+  padding: 0 20px;
+  height: 35px;
+  line-height: 35px;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+  border: none;
+  display: inline-block;
+  font-size: 15px;
 }
 
-/* #71eeb8 */
+/* line 145, main.scss */
+.home-menu-wrap {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-justify-content: space-between;
+  -ms-justify-content: space-between;
+  justify-content: space-between;
+  width: 100%;
+}
+/* line 150, main.scss */
+.home-menu-wrap .home-menu-button {
+  cursor: pointer;
+  width: calc(50% - 10px);
+  margin-bottom: 20px;
+  border: 1px solid black;
+  background: white;
+  color: black;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-align-items: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  height: 100px;
+}
+
+/*# sourceMappingURL=main.css.map */
