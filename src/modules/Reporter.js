@@ -5,7 +5,14 @@ export class Reporter extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.compress = this.compress.bind(this);
         this.activate = this.activate.bind(this);
+        this.getCoords = this.getCoords.bind(this);
 
+        this.crew_id = this.props.crew_id;
+
+        this.coords = {
+            lat: '123.9309230',
+            lng: '99.30904290'
+        }
         this.endpoint = "https://www.roberttamayo.com/skate/up.php";
         this.state = {
             spot_name: '',
@@ -16,19 +23,31 @@ export class Reporter extends React.Component {
             active: false
         };
     }
+    getCoords() {
+        if (this.coords.lat != '') {
+            return `Lat: ${this.coords.lat}, Lng: ${this.coords.lng}`;
+        } else {
+            return ``;
+        }
+    }
     generate(event){
+        // TODO: update this section to upload the image file
         event.preventDefault();
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition((position) => {
                 console.log(position);
+                this.coords.lat = position.coords.latitude.toString();
+                this.coords.lng = position.coords.latitude.toString();
                 $.ajax(this.endpoint, {
                     method: "POST",
                     data: {
                         lat: position.coords.latitude.toString(),
                         lng: position.coords.longitude.toString(),
-                        spot_name: this.state.spot_name
+                        spot_name: this.state.spot_name,
+                        crew_id: this.crew_id
                     }   
                 }).then((response)=>{
+                    // TODO: update UI to reflect successful upload
                     console.log(response);
                 });
                 //do_something(position.coords.latitude, position.coords.longitude);
@@ -88,7 +107,8 @@ export class Reporter extends React.Component {
         if (this.state.image_file !== null) {
             rendered = "rendered";
         }
-        if (!this.state.active) {
+        // if (!this.state.active) {
+        if (false) {
             return (
                 <div className="reporter-wrap">
                     <div className="reporter-cta button-cta" onClick={this.activate}>Up this spot</div>
@@ -97,25 +117,28 @@ export class Reporter extends React.Component {
         } else {
             return (
                 <div className="reporter-wrap">
-                    <div className="reporter-title">Adding new spot</div>
+                    <div className="reporter-title">Adding a Spot</div>
                     <form className="reporter-form" onSubmit={this.generate}>
                         <div>
                             <label className="standard-label" for="spot_name">Name</label>
-                            <input type="text" onChange={this.handleChange} value={this.state.spot_name} placeholder="Spot name" id="spot_name" name="spot_name"/>
+                            <input type="text" onChange={this.handleChange} value={this.state.spot_name} placeholder="Name" id="spot_name" name="spot_name"/>
                         </div>
                         <div>
                             <label className="standard-label" for="spot_description">Description (Optional)</label>
-                            <input type="text" onChange={this.handleChange} value={this.state.spot_description} placeholder="Describe this spot (rails, stairs, etc)" id="spot_description" name="spot_description"/>
+                            <textarea onChange={this.handleChange} value={this.state.spot_description} placeholder="Description" id="spot_description" name="spot_description"/>
                         </div>
                         <div>
-                            <label for="image_file" className="file-label">Upload an image</label>
+                            <label for="image_file" className="file-label">Add an Image</label>
                             <input id="image_file" name="image_file" onChange={this.compress} type="file" accept="image/*"/>
                         </div>
                         <div className="image-preview">
-                            <canvas style={`display: ${(this.state.image_file) ? 'default' : 'none'}`} width={this.state.image_width} height={this.state.image_height} id="image-preview-canvas"></canvas>
+                            <canvas style={{display: this.state.image_file ? 'default' : 'none'}} width={this.state.image_width} height={this.state.image_height} id="image-preview-canvas"></canvas>
                         </div>
                         <div>
-                            <button type="submit" className="button-cta">Submit spot</button>
+                            <button type="submit" className="button-cta">Post</button>
+                        </div>
+                        <div className="coords">
+                            {this.getCoords()}
                         </div>
                     </form>
                 </div>

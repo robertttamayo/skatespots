@@ -8,15 +8,19 @@ export class Locator extends React.Component {
         this.gather = this.gather.bind(this);
         this.askUserLocation = this.askUserLocation.bind(this);
 
+        this.crew_id = this.props.crew_id;
         this.state = {
             items: [],
         };
     }
     gather() {
+        console.log(this.crew_id);
         return new Promise((resolve, reject)=> {
             $.ajax(this.endpoint, {
                 method: "POST",
-                data: {}
+                data: {
+                    crew_id: this.crew_id
+                }
             }).then((response)=>{
                 try {
                     const response_data = JSON.parse(response);

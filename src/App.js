@@ -11,17 +11,29 @@ class App extends React.Component {
         super(props);
         this.handleLoginChange = this.handleLoginChange.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
+        this.menuAction = this.menuAction.bind(this);
         
         this.endpoint = 'https://www.roberttamayo.com/skate/login.php';
+
+        this.views = {
+            Add: "Add",
+            Locator: "Locator",
+            Messages: "Messages",
+            Logout: "Logout",
+            Main: "Main"
+        }
 
         this.state = {
             user_data: this.props.user_data,
             user_name: this.props.user_name,
             user_id: this.props.user_id,
+            crew_id: this.props.crew_id,
             signed_in: this.props.signed_in,
-            user_magicword: ''
+            user_magicword: '',
+            activeView: 'Main'
         };
     }
+
     handleLogin() {
         $.ajax(this.endpoint, {
             method: "POST",
@@ -35,12 +47,14 @@ class App extends React.Component {
                 if (data.success) {
                     const cookie_data_string = JSON.stringify({
                         user_name: data.user_name,
-                        user_id: data.user_id
+                        user_id: data.user_id,
+                        crew_id: data.crew_id
                     });
                     setCookie('user_data', cookie_data_string);
                     this.setState({
                         user_name: data.user_name,
                         user_id: data.user_id,
+                        crew_id: data.crew_id,
                         signed_in: true
                     });
                 } else {
@@ -60,21 +74,28 @@ class App extends React.Component {
             [data.name]: data.value
         });
     }
+    menuAction(actionName) {
+        this.setState({
+            activeView: actionName
+        });
+    }
     render() {
         if (this.state.signed_in) {
             return (
-                <div className="app-wrap">
-                    <Header />
+                <div className={`app-wrap ${this.state.activeView}`}>
+                    <Header menuAction={this.menuAction}/>
 
                     <div className="app-body">
                         <div className="app-view app-view-main">
-                            <HomeMenu />
+                            <HomeMenu menuAction={this.menuAction}/>
+                        </div>
+
+                        <div className="app-view app-view-add">
+                            <Reporter crew_id={this.state.crew_id}/>
                         </div>
 
                         <div className="app-view app-view-locator">
-                            <Reporter />
-
-                            <Locator />
+                            <Locator crew_id={this.state.crew_id}/>
                         </div>
 
                         <div className="app-view app-view-messages">
@@ -101,6 +122,7 @@ let signed_in = (user_data != '');
 ReactDOM.render(
     <App user_name={user_data.user_name}
     user_id={user_data.user_id}
+    crew_id={user_data.crew_id}
     signed_in={signed_in}/>,
     document.getElementById('app')
 );

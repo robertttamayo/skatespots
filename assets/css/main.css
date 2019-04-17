@@ -1,4 +1,4 @@
-/* line 31, main.scss */
+/* line 32, main.scss */
 body {
   margin: 0;
   font-family: sans-serif;
@@ -6,29 +6,28 @@ body {
   background: #71eeb8;
 }
 
-/* line 37, main.scss */
+/* line 38, main.scss */
 body * {
   box-sizing: border-box;
 }
 
-/* line 40, main.scss */
+/* line 41, main.scss */
 header {
   width: 100%;
   padding: 5px 20px;
   text-align: center;
 }
 
-/* line 45, main.scss */
+/* line 46, main.scss */
 header img {
   /* width: 50px; */
 }
 
-/* line 48, main.scss */
+/* line 49, main.scss */
 footer {
   width: 100%;
   padding: 20px;
-  background: #efefef;
-  border-top: 1px solid silver;
+  background: #71eeb8;
 }
 
 /* line 54, main.scss */
@@ -72,76 +71,81 @@ footer {
 /* line 80, main.scss */
 .reporter-wrap {
   margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid silver;
 }
 
-/* line 85, main.scss */
+/* line 83, main.scss */
 .image-preview {
   margin: 20px 0;
 }
 
-/* line 88, main.scss */
+/* line 86, main.scss */
 .image-preview canvas {
   width: 100%;
   max-width: 400px;
 }
 
 @media (max-width: 767px) {
-  /* line 93, main.scss */
+  /* line 91, main.scss */
   .locator-map {
     width: 100%;
     position: absolute;
   }
 }
-/* line 98, main.scss */
+/* line 96, main.scss */
 .reporter-title {
+  display: none;
   padding-bottom: 10px;
   margin-bottom: 20px;
   border-bottom: 1px solid silver;
 }
 
-/* line 103, main.scss */
-.reporter-form input[type=text] {
+/* line 102, main.scss */
+.reporter-form input[type=text], .reporter-form textarea {
   padding: 0 10px;
-  border: 1px solid silver;
+  border: 1px solid #052919;
   margin-bottom: 20px;
-  height: 35px;
-  line-height: 35px;
+  height: 40px;
+  line-height: 40px;
   width: 100%;
   max-width: 320px;
+  font-size: 15px;
 }
 
 /* line 112, main.scss */
+.reporter-form textarea {
+  height: 100px;
+}
+
+/* line 115, main.scss */
 .reporter-form input[type=file] {
   display: none;
 }
 
-/* line 115, main.scss */
+/* line 118, main.scss */
 .standard-label {
-  display: inline-block;
+  display: none;
   margin-bottom: 10px;
 }
 
-/* line 119, main.scss */
+/* line 122, main.scss */
 .reporter-form .file-label {
-  background: silver;
+  background: white;
   padding: 0 20px;
-  height: 35px;
-  line-height: 35px;
-  color: black;
+  height: 40px;
+  line-height: 40px;
+  color: #052919;
   text-align: center;
-  border: 1px solid black;
+  border: 1px solid #052919;
   display: inline-block;
   font-size: 15px;
 }
 
-/* line 131, main.scss */
+/* line 134, main.scss */
 .button-cta {
-  background: black;
+  background: #052919;
   padding: 0 20px;
-  height: 35px;
-  line-height: 35px;
+  height: 40px;
+  line-height: 40px;
   color: white;
   text-transform: uppercase;
   font-weight: bold;
@@ -151,7 +155,7 @@ footer {
   font-size: 15px;
 }
 
-/* line 145, main.scss */
+/* line 148, main.scss */
 .home-menu-wrap {
   display: -webkit-box;
   display: -moz-box;
@@ -166,14 +170,14 @@ footer {
   justify-content: space-between;
   width: 100%;
 }
-/* line 150, main.scss */
+/* line 153, main.scss */
 .home-menu-wrap .home-menu-button {
   cursor: pointer;
   width: calc(50% - 10px);
   margin-bottom: 20px;
-  border: 1px solid black;
+  border: 1px solid #052919;
   background: white;
-  color: black;
+  color: #052919;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -189,6 +193,40 @@ footer {
   font-weight: bold;
   text-align: center;
   height: 100px;
+}
+
+/* line 169, main.scss */
+.button-action-main {
+  font-size: 32px;
+  color: white;
+  font-weight: bold;
+  text-align: left;
+}
+
+/* line 177, main.scss */
+.Main .app-view:not(.app-view-main) {
+  display: none;
+}
+/* line 181, main.scss */
+.Main .button-action-main {
+  visibility: hidden;
+}
+
+/* line 187, main.scss */
+.Locator .app-view:not(.app-view-locator) {
+  display: none;
+}
+
+/* line 194, main.scss */
+.Add .app-view:not(.app-view-add) {
+  display: none;
+}
+
+/* line 199, main.scss */
+.coords {
+  color: black;
+  font-size: 15px;
+  margin-top: 20px;
 }
 
 /*# sourceMappingURL=main.css.map */
