@@ -15,7 +15,7 @@ if (isset($_POST['user_magicword'])) {
     $magicword = filter_var($_POST['user_magicword'], FILTER_SANITIZE_STRING);
 }
 
-$sql = "SELECT user_name, user_id, user_is_active, crew_id FROM users WHERE user_name = '$username' AND user_magicword = '$magicword' LIMIT 1";
+$sql = "SELECT user_name, user_id, user_is_active, crew_id, user_role FROM users WHERE user_name = '$username' AND user_magicword = '$magicword' LIMIT 1";
 $stmt = $con->prepare($sql);
 $stmt->execute();
 $data = $stmt->fetchAll();
@@ -26,6 +26,7 @@ if (sizeof($data) == 1) {
         'user_id' => $data[0]['user_id'],
         'user_is_active' => $data[0]['user_is_active'],
         'crew_id' => $data[0]['crew_id'],
+        'user_role' => $data[0]['user_role'], // must check user role again on api actions
         'success' => true
     ];
 } else {

@@ -27,6 +27,7 @@ foreach($data as $datum) {
     $spot = [
         'spot_id' => $datum['spot_id'],
         'spot_name' => $datum['spot_name'],
+        'spot_description' => $datum['spot_description'],
         'spot_lat' => $datum['spot_lat'],
         'spot_lng' => $datum['spot_lng']
     ];

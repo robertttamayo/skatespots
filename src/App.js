@@ -12,6 +12,7 @@ class App extends React.Component {
         this.handleLoginChange = this.handleLoginChange.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
         this.menuAction = this.menuAction.bind(this);
+        this.toggleMenu = this.toggleMenu.bind(this);
         
         this.endpoint = 'https://www.roberttamayo.com/skate/login.php';
 
@@ -28,12 +29,18 @@ class App extends React.Component {
             user_name: this.props.user_name,
             user_id: this.props.user_id,
             crew_id: this.props.crew_id,
+            user_role: this.props.user_role,
             signed_in: this.props.signed_in,
             user_magicword: '',
-            activeView: 'Main'
+            activeView: 'Main',
+            menuOpen: false,
         };
     }
-
+    toggleMenu() {
+        this.setState({
+            menuOpen: !this.state.menuOpen
+        });
+    }
     handleLogin() {
         $.ajax(this.endpoint, {
             method: "POST",
@@ -48,6 +55,7 @@ class App extends React.Component {
                     const cookie_data_string = JSON.stringify({
                         user_name: data.user_name,
                         user_id: data.user_id,
+                        user_role: data.user_role,
                         crew_id: data.crew_id
                     });
                     setCookie('user_data', cookie_data_string);
@@ -55,6 +63,7 @@ class App extends React.Component {
                         user_name: data.user_name,
                         user_id: data.user_id,
                         crew_id: data.crew_id,
+                        user_role: data.user_role,
                         signed_in: true
                     });
                 } else {
@@ -82,8 +91,11 @@ class App extends React.Component {
     render() {
         if (this.state.signed_in) {
             return (
-                <div className={`app-wrap ${this.state.activeView}`}>
-                    <Header menuAction={this.menuAction}/>
+                <div className={`app-wrap ${this.state.activeView} menu-open-${this.state.menuOpen}`}>
+                    <Header menuAction={this.menuAction} 
+                    user_data={this.user_data}
+                    toggleMenu={this.toggleMenu}
+                    menuOpen={this.state.menuOpen}/>
 
                     <div className="app-body">
                         <div className="app-view app-view-main">
@@ -123,6 +135,8 @@ ReactDOM.render(
     <App user_name={user_data.user_name}
     user_id={user_data.user_id}
     crew_id={user_data.crew_id}
+    user_data={user_data}
+    user_role={user_data.user_role}
     signed_in={signed_in}/>,
     document.getElementById('app')
 );
