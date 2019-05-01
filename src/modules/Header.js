@@ -1,3 +1,12 @@
+import React from "react";
+import ReactDOM from "react-dom";
+import {MenuAddCrew, MenuAddCrewLeader, MenuAddSkater} from "./SlideMenuActions";
+import { library } from '@fortawesome/fontawesome-svg-core';
+import  {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
+import { faBars, faArrowLeft, faTimes, faSnowboarding } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faBars, faArrowLeft, faTimes, faSnowboarding);
+
 export class Header extends React.Component {
     constructor(props) {
         super(props);
@@ -9,6 +18,7 @@ export class Header extends React.Component {
         this.state = {
             user_data: this.props.user_data
         }
+        console.log(this.state.user_data);
     }
     onBack() {
         this.props.menuAction("Main");
@@ -17,38 +27,31 @@ export class Header extends React.Component {
         this.props.toggleMenu();
     }
     menuAddCrew() {
-        return (
-            <div className="menu-list-item">
-                Add Crew
-            </div>
-        );
+        
     }
     menuAddSkater() {
-        return (
-            <div className="menu-list-item">
-                Add Skater
-            </div>
-        );
+        
     }
     menuAddCrewLeader() {
-        return (
-            <div className="menu-list-item">
-                Add Crew Leader
-            </div>
-        );
+        
     }
     render() {
-        let menuOptions = this.menuAddCrew() + this.menuAddSkater() + this.menuAddCrewLeader();
         return (
             <header className="header-wrap">
                 <div className="icon-button button-action-main" onClick={this.onBack}>
-                    &larr;
+                    <FontAwesomeIcon icon="arrow-left" />
                 </div>
                 <div className="icon-button button-action-menu" onClick={this.onMenu}>
-                    Menu
+                    <FontAwesomeIcon icon="bars" />
                 </div>
                 <div className="slide-menu">
-                    {menuOptions}
+                    <div className="slide-menu-close" onClick={this.onMenu}>
+                        <FontAwesomeIcon icon="times" />
+                    </div>
+
+                    <MenuAddCrew user_data={this.state.user_data} menuAction={this.menuAddCrew}/>
+                    <MenuAddSkater user_data={this.state.user_data} menuAction={this.menuAddSkater}/>
+                    <MenuAddCrewLeader user_data={this.state.user_data} menuAction={this.menuAddCrewLeader}/>
                 </div>
             </header>
         );

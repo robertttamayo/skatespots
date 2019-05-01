@@ -28,6 +28,11 @@ $darkgreen: #052919;
     -webkit-align-items: $align;
     align-items: $align;
 }
+@mixin align-self($align){
+    -ms-align-self: $align;
+    -webkit-align-self: $align;
+    align-self: $align;
+}
 
 body {
     margin: 0;
@@ -42,6 +47,8 @@ header {
     width: 100%;
     padding: 5px 20px;
     text-align: center;
+    @include flex();
+    @include justify-content(space-between);
 }
 header img {
     /* width: 50px; */
@@ -166,11 +173,16 @@ footer {
         height: 100px;
     }
 }
+.button-action-menu {
+    font-size: 20px;
+    margin-top: 20px;
+}
 .button-action-main {
-    font-size: 32px;
-    color: white;
+    font-size: 20px;
+    color: $darkgreen;
     font-weight: bold;
     text-align: left;
+    margin-top: 20px;
 }
 .Main {
     .app-view {
@@ -200,4 +212,40 @@ footer {
     color: black;
     font-size: 15px;
     margin-top: 20px;
+}
+.slide-menu {
+    width: 100vw;
+    opacity: 0;
+    height: auto;
+    position: absolute;
+    left: 0;
+    background: white;
+    border-bottom: 1px solid $darkgreen;
+    padding: 20px;
+    transition: transform .3s ease, opacity .3s ease;
+    transform: translate(100%, 0);
+    @include flex();
+    @include flex-direction(column);
+}
+.app-wrap {
+    &.menu-open-true {
+        .slide-menu {
+            transform: translate(0, 0);
+            opacity: 1;
+        }
+    }
+}
+.slide-menu-item {
+    background: white;;
+    padding: 10px 20px;
+    padding-right: 0;
+    font-size: 18px;
+    color: $darkgreen;
+    margin-bottom: 10px;
+    text-align: right;
+}
+.slide-menu-close {
+    @include align-self(flex-end);
+    margin-bottom: 20px;
+    font-size: 20px;
 }

@@ -1,3 +1,6 @@
+
+import React from "react";
+
 export class Maps extends React.Component {
     constructor(props) {
         super(props);

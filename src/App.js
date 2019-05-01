@@ -1,3 +1,5 @@
+import React from "react";
+import ReactDOM from "react-dom";
 import {Header} from "./modules/Header"; 
 import {Reporter} from "./modules/Reporter"; 
 import {Locator} from "./modules/Locator"; 
@@ -93,7 +95,7 @@ class App extends React.Component {
             return (
                 <div className={`app-wrap ${this.state.activeView} menu-open-${this.state.menuOpen}`}>
                     <Header menuAction={this.menuAction} 
-                    user_data={this.user_data}
+                    user_data={this.state.user_data}
                     toggleMenu={this.toggleMenu}
                     menuOpen={this.state.menuOpen}/>
 

@@ -1,3 +1,5 @@
+import React from "react";
+
 export class Reporter extends React.Component {
     constructor(props) {
         super(props);
@@ -120,15 +122,15 @@ export class Reporter extends React.Component {
                     <div className="reporter-title">Adding a Spot</div>
                     <form className="reporter-form" onSubmit={this.generate}>
                         <div>
-                            <label className="standard-label" for="spot_name">Name</label>
+                            <label className="standard-label" htmlFor="spot_name">Name</label>
                             <input type="text" onChange={this.handleChange} value={this.state.spot_name} placeholder="Name" id="spot_name" name="spot_name"/>
                         </div>
                         <div>
-                            <label className="standard-label" for="spot_description">Description (Optional)</label>
+                            <label className="standard-label" htmlFor="spot_description">Description (Optional)</label>
                             <textarea onChange={this.handleChange} value={this.state.spot_description} placeholder="Description" id="spot_description" name="spot_description"/>
                         </div>
                         <div>
-                            <label for="image_file" className="file-label">Add an Image</label>
+                            <label htmlFor="image_file" className="file-label">Add an Image</label>
                             <input id="image_file" name="image_file" onChange={this.compress} type="file" accept="image/*"/>
                         </div>
                         <div className="image-preview">
