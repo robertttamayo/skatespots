@@ -3,9 +3,9 @@ import ReactDOM from "react-dom";
 import {MenuAddCrew, MenuAddCrewLeader, MenuAddSkater} from "./SlideMenuActions";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import  {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
-import { faBars, faArrowLeft, faTimes, faSnowboarding } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faArrowLeft, faTimes, faSnowboarding, faUsers } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faBars, faArrowLeft, faTimes, faSnowboarding);
+library.add(faBars, faArrowLeft, faTimes, faSnowboarding, faUsers);
 
 export class Header extends React.Component {
     constructor(props) {
@@ -15,6 +15,7 @@ export class Header extends React.Component {
         this.menuAddCrew = this.menuAddCrew.bind(this);
         this.menuAddCrewLeader = this.menuAddCrewLeader.bind(this);
         this.menuAddSkater = this.menuAddSkater.bind(this);
+        this.logout = this.logout.bind(this);
         this.state = {
             user_data: this.props.user_data
         }
@@ -35,6 +36,9 @@ export class Header extends React.Component {
     menuAddCrewLeader() {
         
     }
+    logout() {
+        this.props.logout();
+    }
     render() {
         return (
             <header className="header-wrap">
@@ -49,9 +53,9 @@ export class Header extends React.Component {
                         <FontAwesomeIcon icon="times" />
                     </div>
 
-                    <MenuAddCrew user_data={this.state.user_data} menuAction={this.menuAddCrew}/>
-                    <MenuAddSkater user_data={this.state.user_data} menuAction={this.menuAddSkater}/>
-                    <MenuAddCrewLeader user_data={this.state.user_data} menuAction={this.menuAddCrewLeader}/>
+                    <div className="slide-menu-item" onClick={this.logout}>
+                        Logout
+                    </div>
                 </div>
             </header>
         );

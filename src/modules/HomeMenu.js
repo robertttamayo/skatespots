@@ -8,6 +8,8 @@ export class HomeMenu extends React.Component {
         this.handleActionLocator = this.handleActionLocator.bind(this);
         this.handleActionMessages = this.handleActionMessages.bind(this);
         this.handleActionLogout = this.handleActionLogout.bind(this);
+        this.handleActionSkaters = this.handleActionSkaters.bind(this);
+        this.handleActionCrews = this.handleActionCrews.bind(this);
     }
     handleActionAdd() {
         this.props.menuAction('Add');
@@ -21,6 +23,12 @@ export class HomeMenu extends React.Component {
     handleActionLogout() {
         this.props.menuAction('Logout');
     }
+    handleActionSkaters(){
+        this.props.menuAction("Skaters");
+    }
+    handleActionCrews(){
+
+    }
     render(){
         return (
             <div className="home-menu-wrap">
@@ -33,8 +41,8 @@ export class HomeMenu extends React.Component {
                 <div className="home-menu-button action-messages" onClick={this.handleActionMessages}>
                     Message Board
                 </div>
-                <div className="home-menu-button action-logout" onClick={this.handleActionLogout}>
-                    Logout
+                <div className="home-menu-button action-skaters" onClick={this.handleActionSkaters}>
+                    Skaters
                 </div>
             </div>
         );

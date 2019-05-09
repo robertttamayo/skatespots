@@ -1,4 +1,6 @@
 import React from "react";
+import {ViewAddSkater} from "./ViewAddSkater";
+
 export class MenuAddCrew extends React.Component {
     constructor(props) {
         super(props);
@@ -58,11 +60,13 @@ export class MenuAddSkater extends React.Component {
         this.props.menuAction();
     }
     render(){
-        if (this.state.user_data.user_role < 2) {
+        if (this.state.user_data.user_role <= 1) {
             return (
-                <div className="slide-menu-item" onClick={this.menuAction}>
-                    Add Skater
-                </div>
+                <React.Fragment>
+                    <div className="slide-menu-item">
+                        <ViewAddSkater crew_id={this.state.user_data.crew_id} />
+                    </div>
+                </React.Fragment>
             );
         } else {
             return '';

@@ -237,14 +237,19 @@ footer {
   display: none;
 }
 
-/* line 211, main.scss */
+/* line 213, main.scss */
+.Skaters .app-view:not(.app-view-skaters) {
+  display: none;
+}
+
+/* line 218, main.scss */
 .coords {
   color: black;
   font-size: 15px;
   margin-top: 20px;
 }
 
-/* line 216, main.scss */
+/* line 223, main.scss */
 .slide-menu {
   width: 100vw;
   opacity: 0;
@@ -266,13 +271,13 @@ footer {
   flex-direction: column;
 }
 
-/* line 232, main.scss */
+/* line 239, main.scss */
 .app-wrap.menu-open-true .slide-menu {
   transform: translate(0, 0);
   opacity: 1;
 }
 
-/* line 238, main.scss */
+/* line 245, main.scss */
 .slide-menu-item {
   background: white;
   padding: 10px 20px;
@@ -283,13 +288,27 @@ footer {
   text-align: right;
 }
 
-/* line 247, main.scss */
+/* line 254, main.scss */
 .slide-menu-close {
   -ms-align-self: flex-end;
   -webkit-align-self: flex-end;
   align-self: flex-end;
   margin-bottom: 20px;
   font-size: 20px;
+}
+
+/* line 259, main.scss */
+.slide-menu-action {
+  display: none;
+}
+
+/* line 263, main.scss */
+.slide-menu-action-active .slide-menu-item {
+  display: none;
+}
+/* line 266, main.scss */
+.slide-menu-action-active .slide-menu-action.active {
+  display: block;
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -7,6 +7,7 @@ import {Footer} from "./modules/Footer";
 import {LoginForm} from "./modules/LoginForm"; 
 import {HomeMenu} from "./modules/HomeMenu";
 import {Messages} from "./modules/Messages";
+import {Skaters} from "./modules/Skaters";
 
 class App extends React.Component {
     constructor(props) {
@@ -15,6 +16,7 @@ class App extends React.Component {
         this.handleLogin = this.handleLogin.bind(this);
         this.menuAction = this.menuAction.bind(this);
         this.toggleMenu = this.toggleMenu.bind(this);
+        this.handleLogout = this.handleLogout.bind(this);
         
         this.endpoint = 'https://www.roberttamayo.com/skate/login.php';
 
@@ -23,7 +25,9 @@ class App extends React.Component {
             Locator: "Locator",
             Messages: "Messages",
             Logout: "Logout",
-            Main: "Main"
+            Main: "Main",
+            Users: "Users",
+            Crews: "Crews"
         }
 
         this.state = {
@@ -36,6 +40,7 @@ class App extends React.Component {
             user_magicword: '',
             activeView: 'Main',
             menuOpen: false,
+            skaters: []
         };
     }
     toggleMenu() {
@@ -86,8 +91,25 @@ class App extends React.Component {
         });
     }
     menuAction(actionName) {
+        console.log(actionName);
         this.setState({
             activeView: actionName
+        });
+    }
+    handleLogout(){
+        const cookie_data_string = JSON.stringify({
+            user_name: '',
+            user_id: '',
+            user_role: '',
+            crew_id: ''
+        });
+        setCookie('user_data', cookie_data_string);
+        this.setState({
+            user_name: '',
+            user_id: '',
+            user_role: '',
+            crew_id: '',
+            signed_in: false
         });
     }
     render() {
@@ -97,7 +119,8 @@ class App extends React.Component {
                     <Header menuAction={this.menuAction} 
                     user_data={this.state.user_data}
                     toggleMenu={this.toggleMenu}
-                    menuOpen={this.state.menuOpen}/>
+                    menuOpen={this.state.menuOpen}
+                    logout={this.handleLogout}/>
 
                     <div className="app-body">
                         <div className="app-view app-view-main">
@@ -114,6 +137,11 @@ class App extends React.Component {
 
                         <div className="app-view app-view-messages">
                             <Messages />
+                        </div>
+
+                        <div className="app-view app-view-skaters">
+                            <Skaters skaters={this.state.skaters} 
+                                crew_id={this.state.crew_id}/>
                         </div>
                     </div>
 

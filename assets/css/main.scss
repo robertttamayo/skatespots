@@ -208,6 +208,13 @@ footer {
         }
     }
 }
+.Skaters {
+    .app-view {
+        &:not(.app-view-skaters) {
+            display: none;
+        }
+    }
+}
 .coords {
     color: black;
     font-size: 15px;
@@ -248,4 +255,15 @@ footer {
     @include align-self(flex-end);
     margin-bottom: 20px;
     font-size: 20px;
+}
+.slide-menu-action {
+    display: none;
+}
+.slide-menu-action-active {
+    .slide-menu-item {
+        display: none;
+    }
+    .slide-menu-action.active {
+        display: block;
+    }
 }
