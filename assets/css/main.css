@@ -183,7 +183,7 @@ footer {
   cursor: pointer;
   width: calc(50% - 10px);
   margin-bottom: 20px;
-  border: 1px solid #052919;
+  border-radius: 3px;
   background: white;
   color: #052919;
   display: -webkit-box;
@@ -201,15 +201,16 @@ footer {
   font-weight: bold;
   text-align: center;
   height: 100px;
+  box-shadow: 0px 3px 5px #052919;
 }
 
-/* line 176, main.scss */
+/* line 178, main.scss */
 .button-action-menu {
   font-size: 20px;
   margin-top: 20px;
 }
 
-/* line 180, main.scss */
+/* line 182, main.scss */
 .button-action-main {
   font-size: 20px;
   color: #052919;
@@ -218,38 +219,38 @@ footer {
   margin-top: 20px;
 }
 
-/* line 189, main.scss */
+/* line 191, main.scss */
 .Main .app-view:not(.app-view-main) {
   display: none;
 }
-/* line 193, main.scss */
+/* line 195, main.scss */
 .Main .button-action-main {
   visibility: hidden;
 }
 
-/* line 199, main.scss */
+/* line 201, main.scss */
 .Locator .app-view:not(.app-view-locator) {
   display: none;
 }
 
-/* line 206, main.scss */
+/* line 208, main.scss */
 .Add .app-view:not(.app-view-add) {
   display: none;
 }
 
-/* line 213, main.scss */
+/* line 215, main.scss */
 .Skaters .app-view:not(.app-view-skaters) {
   display: none;
 }
 
-/* line 218, main.scss */
+/* line 220, main.scss */
 .coords {
   color: black;
   font-size: 15px;
   margin-top: 20px;
 }
 
-/* line 223, main.scss */
+/* line 225, main.scss */
 .slide-menu {
   width: 100vw;
   opacity: 0;
@@ -271,13 +272,13 @@ footer {
   flex-direction: column;
 }
 
-/* line 239, main.scss */
+/* line 241, main.scss */
 .app-wrap.menu-open-true .slide-menu {
   transform: translate(0, 0);
   opacity: 1;
 }
 
-/* line 245, main.scss */
+/* line 247, main.scss */
 .slide-menu-item {
   background: white;
   padding: 10px 20px;
@@ -288,7 +289,7 @@ footer {
   text-align: right;
 }
 
-/* line 254, main.scss */
+/* line 256, main.scss */
 .slide-menu-close {
   -ms-align-self: flex-end;
   -webkit-align-self: flex-end;
@@ -297,16 +298,16 @@ footer {
   font-size: 20px;
 }
 
-/* line 259, main.scss */
+/* line 261, main.scss */
 .slide-menu-action {
   display: none;
 }
 
-/* line 263, main.scss */
+/* line 265, main.scss */
 .slide-menu-action-active .slide-menu-item {
   display: none;
 }
-/* line 266, main.scss */
+/* line 268, main.scss */
 .slide-menu-action-active .slide-menu-action.active {
   display: block;
 }

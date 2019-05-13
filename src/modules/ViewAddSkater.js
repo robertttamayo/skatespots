@@ -32,13 +32,18 @@ export class ViewAddSkater extends React.Component {
             this.props.onFinish();
         });
     }
+    handleChange(event){
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+    }
     render() {
         return (
         <div className="mode-add-skater">
             <h3>Add New Skater</h3>
             <form className="mode-form view-add-skater-form" onSubmit={this.submit}>
-                <input name="skater_username" type="text" placeholder="Username" value={this.state.skater_username} onChange={this.onChange} />
-                <input name="skater_password" type="text" placeholder="Password" value={this.state.skater_password} onChange={this.onChange} />
+                <input name="skater_username" type="text" placeholder="Username" value={this.state.skater_username} onChange={this.handleChange} />
+                <input name="skater_password" type="text" placeholder="Password" value={this.state.skater_password} onChange={this.handleChange} />
             </form>
         </div>
         );
