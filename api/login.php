@@ -1,9 +1,6 @@
 <?php 
 
-define("DB_SERVER", "localhost");
-define("DB_NAME", "robtam10_skate");
-define("DB_USERNAME", "robtam10_skate");
-define("DB_PASSWORD", "25p!K@25c0dE");
+require_once('config.php');
 
 $con = new PDO("mysql:host=". DB_SERVER . ";dbname=" . DB_NAME, DB_USERNAME, DB_PASSWORD);
 $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

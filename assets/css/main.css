@@ -24,26 +24,35 @@ header {
   -webkit-justify-content: space-between;
   -ms-justify-content: space-between;
   justify-content: space-between;
+  -ms-align-items: flex-end;
+  -webkit-align-items: flex-end;
+  align-items: flex-end;
 }
 
-/* line 53, main.scss */
+/* line 54, main.scss */
+.header-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* line 58, main.scss */
 header img {
   /* width: 50px; */
 }
 
-/* line 56, main.scss */
+/* line 61, main.scss */
 footer {
   width: 100%;
   padding: 20px;
   background: #71eeb8;
 }
 
-/* line 61, main.scss */
+/* line 66, main.scss */
 .app-body {
   padding: 20px;
 }
 
-/* line 64, main.scss */
+/* line 69, main.scss */
 .locator-wrap {
   height: 600px;
   width: 100%;
@@ -51,55 +60,55 @@ footer {
   justify-content: space-between;
 }
 
-/* line 70, main.scss */
+/* line 75, main.scss */
 .locator-list {
   width: 320px;
   border-top: 1px solid silver;
   padding-top: 20px;
 }
 
-/* line 75, main.scss */
+/* line 80, main.scss */
 .list-item {
   padding-bottom: 20px;
   margin-bottom: 20px;
   border-bottom: 1px solid silver;
 }
 
-/* line 80, main.scss */
+/* line 85, main.scss */
 .locator-map {
   width: calc(100% - 340px);
 }
 
-/* line 83, main.scss */
+/* line 88, main.scss */
 #map {
   width: 100%;
   height: 100%;
 }
 
-/* line 87, main.scss */
+/* line 92, main.scss */
 .reporter-wrap {
   margin-bottom: 20px;
 }
 
-/* line 90, main.scss */
+/* line 95, main.scss */
 .image-preview {
   margin: 20px 0;
 }
 
-/* line 93, main.scss */
+/* line 98, main.scss */
 .image-preview canvas {
   width: 100%;
   max-width: 400px;
 }
 
 @media (max-width: 767px) {
-  /* line 98, main.scss */
+  /* line 103, main.scss */
   .locator-map {
     width: 100%;
     position: absolute;
   }
 }
-/* line 103, main.scss */
+/* line 108, main.scss */
 .reporter-title {
   display: none;
   padding-bottom: 10px;
@@ -107,7 +116,7 @@ footer {
   border-bottom: 1px solid silver;
 }
 
-/* line 109, main.scss */
+/* line 114, main.scss */
 .reporter-form input[type=text], .reporter-form textarea {
   padding: 0 10px;
   border: 1px solid #052919;
@@ -119,23 +128,23 @@ footer {
   font-size: 15px;
 }
 
-/* line 119, main.scss */
+/* line 124, main.scss */
 .reporter-form textarea {
   height: 100px;
 }
 
-/* line 122, main.scss */
+/* line 127, main.scss */
 .reporter-form input[type=file] {
   display: none;
 }
 
-/* line 125, main.scss */
+/* line 130, main.scss */
 .standard-label {
   display: none;
   margin-bottom: 10px;
 }
 
-/* line 129, main.scss */
+/* line 134, main.scss */
 .reporter-form .file-label {
   background: white;
   padding: 0 20px;
@@ -148,7 +157,7 @@ footer {
   font-size: 15px;
 }
 
-/* line 141, main.scss */
+/* line 146, main.scss */
 .button-cta {
   background: #052919;
   padding: 0 20px;
@@ -163,7 +172,7 @@ footer {
   font-size: 15px;
 }
 
-/* line 155, main.scss */
+/* line 160, main.scss */
 .home-menu-wrap {
   display: -webkit-box;
   display: -moz-box;
@@ -178,7 +187,7 @@ footer {
   justify-content: space-between;
   width: 100%;
 }
-/* line 160, main.scss */
+/* line 165, main.scss */
 .home-menu-wrap .home-menu-button {
   cursor: pointer;
   width: calc(50% - 10px);
@@ -204,13 +213,13 @@ footer {
   box-shadow: 0px 3px 5px #052919;
 }
 
-/* line 178, main.scss */
+/* line 183, main.scss */
 .button-action-menu {
   font-size: 20px;
   margin-top: 20px;
 }
 
-/* line 182, main.scss */
+/* line 187, main.scss */
 .button-action-main {
   font-size: 20px;
   color: #052919;
@@ -219,38 +228,43 @@ footer {
   margin-top: 20px;
 }
 
-/* line 191, main.scss */
+/* line 196, main.scss */
 .Main .app-view:not(.app-view-main) {
   display: none;
 }
-/* line 195, main.scss */
+/* line 200, main.scss */
 .Main .button-action-main {
   visibility: hidden;
 }
 
-/* line 201, main.scss */
+/* line 206, main.scss */
 .Locator .app-view:not(.app-view-locator) {
   display: none;
 }
 
-/* line 208, main.scss */
+/* line 213, main.scss */
 .Add .app-view:not(.app-view-add) {
   display: none;
 }
 
-/* line 215, main.scss */
-.Skaters .app-view:not(.app-view-skaters) {
+/* line 220, main.scss */
+.Skaters .app-view:not(.app-view-skaters), .Users .app-view:not(.app-view-skaters) {
   display: none;
 }
 
-/* line 220, main.scss */
+/* line 227, main.scss */
+.Crews .app-view:not(.app-view-crews) {
+  display: none;
+}
+
+/* line 232, main.scss */
 .coords {
   color: black;
   font-size: 15px;
   margin-top: 20px;
 }
 
-/* line 225, main.scss */
+/* line 237, main.scss */
 .slide-menu {
   width: 100vw;
   opacity: 0;
@@ -272,13 +286,13 @@ footer {
   flex-direction: column;
 }
 
-/* line 241, main.scss */
+/* line 253, main.scss */
 .app-wrap.menu-open-true .slide-menu {
   transform: translate(0, 0);
   opacity: 1;
 }
 
-/* line 247, main.scss */
+/* line 259, main.scss */
 .slide-menu-item {
   background: white;
   padding: 10px 20px;
@@ -289,7 +303,7 @@ footer {
   text-align: right;
 }
 
-/* line 256, main.scss */
+/* line 268, main.scss */
 .slide-menu-close {
   -ms-align-self: flex-end;
   -webkit-align-self: flex-end;
@@ -298,18 +312,89 @@ footer {
   font-size: 20px;
 }
 
-/* line 261, main.scss */
+/* line 273, main.scss */
 .slide-menu-action {
   display: none;
 }
 
-/* line 265, main.scss */
+/* line 277, main.scss */
 .slide-menu-action-active .slide-menu-item {
   display: none;
 }
-/* line 268, main.scss */
+/* line 280, main.scss */
 .slide-menu-action-active .slide-menu-action.active {
   display: block;
+}
+
+/* line 284, main.scss */
+.skater-list-item-wrap {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  -ms-justify-content: space-between;
+  justify-content: space-between;
+  -ms-align-items: center;
+  -webkit-align-items: center;
+  align-items: center;
+  padding: 10px 0px;
+  border-bottom: 1px solid #052919;
+}
+
+/* line 291, main.scss */
+.skater-list-cta {
+  padding: 5px 10px;
+  text-align: center;
+  background: #052919;
+  color: white;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-right: 10px;
+}
+/* line 299, main.scss */
+.skater-list-cta:last-child {
+  margin-right: 0;
+}
+
+/* line 303, main.scss */
+.mode-add-skater {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  -ms-justify-content: space-between;
+  justify-content: space-between;
+  -ms-align-items: center;
+  -webkit-align-items: center;
+  align-items: center;
+  border-bottom: 1px solid #052919;
+  padding-bottom: 10px;
+}
+/* line 309, main.scss */
+.mode-add-skater .form-wrap {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+/* line 311, main.scss */
+.mode-add-skater .form-wrap input[type="text"] {
+  height: 40px;
+  width: 120px;
+  border: 1px solid #052919;
+}
+/* line 316, main.scss */
+.mode-add-skater .form-wrap button {
+  height: 40px;
+  padding: 0 10px;
+  text-align: center;
+  line-height: 40px;
+  text-transform: uppercase;
 }
 
 /*# sourceMappingURL=main.css.map */

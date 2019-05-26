@@ -49,6 +49,11 @@ header {
     text-align: center;
     @include flex();
     @include justify-content(space-between);
+    @include align-items(flex-end);
+}
+.header-title {
+    font-size: 16px;
+    font-weight: bold;
 }
 header img {
     /* width: 50px; */
@@ -210,9 +215,16 @@ footer {
         }
     }
 }
-.Skaters {
+.Skaters, .Users {
     .app-view {
         &:not(.app-view-skaters) {
+            display: none;
+        }
+    }
+}
+.Crews {
+    .app-view {
+        &:not(.app-view-crews) {
             display: none;
         }
     }
@@ -267,5 +279,46 @@ footer {
     }
     .slide-menu-action.active {
         display: block;
+    }
+}
+.skater-list-item-wrap {
+    @include flex();
+    @include justify-content(space-between);
+    @include align-items(center);
+    padding: 10px 0px;
+    border-bottom: 1px solid $darkgreen;
+}
+.skater-list-cta {
+    padding: 5px 10px;
+    text-align: center;
+    background: $darkgreen;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-right: 10px;
+    &:last-child {
+        margin-right: 0;
+    }
+}
+.mode-add-skater {
+    @include flex();
+    @include justify-content(space-between);
+    @include align-items(center);
+    border-bottom: 1px solid $darkgreen;
+    padding-bottom: 10px;
+    .form-wrap {
+        @include flex();
+        input[type="text"] {
+            height: 40px;
+            width: 120px;
+            border: 1px solid $darkgreen;
+        }
+        button {
+            height: 40px;
+            padding: 0 10px;
+            text-align: center;
+            line-height: 40px;
+            text-transform: uppercase;
+        }
     }
 }

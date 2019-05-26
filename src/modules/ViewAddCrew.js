@@ -5,9 +5,14 @@ export class ViewAddCrew extends React.Component {
         super(props);
         this.endpoint = "https://www.roberttamayo.com/skate/add.php";
         this.handleChange = this.handleChange.bind(this);
+        this.handleAddNewCrew = this.handleAddNewCrew.bind(this);
+
         this.state = {
             crew_name: ''
         };
+    }
+    handleAddNewCrew(){
+        this.props.handleAddNewCrew(this.state.crew_name);
     }
     handleChange(event){
         this.setState({
@@ -18,8 +23,17 @@ export class ViewAddCrew extends React.Component {
         return(
             <div className="mode-add-skater">
                 <h3>Add New Crew</h3>
-                <input type="text" name="crew_name" value={this.state.crew_name} placeholder="Crew Name"/>
-                <button onClick={this.onAddCrew}>Submit</button>
+                {this.props.loading ? (
+                    <div className="loading-inline">Loading</div>
+                ) 
+                : (
+                    <div className="form-wrap">
+                        <form onSubmit={this.handleAddNewCrew}>
+                            <input type="text" required name="crew_name" value={this.state.crew_name} onChange={this.handleChange} placeholder="Crew Name"/>
+                            <button onClick={this.onAddCrew}>Submit</button>
+                        </form>
+                    </div>
+                )}
             </div>
         );
     }

@@ -8,6 +8,7 @@ import {LoginForm} from "./modules/LoginForm";
 import {HomeMenu} from "./modules/HomeMenu";
 import {Messages} from "./modules/Messages";
 import {Skaters} from "./modules/Skaters";
+import {Crews} from "./modules/Crews";
 
 class App extends React.Component {
     constructor(props) {
@@ -17,9 +18,22 @@ class App extends React.Component {
         this.menuAction = this.menuAction.bind(this);
         this.toggleMenu = this.toggleMenu.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
-        
-        this.endpoint = 'https://www.roberttamayo.com/skate/login.php';
+        this.fetchCrews = this.fetchCrews.bind(this);
+        this.fetchSkaters = this.fetchSkaters.bind(this);
+        this.handleSelectCrew = this.handleSelectCrew.bind(this);
+        this.getHeaderTitleFromActionName = this.getHeaderTitleFromActionName.bind(this);
+        this.handleAddNewCrew = this.handleAddNewCrew.bind(this);
 
+        this.baseUrl = 'https://www.roberttamayo.com/skate/api/';
+        this.endpoints = {
+            login: `${this.baseUrl}login.php`,
+            skaters: `${this.baseUrl}skaters.php`,
+            crews: `${this.baseUrl}crews.php`,
+            spots: `${this.baseUrl}down.php`,
+            uploadSpot: `${this.baseUrl}up.php`,
+            user: `${this.baseUrl}user.php`,
+            crew: `${this.baseUrl}crew.php`,
+        }
         this.views = {
             Add: "Add",
             Locator: "Locator",
@@ -40,8 +54,60 @@ class App extends React.Component {
             user_magicword: '',
             activeView: 'Main',
             menuOpen: false,
-            skaters: []
+            skaters: [],
+            crews: [],
+            headerTitle: '',
         };
+    }
+    fetchCrews() {
+        return new Promise((resolve, reject) => {
+            let endpoint = this.endpoints.crews;
+            $.ajax(endpoint, {
+                method: "POST",
+                data: {}
+            }).then((response)=>{
+                try {
+                    let data = JSON.parse(response);
+                    console.log(data);
+                    this.setState({
+                        crews: data
+                    });
+                    resolve();
+                } catch (e) {
+                    reject();
+                }
+                console.log(response);
+            });
+        });
+    }  
+    handleSelectCrew(crew_id) {
+        console.log('handle select crew: ' + crew_id);
+        this.fetchSkaters(crew_id).then(()=>{
+            this.menuAction('Users');
+        });
+    }
+    fetchSkaters(crew_id){
+        return new Promise((resolve, reject) => {
+            let endpoint = this.endpoints.skaters;
+            $.ajax(endpoint, {
+                method: "POST",
+                data: {
+                    crew_id
+                }
+            }).then((response)=>{
+                try {
+                    let data = JSON.parse(response);
+                    console.log(data);
+                    this.setState({
+                        skaters: data
+                    });
+                    resolve();
+                } catch (e) {
+                    reject();
+                }
+                console.log(response);
+            });
+        });
     }
     toggleMenu() {
         this.setState({
@@ -49,7 +115,7 @@ class App extends React.Component {
         });
     }
     handleLogin() {
-        $.ajax(this.endpoint, {
+        $.ajax(this.endpoints.login, {
             method: "POST",
             data: {
                 user_name: this.state.user_name,
@@ -85,15 +151,69 @@ class App extends React.Component {
             console.log(response);
         });
     }
+    handleAddNewCrew(crew_name){
+        return new Promise((resolve, reject)=>{
+            $.ajax(this.endpoints.crew, {
+                method: "POST",
+                data: {
+                    crew_name,
+                    action: 'create',
+                }
+            }).then((response)=>{
+                console.log(response);
+                try {
+                    let crew = JSON.parse(response);
+                    if (crew.crew_id && crew.crew_is_active && crew.crew_name) {
+                        let crews = [...this.state.crews];
+                        crews.push(crew);
+                        this.setState({crews});
+                    }
+                    resolve(crew);
+                } catch (e) {
+                    console.error(e);
+                    reject();
+                }
+            });
+        });
+    }
     handleLoginChange(data) {
         this.setState({
             [data.name]: data.value
         });
     }
+    getHeaderTitleFromActionName(actionName){
+        let headerTitle = '';
+        switch (actionName) {
+            case "Add":
+            headerTitle = 'Add';
+            break;
+            case "Locator":
+            headerTitle = 'Spots';
+            break;
+            case "Messages":
+            headerTitle = 'Messages';
+            break;
+            case "Logout":
+            headerTitle = '';
+            break;
+            case "Main":
+            headerTitle = '';
+            break;
+            case "Users":
+            headerTitle = 'Skaters';
+            break;
+            case "Crews":
+            headerTitle = 'Crews';
+            break;
+        }
+        return headerTitle;
+    }
     menuAction(actionName) {
-        console.log(actionName);
+        let headerTitle = this.getHeaderTitleFromActionName(actionName);
+        console.log(`Changed headerTitle to ${headerTitle} for actionName ${actionName}`);
         this.setState({
-            activeView: actionName
+            activeView: actionName,
+            headerTitle
         });
     }
     handleLogout(){
@@ -120,19 +240,24 @@ class App extends React.Component {
                     user_data={this.state.user_data}
                     toggleMenu={this.toggleMenu}
                     menuOpen={this.state.menuOpen}
-                    logout={this.handleLogout}/>
+                    logout={this.handleLogout}
+                    headerTitle={this.state.headerTitle}/>
 
                     <div className="app-body">
                         <div className="app-view app-view-main">
-                            <HomeMenu menuAction={this.menuAction}/>
+                            <HomeMenu 
+                            menuAction={this.menuAction}
+                            user_admin={this.state.user_data.user_role == 0}/>
                         </div>
-
+ 
                         <div className="app-view app-view-add">
-                            <Reporter crew_id={this.state.crew_id}/>
+                            <Reporter 
+                            crew_id={this.state.crew_id}/>
                         </div>
 
                         <div className="app-view app-view-locator">
-                            <Locator crew_id={this.state.crew_id}/>
+                            <Locator 
+                            crew_id={this.state.crew_id}/>
                         </div>
 
                         <div className="app-view app-view-messages">
@@ -140,8 +265,18 @@ class App extends React.Component {
                         </div>
 
                         <div className="app-view app-view-skaters">
-                            <Skaters skaters={this.state.skaters} 
-                                crew_id={this.state.crew_id}/>
+                            <Skaters 
+                            skaters={this.state.skaters} 
+                            crew_id={this.state.crew_id}
+                            user_can_add={this.state.user_role <= 1}    />
+                        </div>
+
+                        <div className="app-view app-view-crews">
+                            <Crews 
+                            crews={this.state.crews}
+                            user_id={this.state.user_id}
+                            handleSelectCrew={this.handleSelectCrew}
+                            handleAddNewCrew={this.handleAddNewCrew}/>
                         </div>
                     </div>
 
@@ -155,6 +290,13 @@ class App extends React.Component {
                 user_name={this.user_name} 
                 user_magicword={this.user_magicword}/>
             )
+        }
+    }
+    componentDidMount(){
+        if (this.state.user_data.user_role == 0) {
+            this.fetchCrews();
+        } else if (this.state.user_data.user_role == 1) {
+            this.fetchSkaters(this.state.user_data.crew_id);
         }
     }
 }
