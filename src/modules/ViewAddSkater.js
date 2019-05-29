@@ -4,49 +4,56 @@ import React from "react";
 export class ViewAddSkater extends React.Component {
     constructor(props) {
         super(props);
-        this.endpoint = "https://www.roberttamayo.com/skate/add.php";
+        this.endpoint = this.props.endpoint;
         this.crew_id = this.props.crew_id;
-        this.submit = this.submit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+        this.handleAddNewSkater = this.handleAddNewSkater.bind(this);
         this.state = {
             skater_username: '',
-            skater_password: ''
+            skater_password: '',
+            skater_is_crew_leader: false,
+            crew_id: this.props.crew_id,
         };
     }
     handleChange(event) {
+        console.log(event.target);
         this.setState({
-            [event.target.name]: event.target.value
+            [event.target.name]: event.target.name == 'skater_is_crew_leader' ? event.target.checked : event.target.value
         });
     }
-    submit() {
-        $.ajax(this.endpoint, {
-            method: "POST",
-            data: {
-                skater_username: this.state.skater_username,
-                skater_password: this.state.skater_password,
-                crew_id: this.crew_id
-            }
-        }).then((response) => {
-            // TODO: update UI to reflect successful upload
-            console.log(response);
-            this.props.onFinish();
-        });
+    handleAddNewSkater() {
+        console.log('adding new skater');
+        this.props.handleAddNewSkater(Object.assign({}, {...this.state}));
     }
     handleChange(event){
         this.setState({
             [event.target.name]: event.target.value
         });
     }
+    handleCheckboxChange(event) {
+        this.setState({
+            [event.target.name]: event.target.checked
+        });
+    }
     render() {
         return (
         <div className="mode-add-skater">
             <h3>Add New Skater</h3>
+            {this.props.loading ? (
+                <div className="loading-inline">Loading</div>
+            ) 
+            : (
             <div className="form-wrap">
-                <form className="mode-form view-add-skater-form" onSubmit={this.submit}>
+                <form className="mode-form view-add-skater-form" onSubmit={this.handleAddNewSkater}>
                     <input name="skater_username" type="text" placeholder="Username" value={this.state.skater_username} onChange={this.handleChange} />
                     <input name="skater_password" type="text" placeholder="Password" value={this.state.skater_password} onChange={this.handleChange} />
+                    <label htmlFor="user_role">Crew Leader?</label>
+                    <input type="checkbox" name="skater_is_crew_leader" checked={this.state.skater_is_crew_leader} onChange={this.handleCheckboxChange}/>
+                    <button type="submit">Submit</button>
                 </form>
             </div>
+            )}
         </div>
         );
     }

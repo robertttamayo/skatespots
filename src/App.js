@@ -23,6 +23,7 @@ class App extends React.Component {
         this.handleSelectCrew = this.handleSelectCrew.bind(this);
         this.getHeaderTitleFromActionName = this.getHeaderTitleFromActionName.bind(this);
         this.handleAddNewCrew = this.handleAddNewCrew.bind(this);
+        this.handleAddNewSkater = this.handleAddNewSkater.bind(this);
 
         this.baseUrl = 'https://www.roberttamayo.com/skate/api/';
         this.endpoints = {
@@ -176,6 +177,29 @@ class App extends React.Component {
             });
         });
     }
+    handleAddNewSkater(skater_data) {
+        console.log(skater_data);
+        return new Promise((resolve, reject) => {
+            $.ajax(this.endpoints.user, {
+                method: "POST",
+                data: {
+                    crew_id: skater_data.crew_id,
+                    action: 'create',
+                    user_name: skater_data.skater_username,
+                    user_magicword: skater_data.skater_password,
+                    user_role: skater_data.skater_is_crew_leader ? 1 : 2,
+                }
+            }).then((response)=>{
+                try{
+                    let data = JSON.parse(response);
+                    resolve(data);
+                } catch(e) {
+                    console.error(e);
+                    reject();
+                }
+            });
+        });
+    }
     handleLoginChange(data) {
         this.setState({
             [data.name]: data.value
@@ -268,7 +292,8 @@ class App extends React.Component {
                             <Skaters 
                             skaters={this.state.skaters} 
                             crew_id={this.state.crew_id}
-                            user_can_add={this.state.user_role <= 1}    />
+                            user_can_add={this.state.user_role <= 1} 
+                            handleAddNewSkater={this.handleAddNewSkater}   />
                         </div>
 
                         <div className="app-view app-view-crews">

@@ -30,7 +30,7 @@ export class ViewAddCrew extends React.Component {
                     <div className="form-wrap">
                         <form onSubmit={this.handleAddNewCrew}>
                             <input type="text" required name="crew_name" value={this.state.crew_name} onChange={this.handleChange} placeholder="Crew Name"/>
-                            <button onClick={this.onAddCrew}>Submit</button>
+                            <button type="submit">Submit</button>
                         </form>
                     </div>
                 )}

@@ -4,14 +4,22 @@ import {ViewAddSkater} from "./ViewAddSkater";
 export class Skaters extends React.Component {
     constructor(props){
         super(props);
-        this.onStartAdd = this.onStartAdd.bind(this);
-        this.onFinishAdd = this.onFinishAdd.bind(this);
+        this.handleAddNewSkater = this.handleAddNewSkater.bind(this);
+        this.state = {
+            loading: false
+        }
     }
-    onStartAdd(){
-        
-    }
-    onFinishAdd(){
-
+    handleAddNewSkater(skater_data){
+        console.log(skater_data);
+        this.setState({
+            loading: true
+        });
+        this.props.handleAddNewSkater(skater_data).then((response)=>{
+            console.log('Done adding new skater', response);
+            this.setState({
+                loading: false
+            })
+        });
     }
     render(){
         const skatersList = this.props.skaters.map(item => 
@@ -22,7 +30,10 @@ export class Skaters extends React.Component {
         return (
             <div className="skaters-wrap">
                 {this.props.user_can_add ? (
-                    <ViewAddSkater onFinish={this.onFinishAdd}/>
+                    <ViewAddSkater 
+                    handleAddNewSkater={this.handleAddNewSkater}
+                    loading={this.state.loading}
+                    crew_id={this.props.crew_id}/>
                 ) : (
                     ''
                 )}
