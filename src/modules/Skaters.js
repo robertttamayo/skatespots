@@ -4,9 +4,11 @@ import {ViewAddSkater} from "./ViewAddSkater";
 export class Skaters extends React.Component {
     constructor(props){
         super(props);
+        this.activateEndpoint = this.props.activateEndpoint;
         this.handleAddNewSkater = this.handleAddNewSkater.bind(this);
         this.state = {
-            loading: false
+            loading: false,
+            shareLink: '',
         }
     }
     handleAddNewSkater(skater_data){
@@ -16,8 +18,10 @@ export class Skaters extends React.Component {
         });
         this.props.handleAddNewSkater(skater_data).then((response)=>{
             console.log('Done adding new skater', response);
+            let shareLink = `${this.activateEndpoint}?user_id=${response.user_id}&key=${response.user_activate_key}`;
             this.setState({
-                loading: false
+                loading: false,
+                shareLink
             })
         });
     }
@@ -33,7 +37,8 @@ export class Skaters extends React.Component {
                     <ViewAddSkater 
                     handleAddNewSkater={this.handleAddNewSkater}
                     loading={this.state.loading}
-                    crew_id={this.props.crew_id}/>
+                    crew_id={this.props.crew_id}
+                    shareLink={this.state.shareLink}/>
                 ) : (
                     ''
                 )}

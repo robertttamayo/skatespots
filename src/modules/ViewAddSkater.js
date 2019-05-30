@@ -38,23 +38,32 @@ export class ViewAddSkater extends React.Component {
     }
     render() {
         return (
-        <div className="mode-add-skater">
-            <h3>Add New Skater</h3>
-            {this.props.loading ? (
-                <div className="loading-inline">Loading</div>
-            ) 
-            : (
-            <div className="form-wrap">
-                <form className="mode-form view-add-skater-form" onSubmit={this.handleAddNewSkater}>
-                    <input name="skater_username" type="text" placeholder="Username" value={this.state.skater_username} onChange={this.handleChange} />
-                    <input name="skater_password" type="text" placeholder="Password" value={this.state.skater_password} onChange={this.handleChange} />
-                    <label htmlFor="user_role">Crew Leader?</label>
-                    <input type="checkbox" name="skater_is_crew_leader" checked={this.state.skater_is_crew_leader} onChange={this.handleCheckboxChange}/>
-                    <button type="submit">Submit</button>
-                </form>
+        <React.Fragment>
+            <div className="mode-add-skater">
+                <h3>Add New Skater</h3>
+                {this.props.loading ? (
+                    <div className="loading-inline">Loading</div>
+                ) 
+                : (
+                <div className="form-wrap">
+                    <form className="mode-form view-add-skater-form" onSubmit={this.handleAddNewSkater}>
+                        <input name="skater_username" type="text" placeholder="Username" value={this.state.skater_username} onChange={this.handleChange} />
+                        <label htmlFor="user_role">Crew Leader?</label>
+                        <input type="checkbox" name="skater_is_crew_leader" checked={this.state.skater_is_crew_leader} onChange={this.handleCheckboxChange}/>
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+                )}
+            </div>
+            {this.props.shareLink == '' ? (
+                ''
+            ) : (
+            <div className="skater-share-link" data-visible={this.props.shareLink}>
+                Success! Click on the link to share with the new skater:
+                <a>{this.props.shareLink}</a>
             </div>
             )}
-        </div>
+        </React.Fragment>
         );
     }
 }

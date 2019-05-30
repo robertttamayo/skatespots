@@ -40,18 +40,17 @@ if (isset($_POST['action'])){
             echo "Error: User Name must be set";
             die;
         } 
-        if (!isset($_POST['user_magicword'])) {
-            echo "Error: Password must be set";
-            die;
+        if (isset($_POST['user_magicword'])) {
+            $user_magicword = filter_var($_POST['user_magicword'], FILTER_SANITIZE_STRING);
         }
         if (isset($_POST['user_role'])) {
             $user_role = filter_var($_POST['user_role'], FILTER_VALIDATE_INT);
         }
+        $key = md5(rand());
         $user_name = filter_var($_POST['user_name'], FILTER_SANITIZE_STRING);
-        $user_magicword = filter_var($_POST['user_magicword'], FILTER_SANITIZE_STRING);
-        $sql = "INSERT INTO users (user_name, crew_id, user_magicword, user_role) 
-        VALUES ('$user_name', $crew_id, '$user_magicword', $user_role)";
-        
+        $sql = "INSERT INTO users (user_name, crew_id, user_magicword, user_role, user_is_active, user_activate_key) 
+        VALUES ('$user_name', $crew_id, '', $user_role, 0, '$key')";
+
         $insert = true;
     } else if ($action == 'modify') {
         if (!isset($_POST['user_id'])) {
@@ -85,7 +84,8 @@ if ($insert) {
     $user = [
         'user_id' => $user_id,
         'user_name' => $user_name,
-        'user_is_active' => 1
+        'user_is_active' => 0,
+        'user_activate_key' => $key
     ];
     echo json_encode($user);
 } else if ($update) {
@@ -103,6 +103,7 @@ if ($insert) {
             'user_name' => $datum['user_name'],
             'user_is_active' => $datum['user_is_active'],
             'user_role' => $datum['user_role'],
+            'user_activate_key' => $datum['user_activate_key']
         ];
     }
     echo json_encode($user);

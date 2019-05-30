@@ -34,6 +34,7 @@ class App extends React.Component {
             uploadSpot: `${this.baseUrl}up.php`,
             user: `${this.baseUrl}user.php`,
             crew: `${this.baseUrl}crew.php`,
+            activate: `${this.baseUrl}activate.php`,
         }
         this.views = {
             Add: "Add",
@@ -186,14 +187,15 @@ class App extends React.Component {
                     crew_id: skater_data.crew_id,
                     action: 'create',
                     user_name: skater_data.skater_username,
-                    user_magicword: skater_data.skater_password,
                     user_role: skater_data.skater_is_crew_leader ? 1 : 2,
                 }
             }).then((response)=>{
                 try{
                     let data = JSON.parse(response);
+                    console.log(data);
                     resolve(data);
                 } catch(e) {
+                    console.log(response);
                     console.error(e);
                     reject();
                 }
@@ -293,7 +295,8 @@ class App extends React.Component {
                             skaters={this.state.skaters} 
                             crew_id={this.state.crew_id}
                             user_can_add={this.state.user_role <= 1} 
-                            handleAddNewSkater={this.handleAddNewSkater}   />
+                            handleAddNewSkater={this.handleAddNewSkater} 
+                            activateEndpoint={this.endpoints.activate} />
                         </div>
 
                         <div className="app-view app-view-crews">
