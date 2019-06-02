@@ -43,8 +43,10 @@ class App extends React.Component {
             Logout: "Logout",
             Main: "Main",
             Users: "Users",
-            Crews: "Crews"
+            Crews: "Crews",
+            Back: "Back",
         }
+        this.lastView= this.views.Main;
 
         this.state = {
             user_data: this.props.user_data,
@@ -59,6 +61,7 @@ class App extends React.Component {
             skaters: [],
             crews: [],
             headerTitle: '',
+            selected_crew_id: ''
         };
     }
     fetchCrews() {
@@ -76,14 +79,14 @@ class App extends React.Component {
                     });
                     resolve();
                 } catch (e) {
+                    console.log(e, response);
                     reject();
                 }
-                console.log(response);
             });
         });
     }  
     handleSelectCrew(crew_id) {
-        console.log('handle select crew: ' + crew_id);
+        this.setState({selected_crew_id: crew_id});
         this.fetchSkaters(crew_id).then(()=>{
             this.menuAction('Users');
         });
@@ -99,15 +102,14 @@ class App extends React.Component {
             }).then((response)=>{
                 try {
                     let data = JSON.parse(response);
-                    console.log(data);
                     this.setState({
                         skaters: data
                     });
                     resolve();
                 } catch (e) {
+                    console.log(e, response);
                     reject();
                 }
-                console.log(response);
             });
         });
     }
@@ -148,9 +150,8 @@ class App extends React.Component {
                     })
                 }
             } catch (e) {
-
+                console.log(e, response);
             }
-            console.log(response);
         });
     }
     handleAddNewCrew(crew_name){
@@ -162,7 +163,6 @@ class App extends React.Component {
                     action: 'create',
                 }
             }).then((response)=>{
-                console.log(response);
                 try {
                     let crew = JSON.parse(response);
                     if (crew.crew_id && crew.crew_is_active && crew.crew_name) {
@@ -172,19 +172,18 @@ class App extends React.Component {
                     }
                     resolve(crew);
                 } catch (e) {
-                    console.error(e);
+                    console.error(e, response);
                     reject();
                 }
             });
         });
     }
     handleAddNewSkater(skater_data) {
-        console.log(skater_data);
         return new Promise((resolve, reject) => {
             $.ajax(this.endpoints.user, {
                 method: "POST",
                 data: {
-                    crew_id: skater_data.crew_id,
+                    crew_id: this.state.selected_crew_id,
                     action: 'create',
                     user_name: skater_data.skater_username,
                     user_role: skater_data.skater_is_crew_leader ? 1 : 2,
@@ -192,11 +191,9 @@ class App extends React.Component {
             }).then((response)=>{
                 try{
                     let data = JSON.parse(response);
-                    console.log(data);
                     resolve(data);
                 } catch(e) {
-                    console.log(response);
-                    console.error(e);
+                    console.log(e, response);
                     reject();
                 }
             });
@@ -235,8 +232,10 @@ class App extends React.Component {
         return headerTitle;
     }
     menuAction(actionName) {
+        if (actionName == this.views.Main) {
+            
+        }
         let headerTitle = this.getHeaderTitleFromActionName(actionName);
-        console.log(`Changed headerTitle to ${headerTitle} for actionName ${actionName}`);
         this.setState({
             activeView: actionName,
             headerTitle
@@ -293,7 +292,7 @@ class App extends React.Component {
                         <div className="app-view app-view-skaters">
                             <Skaters 
                             skaters={this.state.skaters} 
-                            crew_id={this.state.crew_id}
+                            crew_id={this.state.selected_crew_id}
                             user_can_add={this.state.user_role <= 1} 
                             handleAddNewSkater={this.handleAddNewSkater} 
                             activateEndpoint={this.endpoints.activate} />

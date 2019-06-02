@@ -1,5 +1,7 @@
 
 import React from "react";
+import { Map, TileLayer, Marker, Popup, LayersControl, ZoomControl } from 'react-leaflet';
+import ReactLeafletGoogleLayer from 'react-leaflet-google-layer';
 
 export class Maps extends React.Component {
     constructor(props) {
@@ -18,16 +20,17 @@ export class Maps extends React.Component {
         }
     }
     create() {
-        this.map = L.map(this.refs.map, {
-            attributionControl: false,
-            scrollWheelZoom: false,
-            doubleClickZoom: 'center',
-            zoomSnap: 1
-        }).setView([this.lat, this.lng], this.zoom);
+        return;
+        // this.map = L.map(this.refs.map, {
+        //     attributionControl: false,
+        //     scrollWheelZoom: false,
+        //     doubleClickZoom: 'center',
+        //     zoomSnap: 1
+        // }).setView([this.lat, this.lng], this.zoom);
         
-        this.tileLayer = L.gridLayer.googleMutant({
-            type: 'roadmap', // valid values are 'roadmap', 'satellite', 'terrain' and 'hybrid'
-        }).addTo(this.map);
+        // this.tileLayer = L.gridLayer.googleMutant({
+        //     type: 'roadmap', // valid values are 'roadmap', 'satellite', 'terrain' and 'hybrid'
+        // }).addTo(this.map);
     }
     preRender(items){
         let lats = [];
@@ -70,16 +73,60 @@ export class Maps extends React.Component {
         }
     }
     render(){
-        this.preRender(this.props.items);
-
         return (
             <div className="locator-map">
-                <div id="map" ref="map"></div>
+                <div id="map">
+                    <Map 
+                    zoom={this.zoom} 
+                    center={[this.lat, this.lng]}
+                    scrollWheelZoom={false}
+                    zoomControl={false}
+                    ref="map"
+                    >
+                        <ReactLeafletGoogleLayer 
+                        googleMapsLoaderConf={{
+                            KEY: this.key, VERSION: '3.34', 
+                            LIBRARIES: ['places']
+                        }} 
+                        type="roadmap" />
+
+                        {this.props.items.map((item, index) => {
+                            let listItems = '';
+                            return (
+                                <Marker 
+                                key={item.spot_id}
+                                position={[item.spot_lat, item.spot_lng]} 
+                                
+                                // icon={L.DivIcon.dataMarkup({
+                                //     className:"cmOverlay" + (item.state || ''),
+                                //     iconSize: [35, 35],
+                                //     iconAnchor: [17.5, 17.5],
+                                //     lid: item.locationId, 
+                                //     lat: item.lat,
+                                //     lng: item.lng,
+                                //     visible: true,
+                                //     particleGroupNames: ['Location Type'],
+                                //     specialties: item.specialties,
+                                //     html: `
+                                //         <div class="circular-close"></div>
+                                //         <div class="circular">${listItems}</div>
+                                //         <div class="index count">${index + 1}</div>
+                                //         <div class="circular-close"></div>
+                                //         <div class="circular"></div>
+                                //     `
+                                // })}
+                                />
+                            )
+                        })}
+                        <ZoomControl 
+                        position="bottomright"/>
+                    </Map>
+                </div>
             </div>
         );
     }
     componentDidMount(){
         console.log('did mount');
-        this.create();
+        // this.create();
     }
 }

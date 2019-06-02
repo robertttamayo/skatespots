@@ -9,11 +9,13 @@ export class ViewAddSkater extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
         this.handleAddNewSkater = this.handleAddNewSkater.bind(this);
+        this.copyShareLink = this.copyShareLink.bind(this);
         this.state = {
             skater_username: '',
             skater_password: '',
             skater_is_crew_leader: false,
             crew_id: this.props.crew_id,
+            copyLinkText: 'Copy Link',
         };
     }
     handleChange(event) {
@@ -22,8 +24,10 @@ export class ViewAddSkater extends React.Component {
             [event.target.name]: event.target.name == 'skater_is_crew_leader' ? event.target.checked : event.target.value
         });
     }
-    handleAddNewSkater() {
-        console.log('adding new skater');
+    handleAddNewSkater(crew_id) {
+        console.log('adding new skater in crew ' + crew_id);
+        this.setState({crew_id});
+        console.log(this.state);
         this.props.handleAddNewSkater(Object.assign({}, {...this.state}));
     }
     handleChange(event){
@@ -36,21 +40,28 @@ export class ViewAddSkater extends React.Component {
             [event.target.name]: event.target.checked
         });
     }
+    copyShareLink(){
+        let element = document.getElementById('copy-link');
+        element.select();
+        document.execCommand('copy');
+        this.setState({copyLinkText: 'Copied!'});
+        window.setTimeout(()=>this.setState({copyLinkText: 'Copy Link'}), 3000);
+    }
     render() {
         return (
         <React.Fragment>
             <div className="mode-add-skater">
-                <h3>Add New Skater</h3>
+                <h3>{this.props.headerText}</h3>
                 {this.props.loading ? (
                     <div className="loading-inline">Loading</div>
                 ) 
                 : (
                 <div className="form-wrap">
-                    <form className="mode-form view-add-skater-form" onSubmit={this.handleAddNewSkater}>
-                        <input name="skater_username" type="text" placeholder="Username" value={this.state.skater_username} onChange={this.handleChange} />
-                        <label htmlFor="user_role">Crew Leader?</label>
-                        <input type="checkbox" name="skater_is_crew_leader" checked={this.state.skater_is_crew_leader} onChange={this.handleCheckboxChange}/>
-                        <button type="submit">Submit</button>
+                    <form className="mode-form view-add-skater-form" onSubmit={()=>this.handleAddNewSkater(this.props.crew_id)}>
+                        <input name="skater_username" readOnly type="hidden" placeholder="Username" value={this.state.skater_username} onChange={this.handleChange} />
+                        <label htmlFor="skater_is_crew_leader">Crew Leader?</label>
+                        <input id="skater_is_crew_leader" type="checkbox" name="skater_is_crew_leader" checked={this.state.skater_is_crew_leader} onChange={this.handleCheckboxChange}/>
+                        <button type="submit">Create</button>
                     </form>
                 </div>
                 )}
@@ -59,10 +70,22 @@ export class ViewAddSkater extends React.Component {
                 ''
             ) : (
             <div className="skater-share-link" data-visible={this.props.shareLink}>
-                Success! Click on the link to share with the new skater:
-                <a class="sms-link" href={`sms:&body=${encodeURI(this.props.shareLink)}`}>Send SMS</a>
-                <a class="email-link" href={`mailto:?body=${encodeURI(this.props.shareLink)}`}>Send via email</a>
-                <a class="copy-link" onClick={document.execCommand('copy')}>{this.props.shareLink}</a>
+                <div>
+                    Success! Click on one of the options below to share the activation link:
+                </div>
+
+                <div>
+                    <a className="sms-link" href={`sms:&body=${encodeURI(this.props.shareLink)}`}>Send SMS</a>
+                </div>
+
+                <div>
+                    <a className="email-link" href={`mailto:?body=${encodeURI(this.props.shareLink)}`}>Send via email</a>
+                </div>
+
+                <div className="copy-link-wrap">
+                    <input id="copy-link" type="text" className="copy-link" value={this.props.shareLink} readOnly/>
+                    <button  className="copy-link-button" onClick={this.copyShareLink}>{this.state.copyLinkText}</button>
+                </div>
             </div>
             )}
         </React.Fragment>

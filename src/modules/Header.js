@@ -22,6 +22,7 @@ export class Header extends React.Component {
         console.log(this.state.user_data);
     }
     onBack() {
+        $(document).trigger("reset");
         this.props.menuAction("Main");
     }
     onMenu() {

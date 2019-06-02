@@ -16,7 +16,6 @@ export class Locator extends React.Component {
         };
     }
     gather() {
-        console.log(this.crew_id);
         return new Promise((resolve, reject)=> {
             $.ajax(this.endpoint, {
                 method: "POST",
@@ -26,10 +25,9 @@ export class Locator extends React.Component {
             }).then((response)=>{
                 try {
                     const response_data = JSON.parse(response);
-                    console.log(response_data);
                     resolve(response_data);
                 } catch (e) {
-                    console.log(e);
+                    console.log(e, reponse);
                     resolve({});
                 }
             });
@@ -45,7 +43,6 @@ export class Locator extends React.Component {
                 });
             } else {
                 reject();
-                alert("You share your location to view locations");
             }
         });
     }
@@ -59,7 +56,6 @@ export class Locator extends React.Component {
     }
     componentDidMount(){
         this.gather().then((response) => {
-            console.log('response in cdm', response);
             this.setState({
                 items: response
             });

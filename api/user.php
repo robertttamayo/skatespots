@@ -48,8 +48,9 @@ if (isset($_POST['action'])){
         }
         $key = md5(rand());
         $user_name = filter_var($_POST['user_name'], FILTER_SANITIZE_STRING);
-        $sql = "INSERT INTO users (user_name, crew_id, user_magicword, user_role, user_is_active, user_activate_key) 
-        VALUES ('$user_name', $crew_id, '', $user_role, 0, '$key')";
+        $date = date("Y-m-d");
+        $sql = "INSERT INTO users (user_name, crew_id, user_magicword, user_role, user_is_active, user_activate_key, user_create_date) 
+        VALUES ('$user_name', $crew_id, '', $user_role, 0, '$key', '$date')";
 
         $insert = true;
     } else if ($action == 'modify') {

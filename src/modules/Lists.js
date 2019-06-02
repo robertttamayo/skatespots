@@ -7,7 +7,7 @@ export class Lists extends React.Component {
     render(){
         // use props to render the list instead of state
         const listItems = this.props.items.map(item => 
-            <div className="list-item" data-item-id={item.spot_id}>
+            <div key={item.spot_id} className="list-item" data-item-id={item.spot_id}>
                 {item.spot_name}
             </div>
         );

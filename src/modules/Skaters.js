@@ -9,25 +9,30 @@ export class Skaters extends React.Component {
         this.state = {
             loading: false,
             shareLink: '',
+            addSkaterHeaderText: 'Add New Skater',
         }
+
+        this.originalState = Object.assign({}, {...this.state});
+        $(document).on('reset', ()=>{
+            this.setState(Object.assign({}, {...this.originalState}));
+        });
     }
     handleAddNewSkater(skater_data){
-        console.log(skater_data);
         this.setState({
             loading: true
         });
         this.props.handleAddNewSkater(skater_data).then((response)=>{
-            console.log('Done adding new skater', response);
             let shareLink = `${this.activateEndpoint}?user_id=${response.user_id}&key=${response.user_activate_key}`;
             this.setState({
                 loading: false,
-                shareLink
+                shareLink,
+                addSkaterHeaderText: 'Add Another Skater',
             })
         });
     }
     render(){
         const skatersList = this.props.skaters.map(item => 
-            <div className="skater-list-item">
+            <div key={item.user_id} className="skater-list-item">
                 {item.user_name}
             </div>
         );
@@ -38,7 +43,8 @@ export class Skaters extends React.Component {
                     handleAddNewSkater={this.handleAddNewSkater}
                     loading={this.state.loading}
                     crew_id={this.props.crew_id}
-                    shareLink={this.state.shareLink}/>
+                    shareLink={this.state.shareLink}
+                    headerText={this.state.addSkaterHeaderText}/>
                 ) : (
                     ''
                 )}
