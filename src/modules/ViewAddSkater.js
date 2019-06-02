@@ -60,7 +60,9 @@ export class ViewAddSkater extends React.Component {
             ) : (
             <div className="skater-share-link" data-visible={this.props.shareLink}>
                 Success! Click on the link to share with the new skater:
-                <a>{this.props.shareLink}</a>
+                <a class="sms-link" href={`sms:&body=${encodeURI(this.props.shareLink)}`}>Send SMS</a>
+                <a class="email-link" href={`mailto:?body=${encodeURI(this.props.shareLink)}`}>Send via email</a>
+                <a class="copy-link" onClick={document.execCommand('copy')}>{this.props.shareLink}</a>
             </div>
             )}
         </React.Fragment>
