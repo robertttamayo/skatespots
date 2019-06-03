@@ -59,6 +59,7 @@ export class Locator extends React.Component {
             this.setState({
                 items: response
             });
+            $(document).trigger('center_map', {items: response});
         });
         // Promise.all([this.gather(), this.askUserLocation()]).then((values) => {
         //     console.log(values);

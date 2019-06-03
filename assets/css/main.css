@@ -102,9 +102,9 @@ footer {
 }
 
 /* line 104, main.scss */
-.leaflet-container {
-  height: 100%;
+.leaflet-google-mutant, .leaflet-map-pane, .leaflet-container {
   width: 100%;
+  height: 100%;
 }
 
 @media (max-width: 767px) {

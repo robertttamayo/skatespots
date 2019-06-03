@@ -1,5 +1,6 @@
 
 import React from "react";
+import * as L from "leaflet";
 import { Map, TileLayer, Marker, Popup, LayersControl, ZoomControl } from 'react-leaflet';
 import ReactLeafletGoogleLayer from 'react-leaflet-google-layer';
 
@@ -7,17 +8,24 @@ export class Maps extends React.Component {
     constructor(props) {
         super(props);
         this.create = this.create.bind(this);
-        this.preRender = this.preRender.bind(this);
+        this.center = this.center.bind(this);
 
         this.map = {};
         this.tileLayer = {};
         this.lat = 39.5;
         this.lng = -98.35;
         this.zoom = 4;
+        this.key = "AIzaSyCqjAzVHf3SRY1HIr-yYTCyNhOCHV1p5AE";
 
         this.state = {
             items: this.props.items
         }
+        $(document).on('center_map', (event, data)=>{
+            this.map.invalidateSize();
+            if (data && data.items) {
+                this.center(data.items);
+            }
+        });
     }
     create() {
         return;
@@ -32,17 +40,16 @@ export class Maps extends React.Component {
         //     type: 'roadmap', // valid values are 'roadmap', 'satellite', 'terrain' and 'hybrid'
         // }).addTo(this.map);
     }
-    preRender(items){
+    center(_items){
+        let items = _items || this.props.items;
         let lats = [];
         let lngs = [];
 
         items.forEach((item)=>{
-            const lat = parseFloat(item.spot_lat);
-            const lng = parseFloat(item.spot_lng);
+            let lat = parseFloat(item.spot_lat);
+            let lng = parseFloat(item.spot_lng);
             lats.push(lat);
             lngs.push(lng);
-
-            L.marker([lat, lng]).addTo(this.map);
         });
 
         lats.sort(function(a, b) {
@@ -51,6 +58,7 @@ export class Maps extends React.Component {
         lngs.sort(function(a, b) {
             return a - b;
         });
+        console.log(lats, lngs);
         if (lats.length && lngs.length) {
             var minLat = lats[0];
             var minLng = lngs[0];
@@ -85,8 +93,8 @@ export class Maps extends React.Component {
                     >
                         <ReactLeafletGoogleLayer 
                         googleMapsLoaderConf={{
-                            KEY: this.key, VERSION: '3.34', 
-                            LIBRARIES: ['places']
+                            KEY: this.key, 
+                            VERSION: '3.36'
                         }} 
                         type="roadmap" />
 
@@ -126,7 +134,7 @@ export class Maps extends React.Component {
         );
     }
     componentDidMount(){
-        console.log('did mount');
-        // this.create();
+        this.map = this.refs.map.leafletElement;
+        this.center(this.props.items);
     }
 }
