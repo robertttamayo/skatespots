@@ -232,14 +232,15 @@ class App extends React.Component {
         return headerTitle;
     }
     menuAction(actionName) {
-        if (actionName == this.views.Main) {
-            
-        }
         let headerTitle = this.getHeaderTitleFromActionName(actionName);
         this.setState({
             activeView: actionName,
             headerTitle
         });
+        if (actionName == this.views.Locator) {
+            console.log('Locator view triggered');
+            window.setTimeout(()=>$(document).trigger('center_map'), 200);
+        }
     }
     handleLogout(){
         const cookie_data_string = JSON.stringify({
