@@ -7,7 +7,6 @@ import ReactLeafletGoogleLayer from 'react-leaflet-google-layer';
 export class Maps extends React.Component {
     constructor(props) {
         super(props);
-        this.create = this.create.bind(this);
         this.center = this.center.bind(this);
 
         this.map = {};
@@ -24,21 +23,10 @@ export class Maps extends React.Component {
             this.map.invalidateSize();
             if (data && data.items) {
                 this.center(data.items);
+            } else {
+                this.center(this.props.items);
             }
         });
-    }
-    create() {
-        return;
-        // this.map = L.map(this.refs.map, {
-        //     attributionControl: false,
-        //     scrollWheelZoom: false,
-        //     doubleClickZoom: 'center',
-        //     zoomSnap: 1
-        // }).setView([this.lat, this.lng], this.zoom);
-        
-        // this.tileLayer = L.gridLayer.googleMutant({
-        //     type: 'roadmap', // valid values are 'roadmap', 'satellite', 'terrain' and 'hybrid'
-        // }).addTo(this.map);
     }
     center(_items){
         let items = _items || this.props.items;

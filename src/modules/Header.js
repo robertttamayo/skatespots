@@ -46,7 +46,7 @@ export class Header extends React.Component {
                 <div className="icon-button button-action-main" onClick={this.onBack}>
                     <FontAwesomeIcon icon="arrow-left" />
                 </div>
-                <div className="header-title">{this.props.headerTitle}</div>
+                <div className="header-title">{this.props.headerTitle || 'skate'}</div>
                 <div className="icon-button button-action-menu" onClick={this.onMenu}>
                     <FontAwesomeIcon icon="bars" />
                 </div>

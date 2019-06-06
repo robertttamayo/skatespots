@@ -1,5 +1,8 @@
 import React from "react";
-
+import { library } from '@fortawesome/fontawesome-svg-core';
+import  {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
+import { faMapMarkerAlt, faPlus, faUsers, faCommentDots } from '@fortawesome/free-solid-svg-icons';
+library.add(faMapMarkerAlt, faPlus, faUsers, faCommentDots);
 export class HomeMenu extends React.Component {
     constructor(props) {
         super(props);
@@ -14,21 +17,26 @@ export class HomeMenu extends React.Component {
         return (
             <div className="home-menu-wrap">
                 <div className="home-menu-button action-add" onClick={()=>this.handleAction('Add')}>
-                    Add a Spot
+                    <span className="icon"><FontAwesomeIcon icon="plus" /></span>
+                    <span>Add a Spot</span>
                 </div>
                 <div className="home-menu-button action-locator" onClick={()=>this.handleAction('Locator')}>
-                    Spots
+                    <span className="icon"><FontAwesomeIcon icon="map-marker-alt" /></span>
+                    <span>Spots</span>
                 </div>
                 <div className="home-menu-button action-messages" onClick={()=>this.handleAction('Messages')}>
-                    Message Board
+                    <span className="icon"><FontAwesomeIcon icon="comment-dots" /></span>
+                    <span>Message<br/>Board</span>
                 </div>
                 {this.props.user_admin ?
                     (<div className="home-menu-button action-crews" onClick={()=>this.handleAction('Crews')}>
-                        Crews
+                        <span className="icon"><FontAwesomeIcon icon="users" /></span>
+                        <span>Crews</span>
                     </div>)
                     : 
                     (<div className="home-menu-button action-skaters" onClick={()=>this.handleAction('Skaters')}>
-                        Skaters
+                        <span className="icon"><FontAwesomeIcon icon="users" /></span>
+                        <span>Skaters</span>
                     </div>
                     )
                 }
