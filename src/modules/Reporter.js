@@ -129,18 +129,15 @@ export class Reporter extends React.Component {
                             <label className="standard-label" htmlFor="spot_description">Description (Optional)</label>
                             <textarea onChange={this.handleChange} value={this.state.spot_description} placeholder="Description" id="spot_description" name="spot_description"/>
                         </div>
-                        <div>
+                        <div className="form-button-section">
                             <label htmlFor="image_file" className="file-label">Add an Image</label>
+                            <button type="submit" className="button-cta">Post</button>
                             <input id="image_file" name="image_file" onChange={this.compress} type="file" accept="image/*"/>
                         </div>
                         <div className="image-preview">
                             <canvas style={{display: this.state.image_file ? 'default' : 'none'}} width={this.state.image_width} height={this.state.image_height} id="image-preview-canvas"></canvas>
                         </div>
-                        <div>
-                            <button type="submit" className="button-cta">Post</button>
-                        </div>
                         <div className="coords">
-                            {this.getCoords()}
                         </div>
                     </form>
                 </div>

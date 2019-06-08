@@ -4,7 +4,7 @@ body {
   margin: 0;
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 15px;
-  background: #9EC6C8;
+  background: black;
 }
 
 /* line 50, main.scss */
@@ -28,99 +28,122 @@ header {
   -ms-align-items: flex-end;
   -webkit-align-items: flex-end;
   align-items: flex-end;
+  height: 65px;
 }
 
-/* line 62, main.scss */
+/* line 63, main.scss */
 .header-title {
-  font-size: 16px;
-  font-size: 26px;
+  font-size: 18px;
   font-weight: bold;
-  text-transform: lowercase;
-  font-family: 'ZCOOL KuaiLe', cursive;
   color: black;
 }
+/* line 66, main.scss */
+.header-title span {
+  font-size: 26px;
+  text-transform: lowercase;
+  font-family: 'ZCOOL KuaiLe', cursive;
+}
 
-/* line 70, main.scss */
+/* line 73, main.scss */
 header img {
   /* width: 50px; */
 }
 
-/* line 73, main.scss */
+/* line 76, main.scss */
 footer {
   width: 100%;
   padding: 20px;
 }
 
-/* line 77, main.scss */
+/* line 80, main.scss */
 .app-body {
   padding: 20px;
   margin-top: 30px;
 }
 
-/* line 81, main.scss */
+/* line 84, main.scss */
 .locator-wrap {
-  height: 600px;
+  height: calc(100vh - 65px);
   width: 100%;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
-  justify-content: space-between;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 
-/* line 87, main.scss */
+/* line 90, main.scss */
 .locator-list {
-  width: 320px;
-  border-top: 1px solid silver;
   padding-top: 20px;
+  height: 220px;
+  overflow: auto;
 }
 
-/* line 92, main.scss */
+/* line 95, main.scss */
 .list-item {
   padding-bottom: 20px;
   margin-bottom: 20px;
   border-bottom: 1px solid silver;
+  width: 60vw;
+  border: 1px solid black;
+  float: left;
 }
 
-/* line 97, main.scss */
+/* line 103, main.scss */
 .locator-map {
-  width: calc(100% - 340px);
+  width: 100vw;
+  height: calc(100vh - 285px);
 }
 
-/* line 100, main.scss */
+/* line 107, main.scss */
 #map {
   width: 100%;
   height: 100%;
 }
 
-/* line 104, main.scss */
+/* line 111, main.scss */
 .reporter-wrap {
   margin-bottom: 20px;
+  max-width: 320px;
+  margin: auto;
 }
 
-/* line 107, main.scss */
+/* line 116, main.scss */
 .image-preview {
   margin: 20px 0;
 }
 
-/* line 110, main.scss */
+/* line 119, main.scss */
 .image-preview canvas {
   width: 100%;
   max-width: 400px;
 }
 
-/* line 114, main.scss */
+/* line 123, main.scss */
 .leaflet-google-mutant, .leaflet-map-pane, .leaflet-container {
   width: 100%;
   height: 100%;
 }
 
-@media (max-width: 767px) {
-  /* line 119, main.scss */
-  .locator-map {
-    width: 100%;
-    position: absolute;
-    height: calc(100vh - 80px);
-  }
+/* line 128, main.scss */
+.form-button-section {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  -ms-justify-content: space-between;
+  justify-content: space-between;
+  -ms-align-items: center;
+  -webkit-align-items: center;
+  align-items: center;
 }
-/* line 125, main.scss */
+
+/* line 133, main.scss */
 .reporter-title {
   display: none;
   padding-bottom: 10px;
@@ -128,10 +151,10 @@ footer {
   border-bottom: 1px solid silver;
 }
 
-/* line 131, main.scss */
+/* line 139, main.scss */
 .reporter-form input[type=text], .reporter-form textarea {
   padding: 0 10px;
-  border: 1px solid #707070;
+  border: 2px solid black;
   margin-bottom: 20px;
   height: 40px;
   line-height: 40px;
@@ -140,42 +163,45 @@ footer {
   font-size: 15px;
 }
 
-/* line 141, main.scss */
+/* line 149, main.scss */
 .reporter-form textarea {
   height: 100px;
 }
 
-/* line 144, main.scss */
+/* line 152, main.scss */
 .reporter-form input[type=file] {
   display: none;
 }
 
-/* line 147, main.scss */
+/* line 155, main.scss */
 .standard-label {
-  display: none;
-  margin-bottom: 10px;
-}
-
-/* line 151, main.scss */
-.reporter-form .file-label {
-  background: white;
-  padding: 0 20px;
-  height: 40px;
-  line-height: 40px;
-  color: #707070;
-  text-align: center;
-  border: 1px solid #707070;
   display: inline-block;
-  font-size: 15px;
+  margin-bottom: 5px;
 }
 
-/* line 163, main.scss */
-.button-cta {
-  background: #707070;
+/* line 159, main.scss */
+.reporter-form .file-label {
+  background: #9EC6C8;
   padding: 0 20px;
   height: 40px;
   line-height: 40px;
-  color: white;
+  color: black;
+  text-align: center;
+  border: 2px solid black;
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 15px;
+  width: calc(50% - 5px);
+}
+
+/* line 174, main.scss */
+.button-cta {
+  background: black;
+  padding: 0 20px;
+  height: 40px;
+  line-height: 40px;
+  color: #9EC6C8;
   text-transform: uppercase;
   font-weight: bold;
   text-align: center;
@@ -184,7 +210,12 @@ footer {
   font-size: 15px;
 }
 
-/* line 177, main.scss */
+/* line 187, main.scss */
+.reporter-form .button-cta {
+  width: calc(50% - 5px);
+}
+
+/* line 191, main.scss */
 .home-menu-wrap {
   display: -webkit-box;
   display: -moz-box;
@@ -202,7 +233,14 @@ footer {
   align-items: center;
   width: 100%;
 }
-/* line 183, main.scss */
+@media (min-width: 500px) {
+  /* line 191, main.scss */
+  .home-menu-wrap {
+    max-width: 360px;
+    margin: auto;
+  }
+}
+/* line 202, main.scss */
 .home-menu-wrap .home-menu-button {
   cursor: pointer;
   width: calc(50vw - 30px);
@@ -210,7 +248,7 @@ footer {
   border: 5px solid black;
   text-transform: uppercase;
   border-radius: 50%;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.05);
   color: black;
   display: -webkit-box;
   display: -moz-box;
@@ -231,81 +269,125 @@ footer {
   text-align: center;
   margin: 5px;
 }
-/* line 200, main.scss */
+/* line 219, main.scss */
 .home-menu-wrap .home-menu-button .icon {
   margin-bottom: 10px;
   display: inline-block;
   font-size: 32px;
 }
+@media (min-width: 500px) {
+  /* line 202, main.scss */
+  .home-menu-wrap .home-menu-button {
+    max-width: 150px;
+    max-height: 150px;
+    margin: 15px;
+  }
+}
 
-/* line 207, main.scss */
+/* line 231, main.scss */
 .button-action-menu {
   font-size: 20px;
   margin-top: 20px;
 }
 
-/* line 211, main.scss */
+/* line 235, main.scss */
 .button-action-main {
   font-size: 20px;
-  color: #707070;
+  color: black;
   font-weight: bold;
   text-align: left;
   margin-top: 20px;
 }
 
-/* line 218, main.scss */
+/* line 243, main.scss */
 .app-wrap {
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
+  background: #9EC6C8;
+}
+/* line 249, main.scss */
+.app-wrap .header-wrap {
+  padding-bottom: 20px;
 }
 
-/* line 223, main.scss */
+/* line 253, main.scss */
 .Main {
   background-image: url(/assets/images/mobile1g2.jpg);
 }
-/* line 226, main.scss */
+/* line 257, main.scss */
 .Main .app-view:not(.app-view-main) {
   display: none;
 }
-/* line 230, main.scss */
+/* line 261, main.scss */
 .Main .button-action-main {
   visibility: hidden;
 }
 
-/* line 236, main.scss */
+/* line 266, main.scss */
+.Locator .button-action-main {
+  color: #9EC6C8;
+}
+/* line 269, main.scss */
+.Locator .header-wrap {
+  color: #9EC6C8 !important;
+  background: black;
+}
+/* line 272, main.scss */
+.Locator .header-wrap .header-title {
+  color: #9EC6C8;
+}
+/* line 276, main.scss */
+.Locator .app-body {
+  margin-top: 0;
+  padding: 0;
+}
+/* line 281, main.scss */
 .Locator .app-view:not(.app-view-locator) {
   display: none;
 }
 
-/* line 243, main.scss */
+/* line 287, main.scss */
+.Add .button-action-main {
+  color: #9EC6C8;
+}
+/* line 290, main.scss */
+.Add .header-wrap {
+  color: #9EC6C8 !important;
+  background: black;
+}
+/* line 293, main.scss */
+.Add .header-wrap .header-title {
+  color: #9EC6C8;
+}
+/* line 298, main.scss */
 .Add .app-view:not(.app-view-add) {
   display: none;
 }
 
-/* line 250, main.scss */
+/* line 305, main.scss */
 .Skaters .app-view:not(.app-view-skaters), .Users .app-view:not(.app-view-skaters) {
   display: none;
 }
 
-/* line 257, main.scss */
+/* line 312, main.scss */
 .Crews .app-view:not(.app-view-crews) {
   display: none;
 }
 
-/* line 262, main.scss */
+/* line 317, main.scss */
 .coords {
   color: black;
   font-size: 15px;
   margin-top: 20px;
 }
 
-/* line 267, main.scss */
+/* line 322, main.scss */
 .slide-menu {
   width: 100vw;
   opacity: 0;
   height: auto;
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   background: white;
@@ -323,13 +405,13 @@ footer {
   flex-direction: column;
 }
 
-/* line 284, main.scss */
+/* line 339, main.scss */
 .app-wrap.menu-open-true .slide-menu {
   transform: translate(0, 0);
   opacity: 1;
 }
 
-/* line 290, main.scss */
+/* line 345, main.scss */
 .slide-menu-item {
   background: white;
   padding: 10px 20px;
@@ -340,7 +422,7 @@ footer {
   text-align: right;
 }
 
-/* line 299, main.scss */
+/* line 354, main.scss */
 .slide-menu-close {
   -ms-align-self: flex-end;
   -webkit-align-self: flex-end;
@@ -349,21 +431,21 @@ footer {
   font-size: 20px;
 }
 
-/* line 304, main.scss */
+/* line 359, main.scss */
 .slide-menu-action {
   display: none;
 }
 
-/* line 308, main.scss */
+/* line 363, main.scss */
 .slide-menu-action-active .slide-menu-item {
   display: none;
 }
-/* line 311, main.scss */
+/* line 366, main.scss */
 .slide-menu-action-active .slide-menu-action.active {
   display: block;
 }
 
-/* line 315, main.scss */
+/* line 370, main.scss */
 .skater-list-item-wrap {
   display: -webkit-box;
   display: -moz-box;
@@ -380,7 +462,7 @@ footer {
   border-bottom: 1px solid #707070;
 }
 
-/* line 322, main.scss */
+/* line 377, main.scss */
 .skater-list-cta {
   padding: 5px 10px;
   text-align: center;
@@ -390,12 +472,12 @@ footer {
   cursor: pointer;
   margin-right: 10px;
 }
-/* line 330, main.scss */
+/* line 385, main.scss */
 .skater-list-cta:last-child {
   margin-right: 0;
 }
 
-/* line 334, main.scss */
+/* line 389, main.scss */
 .mode-add-skater {
   display: -webkit-box;
   display: -moz-box;
@@ -411,7 +493,7 @@ footer {
   border-bottom: 1px solid #707070;
   padding-bottom: 10px;
 }
-/* line 340, main.scss */
+/* line 395, main.scss */
 .mode-add-skater .form-wrap {
   display: -webkit-box;
   display: -moz-box;
@@ -419,13 +501,13 @@ footer {
   display: -webkit-flex;
   display: flex;
 }
-/* line 342, main.scss */
+/* line 397, main.scss */
 .mode-add-skater .form-wrap input[type="text"] {
   height: 40px;
   width: 120px;
   border: 1px solid #707070;
 }
-/* line 347, main.scss */
+/* line 402, main.scss */
 .mode-add-skater .form-wrap button {
   height: 40px;
   padding: 0 10px;
@@ -438,15 +520,15 @@ footer {
   text-transform: uppercase;
 }
 
-/* line 361, main.scss */
+/* line 416, main.scss */
 .skater-share-link {
   padding-top: 10px;
 }
-/* line 364, main.scss */
+/* line 419, main.scss */
 .skater-share-link > div {
   margin-bottom: 10px;
 }
-/* line 367, main.scss */
+/* line 422, main.scss */
 .skater-share-link .copy-link-wrap {
   display: -webkit-box;
   display: -moz-box;
@@ -457,7 +539,7 @@ footer {
   -ms-justify-content: space-between;
   justify-content: space-between;
 }
-/* line 370, main.scss */
+/* line 425, main.scss */
 .skater-share-link .copy-link-wrap #copy-link {
   width: calc(100% - 90px);
   padding: 5px;
@@ -465,7 +547,7 @@ footer {
   margin-bottom: 10px;
   height: 40px;
 }
-/* line 377, main.scss */
+/* line 432, main.scss */
 .skater-share-link .copy-link-wrap button {
   width: 80px;
   background: #707070;

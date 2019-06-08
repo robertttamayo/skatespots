@@ -49,8 +49,8 @@ export class Locator extends React.Component {
     render() {
         return (
             <div className="locator-wrap">
-                <Lists items={this.state.items} />
                 <Maps items={this.state.items} />
+                <Lists items={this.state.items} />
             </div>
         );
     }
