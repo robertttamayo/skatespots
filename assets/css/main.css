@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed|ZCOOL+KuaiLe&display=swap");
-/* line 44, main.scss */
+/* line 49, main.scss */
 body {
   margin: 0;
   font-family: 'Roboto Condensed', sans-serif;
@@ -7,12 +7,12 @@ body {
   background: black;
 }
 
-/* line 50, main.scss */
+/* line 55, main.scss */
 body * {
   box-sizing: border-box;
 }
 
-/* line 54, main.scss */
+/* line 59, main.scss */
 header {
   width: 100%;
   padding: 5px 20px;
@@ -31,37 +31,37 @@ header {
   height: 65px;
 }
 
-/* line 63, main.scss */
+/* line 68, main.scss */
 .header-title {
   font-size: 18px;
   font-weight: bold;
   color: black;
 }
-/* line 66, main.scss */
+/* line 71, main.scss */
 .header-title span {
   font-size: 26px;
   text-transform: lowercase;
   font-family: 'ZCOOL KuaiLe', cursive;
 }
 
-/* line 73, main.scss */
+/* line 78, main.scss */
 header img {
   /* width: 50px; */
 }
 
-/* line 76, main.scss */
+/* line 81, main.scss */
 footer {
   width: 100%;
   padding: 20px;
 }
 
-/* line 80, main.scss */
+/* line 85, main.scss */
 .app-body {
   padding: 20px;
   margin-top: 30px;
 }
 
-/* line 84, main.scss */
+/* line 89, main.scss */
 .locator-wrap {
   height: calc(100vh - 65px);
   width: 100%;
@@ -75,60 +75,170 @@ footer {
   flex-direction: column;
 }
 
-/* line 90, main.scss */
-.locator-list {
-  padding-top: 20px;
-  height: 220px;
-  overflow: auto;
-}
-
 /* line 95, main.scss */
-.list-item {
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-  border-bottom: 1px solid silver;
-  width: 60vw;
-  border: 1px solid black;
-  float: left;
+.locator-list {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
 }
-
-/* line 103, main.scss */
-.locator-map {
-  width: 100vw;
-  height: calc(100vh - 285px);
+/* line 99, main.scss */
+.locator-list .location-list {
+  width: auto;
+  height: calc(100% - 50px);
+  padding: 10px 10px 0px 10px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  background: black;
 }
 
 /* line 107, main.scss */
+.list-item {
+  border-bottom: 1px solid silver;
+  width: calc(50vw - 15px);
+  -webkit-flex-shrink: 0;
+  -ms-flex-shrink: 0;
+  flex-shrink: 0;
+  margin-right: 10px;
+  padding: 10px;
+  background: #9EC6C8;
+  position: relative;
+}
+/* line 115, main.scss */
+.list-item .spot-name {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  -ms-justify-content: space-between;
+  justify-content: space-between;
+  -ms-align-items: flex-start;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+/* line 121, main.scss */
+.list-item .spot-name span {
+  font-weight: bold;
+}
+/* line 124, main.scss */
+.list-item .spot-name .spot-name-left {
+  width: calc(100% - 25px);
+}
+/* line 128, main.scss */
+.list-item .spot-description {
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+/* line 132, main.scss */
+.list-item .show-image {
+  text-decoration: underline;
+  margin-bottom: 15px;
+}
+/* line 136, main.scss */
+.list-item .button-cta {
+  width: calc(100% - 20px);
+  position: absolute;
+  bottom: 10px;
+}
+
+/* line 142, main.scss */
+.locator-list-control {
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: space-between;
+  -ms-justify-content: space-between;
+  justify-content: space-between;
+  -ms-align-items: center;
+  -webkit-align-items: center;
+  align-items: center;
+  background: black;
+  color: #9EC6C8;
+}
+/* line 152, main.scss */
+.locator-list-control .move-left, .locator-list-control .move-right {
+  border: 1px solid #9EC6C8;
+  height: 30px;
+  width: 60px;
+  line-height: 30px;
+  text-align: center;
+}
+/* line 159, main.scss */
+.locator-list-control .bubbles {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  -ms-align-items: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+/* line 163, main.scss */
+.locator-list-control .bubbles .bubble {
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+  border: 1px solid #9EC6C8;
+  border-radius: 50%;
+  background: black;
+}
+/* line 170, main.scss */
+.locator-list-control .bubbles .bubble.active {
+  background: #9EC6C8;
+}
+
+/* line 176, main.scss */
+.locator-map {
+  width: 100vw;
+  height: calc(100vh - 280px);
+}
+
+/* line 180, main.scss */
 #map {
   width: 100%;
   height: 100%;
 }
 
-/* line 111, main.scss */
+/* line 184, main.scss */
 .reporter-wrap {
   margin-bottom: 20px;
   max-width: 320px;
   margin: auto;
 }
 
-/* line 116, main.scss */
+/* line 189, main.scss */
 .image-preview {
   margin: 20px 0;
 }
 
-/* line 119, main.scss */
+/* line 192, main.scss */
 .image-preview canvas {
   width: 100%;
   max-width: 400px;
 }
 
-/* line 123, main.scss */
+/* line 196, main.scss */
 .leaflet-google-mutant, .leaflet-map-pane, .leaflet-container {
   width: 100%;
   height: 100%;
 }
 
-/* line 128, main.scss */
+/* line 201, main.scss */
 .form-button-section {
   display: -webkit-box;
   display: -moz-box;
@@ -143,7 +253,7 @@ footer {
   align-items: center;
 }
 
-/* line 133, main.scss */
+/* line 206, main.scss */
 .reporter-title {
   display: none;
   padding-bottom: 10px;
@@ -151,7 +261,7 @@ footer {
   border-bottom: 1px solid silver;
 }
 
-/* line 139, main.scss */
+/* line 212, main.scss */
 .reporter-form input[type=text], .reporter-form textarea {
   padding: 0 10px;
   border: 2px solid black;
@@ -163,23 +273,23 @@ footer {
   font-size: 15px;
 }
 
-/* line 149, main.scss */
+/* line 222, main.scss */
 .reporter-form textarea {
   height: 100px;
 }
 
-/* line 152, main.scss */
+/* line 225, main.scss */
 .reporter-form input[type=file] {
   display: none;
 }
 
-/* line 155, main.scss */
+/* line 228, main.scss */
 .standard-label {
   display: inline-block;
   margin-bottom: 5px;
 }
 
-/* line 159, main.scss */
+/* line 232, main.scss */
 .reporter-form .file-label {
   background: #9EC6C8;
   padding: 0 20px;
@@ -195,7 +305,7 @@ footer {
   width: calc(50% - 5px);
 }
 
-/* line 174, main.scss */
+/* line 247, main.scss */
 .button-cta {
   background: black;
   padding: 0 20px;
@@ -210,12 +320,12 @@ footer {
   font-size: 15px;
 }
 
-/* line 187, main.scss */
+/* line 260, main.scss */
 .reporter-form .button-cta {
   width: calc(50% - 5px);
 }
 
-/* line 191, main.scss */
+/* line 264, main.scss */
 .home-menu-wrap {
   display: -webkit-box;
   display: -moz-box;
@@ -234,13 +344,13 @@ footer {
   width: 100%;
 }
 @media (min-width: 500px) {
-  /* line 191, main.scss */
+  /* line 264, main.scss */
   .home-menu-wrap {
     max-width: 360px;
     margin: auto;
   }
 }
-/* line 202, main.scss */
+/* line 275, main.scss */
 .home-menu-wrap .home-menu-button {
   cursor: pointer;
   width: calc(50vw - 30px);
@@ -269,14 +379,14 @@ footer {
   text-align: center;
   margin: 5px;
 }
-/* line 219, main.scss */
+/* line 292, main.scss */
 .home-menu-wrap .home-menu-button .icon {
   margin-bottom: 10px;
   display: inline-block;
   font-size: 32px;
 }
 @media (min-width: 500px) {
-  /* line 202, main.scss */
+  /* line 275, main.scss */
   .home-menu-wrap .home-menu-button {
     max-width: 150px;
     max-height: 150px;
@@ -284,13 +394,13 @@ footer {
   }
 }
 
-/* line 231, main.scss */
+/* line 304, main.scss */
 .button-action-menu {
   font-size: 20px;
   margin-top: 20px;
 }
 
-/* line 235, main.scss */
+/* line 308, main.scss */
 .button-action-main {
   font-size: 20px;
   color: black;
@@ -299,90 +409,90 @@ footer {
   margin-top: 20px;
 }
 
-/* line 243, main.scss */
+/* line 316, main.scss */
 .app-wrap {
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
   background: #9EC6C8;
 }
-/* line 249, main.scss */
+/* line 322, main.scss */
 .app-wrap .header-wrap {
   padding-bottom: 20px;
 }
 
-/* line 253, main.scss */
+/* line 326, main.scss */
 .Main {
   background-image: url(/assets/images/mobile1g2.jpg);
 }
-/* line 257, main.scss */
+/* line 330, main.scss */
 .Main .app-view:not(.app-view-main) {
   display: none;
 }
-/* line 261, main.scss */
+/* line 334, main.scss */
 .Main .button-action-main {
   visibility: hidden;
 }
 
-/* line 266, main.scss */
+/* line 339, main.scss */
 .Locator .button-action-main {
   color: #9EC6C8;
 }
-/* line 269, main.scss */
+/* line 342, main.scss */
 .Locator .header-wrap {
   color: #9EC6C8 !important;
   background: black;
 }
-/* line 272, main.scss */
+/* line 345, main.scss */
 .Locator .header-wrap .header-title {
   color: #9EC6C8;
 }
-/* line 276, main.scss */
+/* line 349, main.scss */
 .Locator .app-body {
   margin-top: 0;
   padding: 0;
 }
-/* line 281, main.scss */
+/* line 354, main.scss */
 .Locator .app-view:not(.app-view-locator) {
   display: none;
 }
 
-/* line 287, main.scss */
+/* line 360, main.scss */
 .Add .button-action-main {
   color: #9EC6C8;
 }
-/* line 290, main.scss */
+/* line 363, main.scss */
 .Add .header-wrap {
   color: #9EC6C8 !important;
   background: black;
 }
-/* line 293, main.scss */
+/* line 366, main.scss */
 .Add .header-wrap .header-title {
   color: #9EC6C8;
 }
-/* line 298, main.scss */
+/* line 371, main.scss */
 .Add .app-view:not(.app-view-add) {
   display: none;
 }
 
-/* line 305, main.scss */
+/* line 378, main.scss */
 .Skaters .app-view:not(.app-view-skaters), .Users .app-view:not(.app-view-skaters) {
   display: none;
 }
 
-/* line 312, main.scss */
+/* line 385, main.scss */
 .Crews .app-view:not(.app-view-crews) {
   display: none;
 }
 
-/* line 317, main.scss */
+/* line 390, main.scss */
 .coords {
   color: black;
   font-size: 15px;
   margin-top: 20px;
 }
 
-/* line 322, main.scss */
+/* line 395, main.scss */
 .slide-menu {
   width: 100vw;
   opacity: 0;
@@ -405,13 +515,13 @@ footer {
   flex-direction: column;
 }
 
-/* line 339, main.scss */
+/* line 412, main.scss */
 .app-wrap.menu-open-true .slide-menu {
   transform: translate(0, 0);
   opacity: 1;
 }
 
-/* line 345, main.scss */
+/* line 418, main.scss */
 .slide-menu-item {
   background: white;
   padding: 10px 20px;
@@ -422,7 +532,7 @@ footer {
   text-align: right;
 }
 
-/* line 354, main.scss */
+/* line 427, main.scss */
 .slide-menu-close {
   -ms-align-self: flex-end;
   -webkit-align-self: flex-end;
@@ -431,21 +541,21 @@ footer {
   font-size: 20px;
 }
 
-/* line 359, main.scss */
+/* line 432, main.scss */
 .slide-menu-action {
   display: none;
 }
 
-/* line 363, main.scss */
+/* line 436, main.scss */
 .slide-menu-action-active .slide-menu-item {
   display: none;
 }
-/* line 366, main.scss */
+/* line 439, main.scss */
 .slide-menu-action-active .slide-menu-action.active {
   display: block;
 }
 
-/* line 370, main.scss */
+/* line 443, main.scss */
 .skater-list-item-wrap {
   display: -webkit-box;
   display: -moz-box;
@@ -462,7 +572,7 @@ footer {
   border-bottom: 1px solid #707070;
 }
 
-/* line 377, main.scss */
+/* line 450, main.scss */
 .skater-list-cta {
   padding: 5px 10px;
   text-align: center;
@@ -472,12 +582,12 @@ footer {
   cursor: pointer;
   margin-right: 10px;
 }
-/* line 385, main.scss */
+/* line 458, main.scss */
 .skater-list-cta:last-child {
   margin-right: 0;
 }
 
-/* line 389, main.scss */
+/* line 462, main.scss */
 .mode-add-skater {
   display: -webkit-box;
   display: -moz-box;
@@ -493,7 +603,7 @@ footer {
   border-bottom: 1px solid #707070;
   padding-bottom: 10px;
 }
-/* line 395, main.scss */
+/* line 468, main.scss */
 .mode-add-skater .form-wrap {
   display: -webkit-box;
   display: -moz-box;
@@ -501,13 +611,13 @@ footer {
   display: -webkit-flex;
   display: flex;
 }
-/* line 397, main.scss */
+/* line 470, main.scss */
 .mode-add-skater .form-wrap input[type="text"] {
   height: 40px;
   width: 120px;
   border: 1px solid #707070;
 }
-/* line 402, main.scss */
+/* line 475, main.scss */
 .mode-add-skater .form-wrap button {
   height: 40px;
   padding: 0 10px;
@@ -520,15 +630,15 @@ footer {
   text-transform: uppercase;
 }
 
-/* line 416, main.scss */
+/* line 489, main.scss */
 .skater-share-link {
   padding-top: 10px;
 }
-/* line 419, main.scss */
+/* line 492, main.scss */
 .skater-share-link > div {
   margin-bottom: 10px;
 }
-/* line 422, main.scss */
+/* line 495, main.scss */
 .skater-share-link .copy-link-wrap {
   display: -webkit-box;
   display: -moz-box;
@@ -539,7 +649,7 @@ footer {
   -ms-justify-content: space-between;
   justify-content: space-between;
 }
-/* line 425, main.scss */
+/* line 498, main.scss */
 .skater-share-link .copy-link-wrap #copy-link {
   width: calc(100% - 90px);
   padding: 5px;
@@ -547,7 +657,7 @@ footer {
   margin-bottom: 10px;
   height: 40px;
 }
-/* line 432, main.scss */
+/* line 505, main.scss */
 .skater-share-link .copy-link-wrap button {
   width: 80px;
   background: #707070;

@@ -30,7 +30,6 @@ foreach($data as $datum) {
     ];
     $spots[] = $spot;
 }
-
 echo json_encode($spots);
 
 die;

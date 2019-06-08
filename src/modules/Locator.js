@@ -6,7 +6,7 @@ import {Maps} from "./Maps";
 export class Locator extends React.Component {
     constructor(props) {
         super(props);
-        this.endpoint = "https://www.roberttamayo.com/skate/down.php";
+        this.endpoint = "https://www.roberttamayo.com/skate/api/down.php";
         this.gather = this.gather.bind(this);
         this.askUserLocation = this.askUserLocation.bind(this);
 
@@ -60,6 +60,7 @@ export class Locator extends React.Component {
                 items: response
             });
             $(document).trigger('center_map', {items: response});
+            console.log(response);
         });
         // Promise.all([this.gather(), this.askUserLocation()]).then((values) => {
         //     console.log(values);
