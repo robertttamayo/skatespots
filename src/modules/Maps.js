@@ -15,6 +15,7 @@ export class Maps extends React.Component {
         this.lng = -98.35;
         this.zoom = 4;
         this.key = "AIzaSyCqjAzVHf3SRY1HIr-yYTCyNhOCHV1p5AE";
+        this.iconUrl = "https://www.roberttamayo.com/skate/assets/images/icon.svg";
 
         this.state = {
             items: this.props.items
@@ -88,11 +89,16 @@ export class Maps extends React.Component {
 
                         {this.props.items.map((item, index) => {
                             let listItems = '';
+                            let icon = L.divIcon({
+                                iconSize: [30, 40],
+                                iconAnchor: [15, 20],
+                                html: '<div class="center"></div>'
+                            });
                             return (
                                 <Marker 
                                 key={item.spot_id}
                                 position={[item.spot_lat, item.spot_lng]} 
-                                
+                                icon={icon}
                                 // icon={L.DivIcon.dataMarkup({
                                 //     className:"cmOverlay" + (item.state || ''),
                                 //     iconSize: [35, 35],
