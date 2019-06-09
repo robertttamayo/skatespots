@@ -25,6 +25,7 @@ export class Reporter extends React.Component {
             spot_name: '',
             spot_description: '',
             image_file: null,
+            has_image: false,
             image_height: 300,
             image_width: 400,
             active: false
@@ -76,31 +77,34 @@ export class Reporter extends React.Component {
             const img = new Image();
             img.src = event.target.result;
             img.onload = () => {
-                    const elem = document.createElement('canvas');
-                    let width = 400;
-                    let scaleFactor = width / img.width;
-                    let height = Math.floor(img.height * scaleFactor);
-                    elem.width = width;
-                    elem.height = height;
-                    const ctx = elem.getContext('2d');
-                    ctx.drawImage(img, 0, 0, img.width, img.height);
-                    ctx.drawImage(elem, 0, 0, width, height);
-                    ctx.canvas.toBlob((blob) => {
-                        const file = new File([blob], fileName, {
-                            type: 'image/jpeg',
-                            lastModified: Date.now()
-                        });
-                        let image_preview_canvas = document.getElementById('image-preview-canvas');
-                        let ctx = image_preview_canvas.getContext('2d');
-                        this.setState({
-                            image_file: file,
-                            image_height: height,
-                            image_width: width
-                        });
-                        ctx.drawImage(img, 0,0,width, height);
-                    }, 'image/jpeg', 1);
-                },
-                reader.onerror = error => console.log(error);
+                const elem = document.createElement('canvas');
+                let width = Math.floor(window.innerWidth * .8);
+                let scaleFactor = width / img.width;
+                console.log(`scaleFactor: ${scaleFactor}`);
+                let height = Math.floor(img.height * scaleFactor);
+                console.log(`width: ${width}, height: ${height}`);
+                elem.width = width;
+                elem.height = height;
+                const ctx = elem.getContext('2d');
+                ctx.drawImage(img, 0, 0, img.width, img.height);
+                ctx.drawImage(elem, 0, 0, width, height);
+                ctx.canvas.toBlob((blob) => {
+                    const file = new File([blob], fileName, {
+                        type: 'image/jpeg',
+                        lastModified: Date.now()
+                    });
+                    let image_preview_canvas = document.getElementById('image-preview-canvas');
+                    let ctx = image_preview_canvas.getContext('2d');
+                    this.setState({
+                        image_file: file,
+                        image_height: height,
+                        image_width: width,
+                        has_image: true,
+                    });
+                    ctx.drawImage(img, 0,0,width, height);
+                }, 'image/jpeg', 1);
+            },
+            reader.onerror = error => console.log(error);
         };
     }
     activate() {
@@ -125,10 +129,12 @@ export class Reporter extends React.Component {
             return (
                 <div className="reporter-wrap">
                     <div className="image-preview">
-                        <canvas style={{display: this.state.image_file ? 'default' : 'none'}} width={this.state.image_width} height={this.state.image_height} id="image-preview-canvas"></canvas>
-                        <div className="upload-an-image" style={{display: this.state.image_file ? 'none' : 'default'}}>
-                            <div><FontAwesomeIcon icon="camera" /></div>
-                            <div>Add an Image</div>
+                        <canvas style={{display: this.state.has_image ? 'block' : 'none'}} width={this.state.image_width} height={this.state.image_height} id="image-preview-canvas"></canvas>
+                        <div className="upload-an-image" style={{display: this.state.has_image ? 'none' : 'default'}}>
+                            <label htmlFor="image_file" className="upload-an-image-cta">
+                                <div><FontAwesomeIcon icon="camera" /></div>
+                                <div>Add an Image</div>
+                            </label>
                         </div>
                     </div>
 
