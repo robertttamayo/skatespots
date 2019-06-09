@@ -1,4 +1,9 @@
 import React from "react";
+import { library } from '@fortawesome/fontawesome-svg-core';
+import  {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
+import { faCamera } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faCamera);
 
 export class Reporter extends React.Component {
     constructor(props) {
@@ -119,7 +124,16 @@ export class Reporter extends React.Component {
         } else {
             return (
                 <div className="reporter-wrap">
+                    <div className="image-preview">
+                        <canvas style={{display: this.state.image_file ? 'default' : 'none'}} width={this.state.image_width} height={this.state.image_height} id="image-preview-canvas"></canvas>
+                        <div className="upload-an-image" style={{display: this.state.image_file ? 'none' : 'default'}}>
+                            <div><FontAwesomeIcon icon="camera" /></div>
+                            <div>Add an Image</div>
+                        </div>
+                    </div>
+
                     <div className="reporter-title">Adding a Spot</div>
+
                     <form className="reporter-form" onSubmit={this.generate}>
                         <div>
                             <label className="standard-label" htmlFor="spot_name">Name</label>
@@ -133,9 +147,6 @@ export class Reporter extends React.Component {
                             <label htmlFor="image_file" className="file-label">Add an Image</label>
                             <button type="submit" className="button-cta">Post</button>
                             <input id="image_file" name="image_file" onChange={this.compress} type="file" accept="image/*"/>
-                        </div>
-                        <div className="image-preview">
-                            <canvas style={{display: this.state.image_file ? 'default' : 'none'}} width={this.state.image_width} height={this.state.image_height} id="image-preview-canvas"></canvas>
                         </div>
                         <div className="coords">
                         </div>
