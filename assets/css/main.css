@@ -98,9 +98,10 @@ footer {
   display: -webkit-flex;
   display: flex;
   background: black;
+  transition: margin-left .3s ease;
 }
 
-/* line 115, main.scss */
+/* line 116, main.scss */
 .list-item {
   border-bottom: 1px solid silver;
   width: calc(50vw - 15px);
@@ -112,7 +113,7 @@ footer {
   background: #9EC6C8;
   position: relative;
 }
-/* line 123, main.scss */
+/* line 124, main.scss */
 .list-item .spot-name {
   display: -webkit-box;
   display: -moz-box;
@@ -128,32 +129,32 @@ footer {
   margin-bottom: 15px;
   font-size: 16px;
 }
-/* line 129, main.scss */
+/* line 130, main.scss */
 .list-item .spot-name span {
   font-weight: bold;
 }
-/* line 132, main.scss */
+/* line 133, main.scss */
 .list-item .spot-name .spot-name-left {
   width: calc(100% - 25px);
 }
-/* line 136, main.scss */
+/* line 137, main.scss */
 .list-item .spot-description {
   margin-bottom: 15px;
   font-size: 14px;
 }
-/* line 140, main.scss */
+/* line 141, main.scss */
 .list-item .show-image {
   text-decoration: underline;
   margin-bottom: 15px;
 }
-/* line 144, main.scss */
+/* line 145, main.scss */
 .list-item .button-cta {
   width: calc(100% - 20px);
   position: absolute;
   bottom: 10px;
 }
 
-/* line 150, main.scss */
+/* line 151, main.scss */
 .locator-list-control {
   width: 100%;
   height: 50px;
@@ -172,7 +173,7 @@ footer {
   background: black;
   color: #9EC6C8;
 }
-/* line 160, main.scss */
+/* line 161, main.scss */
 .locator-list-control .move-left, .locator-list-control .move-right {
   border: 1px solid #9EC6C8;
   height: 30px;
@@ -180,7 +181,7 @@ footer {
   line-height: 30px;
   text-align: center;
 }
-/* line 167, main.scss */
+/* line 168, main.scss */
 .locator-list-control .bubbles {
   display: -webkit-box;
   display: -moz-box;
@@ -194,7 +195,7 @@ footer {
   -webkit-align-items: center;
   align-items: center;
 }
-/* line 171, main.scss */
+/* line 172, main.scss */
 .locator-list-control .bubbles .bubble {
   width: 10px;
   height: 10px;
@@ -203,31 +204,31 @@ footer {
   border-radius: 50%;
   background: black;
 }
-/* line 178, main.scss */
+/* line 179, main.scss */
 .locator-list-control .bubbles .bubble.active {
   background: #9EC6C8;
 }
 
-/* line 184, main.scss */
+/* line 185, main.scss */
 .locator-map {
   width: 100vw;
-  height: calc(100vh - 280px);
+  height: calc(100vh - 275px);
 }
 
-/* line 188, main.scss */
+/* line 189, main.scss */
 #map {
   width: 100%;
   height: 100%;
 }
 
-/* line 192, main.scss */
+/* line 193, main.scss */
 .leaflet-div-icon {
   background-image: url(../images/pin.svg);
   background-size: cover;
   background-color: transparent;
   border: none;
 }
-/* line 197, main.scss */
+/* line 198, main.scss */
 .leaflet-div-icon .center {
   background: #9EC6C8;
   border-radius: 50%;
@@ -238,31 +239,31 @@ footer {
   left: 8px;
 }
 
-/* line 207, main.scss */
+/* line 208, main.scss */
 .reporter-wrap {
   margin-bottom: 20px;
   max-width: 320px;
   margin: auto;
 }
 
-/* line 212, main.scss */
+/* line 213, main.scss */
 .image-preview {
   margin: 20px 0;
 }
 
-/* line 215, main.scss */
+/* line 216, main.scss */
 .image-preview canvas {
   width: 100%;
   max-width: 400px;
 }
 
-/* line 219, main.scss */
+/* line 220, main.scss */
 .leaflet-google-mutant, .leaflet-map-pane, .leaflet-container {
   width: 100%;
   height: 100%;
 }
 
-/* line 224, main.scss */
+/* line 225, main.scss */
 .form-button-section {
   display: -webkit-box;
   display: -moz-box;
@@ -277,7 +278,7 @@ footer {
   align-items: center;
 }
 
-/* line 229, main.scss */
+/* line 230, main.scss */
 .reporter-title {
   display: none;
   padding-bottom: 10px;
@@ -285,7 +286,7 @@ footer {
   border-bottom: 1px solid silver;
 }
 
-/* line 235, main.scss */
+/* line 236, main.scss */
 .reporter-form input[type=text], .reporter-form textarea {
   padding: 0 10px;
   border: 2px solid black;
@@ -297,23 +298,23 @@ footer {
   font-size: 15px;
 }
 
-/* line 245, main.scss */
+/* line 246, main.scss */
 .reporter-form textarea {
   height: 100px;
 }
 
-/* line 248, main.scss */
+/* line 249, main.scss */
 .reporter-form input[type=file] {
   display: none;
 }
 
-/* line 251, main.scss */
+/* line 252, main.scss */
 .standard-label {
   display: inline-block;
   margin-bottom: 5px;
 }
 
-/* line 255, main.scss */
+/* line 256, main.scss */
 .reporter-form .file-label {
   background: #9EC6C8;
   padding: 0 20px;
@@ -329,7 +330,7 @@ footer {
   width: calc(50% - 5px);
 }
 
-/* line 270, main.scss */
+/* line 271, main.scss */
 .button-cta {
   background: black;
   padding: 0 20px;
@@ -344,12 +345,12 @@ footer {
   font-size: 15px;
 }
 
-/* line 283, main.scss */
+/* line 284, main.scss */
 .reporter-form .button-cta {
   width: calc(50% - 5px);
 }
 
-/* line 287, main.scss */
+/* line 288, main.scss */
 .home-menu-wrap {
   display: -webkit-box;
   display: -moz-box;
@@ -368,13 +369,13 @@ footer {
   width: 100%;
 }
 @media (min-width: 500px) {
-  /* line 287, main.scss */
+  /* line 288, main.scss */
   .home-menu-wrap {
     max-width: 360px;
     margin: auto;
   }
 }
-/* line 298, main.scss */
+/* line 299, main.scss */
 .home-menu-wrap .home-menu-button {
   cursor: pointer;
   width: calc(50vw - 30px);
@@ -403,14 +404,14 @@ footer {
   text-align: center;
   margin: 5px;
 }
-/* line 315, main.scss */
+/* line 316, main.scss */
 .home-menu-wrap .home-menu-button .icon {
   margin-bottom: 10px;
   display: inline-block;
   font-size: 32px;
 }
 @media (min-width: 500px) {
-  /* line 298, main.scss */
+  /* line 299, main.scss */
   .home-menu-wrap .home-menu-button {
     max-width: 150px;
     max-height: 150px;
@@ -418,13 +419,13 @@ footer {
   }
 }
 
-/* line 327, main.scss */
+/* line 328, main.scss */
 .button-action-menu {
   font-size: 20px;
   margin-top: 20px;
 }
 
-/* line 331, main.scss */
+/* line 332, main.scss */
 .button-action-main {
   font-size: 20px;
   color: black;
@@ -433,90 +434,90 @@ footer {
   margin-top: 20px;
 }
 
-/* line 339, main.scss */
+/* line 340, main.scss */
 .app-wrap {
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
   background: #9EC6C8;
 }
-/* line 345, main.scss */
+/* line 346, main.scss */
 .app-wrap .header-wrap {
   padding-bottom: 20px;
 }
 
-/* line 349, main.scss */
+/* line 350, main.scss */
 .Main {
   background-image: url(/assets/images/mobile1g2.jpg);
 }
-/* line 353, main.scss */
+/* line 354, main.scss */
 .Main .app-view:not(.app-view-main) {
   display: none;
 }
-/* line 357, main.scss */
+/* line 358, main.scss */
 .Main .button-action-main {
   visibility: hidden;
 }
 
-/* line 362, main.scss */
+/* line 363, main.scss */
 .Locator .button-action-main {
   color: #9EC6C8;
 }
-/* line 365, main.scss */
+/* line 366, main.scss */
 .Locator .header-wrap {
   color: #9EC6C8 !important;
   background: black;
 }
-/* line 368, main.scss */
+/* line 369, main.scss */
 .Locator .header-wrap .header-title {
   color: #9EC6C8;
 }
-/* line 372, main.scss */
+/* line 373, main.scss */
 .Locator .app-body {
   margin-top: 0;
   padding: 0;
 }
-/* line 377, main.scss */
+/* line 378, main.scss */
 .Locator .app-view:not(.app-view-locator) {
   display: none;
 }
 
-/* line 383, main.scss */
+/* line 384, main.scss */
 .Add .button-action-main {
   color: #9EC6C8;
 }
-/* line 386, main.scss */
+/* line 387, main.scss */
 .Add .header-wrap {
   color: #9EC6C8 !important;
   background: black;
 }
-/* line 389, main.scss */
+/* line 390, main.scss */
 .Add .header-wrap .header-title {
   color: #9EC6C8;
 }
-/* line 394, main.scss */
+/* line 395, main.scss */
 .Add .app-view:not(.app-view-add) {
   display: none;
 }
 
-/* line 401, main.scss */
+/* line 402, main.scss */
 .Skaters .app-view:not(.app-view-skaters), .Users .app-view:not(.app-view-skaters) {
   display: none;
 }
 
-/* line 408, main.scss */
+/* line 409, main.scss */
 .Crews .app-view:not(.app-view-crews) {
   display: none;
 }
 
-/* line 413, main.scss */
+/* line 414, main.scss */
 .coords {
   color: black;
   font-size: 15px;
   margin-top: 20px;
 }
 
-/* line 418, main.scss */
+/* line 419, main.scss */
 .slide-menu {
   width: 100vw;
   opacity: 0;
@@ -539,13 +540,13 @@ footer {
   flex-direction: column;
 }
 
-/* line 435, main.scss */
+/* line 436, main.scss */
 .app-wrap.menu-open-true .slide-menu {
   transform: translate(0, 0);
   opacity: 1;
 }
 
-/* line 441, main.scss */
+/* line 442, main.scss */
 .slide-menu-item {
   background: white;
   padding: 10px 20px;
@@ -556,7 +557,7 @@ footer {
   text-align: right;
 }
 
-/* line 450, main.scss */
+/* line 451, main.scss */
 .slide-menu-close {
   -ms-align-self: flex-end;
   -webkit-align-self: flex-end;
@@ -565,21 +566,21 @@ footer {
   font-size: 20px;
 }
 
-/* line 455, main.scss */
+/* line 456, main.scss */
 .slide-menu-action {
   display: none;
 }
 
-/* line 459, main.scss */
+/* line 460, main.scss */
 .slide-menu-action-active .slide-menu-item {
   display: none;
 }
-/* line 462, main.scss */
+/* line 463, main.scss */
 .slide-menu-action-active .slide-menu-action.active {
   display: block;
 }
 
-/* line 466, main.scss */
+/* line 467, main.scss */
 .skater-list-item-wrap {
   display: -webkit-box;
   display: -moz-box;
@@ -596,7 +597,7 @@ footer {
   border-bottom: 1px solid #707070;
 }
 
-/* line 473, main.scss */
+/* line 474, main.scss */
 .skater-list-cta {
   padding: 5px 10px;
   text-align: center;
@@ -606,12 +607,12 @@ footer {
   cursor: pointer;
   margin-right: 10px;
 }
-/* line 481, main.scss */
+/* line 482, main.scss */
 .skater-list-cta:last-child {
   margin-right: 0;
 }
 
-/* line 485, main.scss */
+/* line 486, main.scss */
 .mode-add-skater {
   display: -webkit-box;
   display: -moz-box;
@@ -627,7 +628,7 @@ footer {
   border-bottom: 1px solid #707070;
   padding-bottom: 10px;
 }
-/* line 491, main.scss */
+/* line 492, main.scss */
 .mode-add-skater .form-wrap {
   display: -webkit-box;
   display: -moz-box;
@@ -635,13 +636,13 @@ footer {
   display: -webkit-flex;
   display: flex;
 }
-/* line 493, main.scss */
+/* line 494, main.scss */
 .mode-add-skater .form-wrap input[type="text"] {
   height: 40px;
   width: 120px;
   border: 1px solid #707070;
 }
-/* line 498, main.scss */
+/* line 499, main.scss */
 .mode-add-skater .form-wrap button {
   height: 40px;
   padding: 0 10px;
@@ -654,15 +655,15 @@ footer {
   text-transform: uppercase;
 }
 
-/* line 512, main.scss */
+/* line 513, main.scss */
 .skater-share-link {
   padding-top: 10px;
 }
-/* line 515, main.scss */
+/* line 516, main.scss */
 .skater-share-link > div {
   margin-bottom: 10px;
 }
-/* line 518, main.scss */
+/* line 519, main.scss */
 .skater-share-link .copy-link-wrap {
   display: -webkit-box;
   display: -moz-box;
@@ -673,7 +674,7 @@ footer {
   -ms-justify-content: space-between;
   justify-content: space-between;
 }
-/* line 521, main.scss */
+/* line 522, main.scss */
 .skater-share-link .copy-link-wrap #copy-link {
   width: calc(100% - 90px);
   padding: 5px;
@@ -681,7 +682,7 @@ footer {
   margin-bottom: 10px;
   height: 40px;
 }
-/* line 528, main.scss */
+/* line 529, main.scss */
 .skater-share-link .copy-link-wrap button {
   width: 80px;
   background: #707070;

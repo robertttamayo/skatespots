@@ -110,6 +110,7 @@ footer {
         padding: 10px 10px 0px 10px;
         @include flex();
         background: black;
+        transition: margin-left .3s ease;
     }
 }
 .list-item {
@@ -183,7 +184,7 @@ footer {
 }
 .locator-map {
     width: 100vw;
-    height: calc(100vh - 280px);
+    height: calc(100vh - 275px);
 }
 #map {
     width: 100%;
