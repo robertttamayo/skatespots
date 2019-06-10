@@ -235,7 +235,7 @@ footer {
         @include flex-direction(column);
         width: 100%;
         height: 100%;
-        color: $darkgreen;
+        color: black;
         .upload-an-image-cta {
             text-align: center;
         }
@@ -381,7 +381,7 @@ footer {
     }
 }
 .Main {
-    background-image: url(/assets/images/mobile1g2.jpg);
+    background-image: url(../images/mobile1g2.jpg);
     
     .app-view {
         &:not(.app-view-main) {
@@ -435,6 +435,20 @@ footer {
     }
 }
 .Skaters, .Users {
+    .app-body {
+        margin-top: 0;
+        padding: 0;
+    }
+    .button-action-main {
+        color: $green;
+    }
+    .header-wrap {
+        color: $green !important;
+        background: black;
+        .header-title {
+            color: $green;
+        }
+    }
     .app-view {
         &:not(.app-view-skaters) {
             display: none;
@@ -442,6 +456,20 @@ footer {
     }
 }
 .Crews {
+    .app-body {
+        margin-top: 0;
+        padding: 0;
+    }
+    .button-action-main {
+        color: $green;
+    }
+    .header-wrap {
+        color: $green !important;
+        background: black;
+        .header-title {
+            color: $green;
+        }
+    }
     .app-view {
         &:not(.app-view-crews) {
             display: none;
@@ -505,14 +533,39 @@ footer {
     @include flex();
     @include justify-content(space-between);
     @include align-items(center);
-    padding: 10px 0px;
-    border-bottom: 1px solid $darkgreen;
+    padding: 10px 20px;
+    border-bottom: 2px solid black;
+    background: $green;
+    height: 60px;
+}
+.skater-list-name {
+    color: black;
+    @include flex();
+    @include justify-content(flex-start);
+    > span {
+        display: inline-block;
+        margin-right: 10px;
+        font-weight: bold;
+    }
+}
+.skater-list-count {
+    color: black;
+    text-align: left;
+    margin-left: 5px;
+    span {
+        display: inline-block;
+        margin-right: 5px;
+        font-weight: bold;
+    }
 }
 .skater-list-cta {
-    padding: 5px 10px;
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
     text-align: center;
-    background: $darkgreen;
-    color: white;
+    background: black;
+    color: $green;
+    font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;
     margin-right: 10px;
@@ -524,21 +577,33 @@ footer {
     @include flex();
     @include flex-direction(column);
     @include align-items(flex-start);
-    border-bottom: 1px solid $darkgreen;
-    padding-bottom: 10px;
+    @include justify-content(center);
+    padding: 20px 20px 40px 20px;
+    background-image: url(../images/image2.jpg);
+    background-size: cover;
+    height: 35vh;
+    border-bottom: 2px solid black;
     .form-wrap {
-        @include flex();
+        form {
+            @include flex();
+            @include justify-content(space-between);
+        }
+        width: 100%;
+
         input[type="text"] {
             height: 40px;
-            width: 120px;
-            border: 1px solid $darkgreen;
+            width: calc(100% - 90px);
+            border: 2px solid black;
+            font-size: 15px;
+            text-indent: 5px;
         }
         button {
+            font-size: 15px;
             height: 40px;
+            width: 80px;
             padding: 0 10px;
-            background: $darkgreen;
-            color: white;
-            margin-left: 20px;
+            background: black;
+            color: $green;
             border: none;
             text-align: center;
             line-height: 40px;
@@ -546,7 +611,13 @@ footer {
         }
     }
 }
-
+.skater-list-cta-group {
+    @include flex();
+    @include align-items(center);
+    .skater-list-cta {
+        margin-left: 20px;
+    }
+}
 .skater-share-link {
     padding-top: 10px; 
 

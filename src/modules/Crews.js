@@ -1,5 +1,9 @@
 import React from "react";
 import {ViewAddCrew} from "./ViewAddCrew";
+import { library } from '@fortawesome/fontawesome-svg-core';
+import  {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
+import { faUser, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+library.add(faUser, faMapMarkerAlt);
 
 export class Crews extends React.Component {
     constructor(props){
@@ -23,8 +27,19 @@ export class Crews extends React.Component {
     render(){
         const crewsList = this.props.crews.map(item => 
             <div key={item.crew_id} className="skater-list-item-wrap">
-                <div className="skater-list-name">{item.crew_name}</div>
+                <div className="skater-list-name">
+                    <span>{item.crew_name}</span>
+                </div>
+
                 <div className="skater-list-cta-group">
+                    <div className="skater-list-count">
+                        <FontAwesomeIcon icon="user" /> <span>{item.crew_member_count}</span> 
+                    </div>
+
+                    <div className="skater-list-count">
+                        <FontAwesomeIcon icon="map-marker-alt" /> <span>{item.crew_spot_count}</span> 
+                    </div>
+                    
                     <div className="skater-list-cta"
                     onClick={()=>this.handleSelectCrew(item.crew_id)}>
                         Select

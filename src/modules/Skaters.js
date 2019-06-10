@@ -1,5 +1,9 @@
 import React from "react";
 import {ViewAddSkater} from "./ViewAddSkater";
+import { library } from '@fortawesome/fontawesome-svg-core';
+import  {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
+import { faUser, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+library.add(faUser, faMapMarkerAlt);
 
 export class Skaters extends React.Component {
     constructor(props){
@@ -32,8 +36,21 @@ export class Skaters extends React.Component {
     }
     render(){
         const skatersList = this.props.skaters.map(item => 
-            <div key={item.user_id} className="skater-list-item">
-                {item.user_name}
+            <div key={item.crew_id} className="skater-list-item-wrap">
+                <div className="skater-list-name">
+                    <span>{item.user_name}</span>
+                </div>
+
+                <div className="skater-list-cta-group">
+                    <div className="skater-list-count">
+                        <FontAwesomeIcon icon="map-marker-alt" /> <span>{item.user_spots_added_count}</span> 
+                    </div>
+                    
+                    <div className="skater-list-cta"
+                    onClick={()=>this.handleSelectCrew(item.crew_id)}>
+                        Select
+                    </div>
+                </div>
             </div>
         );
         return (

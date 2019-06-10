@@ -279,7 +279,7 @@ footer {
   flex-direction: column;
   width: 100%;
   height: 100%;
-  color: #707070;
+  color: black;
 }
 /* line 239, main.scss */
 .image-preview .upload-an-image .upload-an-image-cta {
@@ -492,7 +492,7 @@ footer {
 
 /* line 383, main.scss */
 .Main {
-  background-image: url(/assets/images/mobile1g2.jpg);
+  background-image: url(../images/mobile1g2.jpg);
 }
 /* line 387, main.scss */
 .Main .app-view:not(.app-view-main) {
@@ -549,24 +549,60 @@ footer {
   display: none;
 }
 
-/* line 439, main.scss */
+/* line 438, main.scss */
+.Skaters .app-body, .Users .app-body {
+  margin-top: 0;
+  padding: 0;
+}
+/* line 442, main.scss */
+.Skaters .button-action-main, .Users .button-action-main {
+  color: #9EC6C8;
+}
+/* line 445, main.scss */
+.Skaters .header-wrap, .Users .header-wrap {
+  color: #9EC6C8 !important;
+  background: black;
+}
+/* line 448, main.scss */
+.Skaters .header-wrap .header-title, .Users .header-wrap .header-title {
+  color: #9EC6C8;
+}
+/* line 453, main.scss */
 .Skaters .app-view:not(.app-view-skaters), .Users .app-view:not(.app-view-skaters) {
   display: none;
 }
 
-/* line 446, main.scss */
+/* line 459, main.scss */
+.Crews .app-body {
+  margin-top: 0;
+  padding: 0;
+}
+/* line 463, main.scss */
+.Crews .button-action-main {
+  color: #9EC6C8;
+}
+/* line 466, main.scss */
+.Crews .header-wrap {
+  color: #9EC6C8 !important;
+  background: black;
+}
+/* line 469, main.scss */
+.Crews .header-wrap .header-title {
+  color: #9EC6C8;
+}
+/* line 474, main.scss */
 .Crews .app-view:not(.app-view-crews) {
   display: none;
 }
 
-/* line 451, main.scss */
+/* line 479, main.scss */
 .coords {
   color: black;
   font-size: 15px;
   margin-top: 20px;
 }
 
-/* line 456, main.scss */
+/* line 484, main.scss */
 .slide-menu {
   width: 100vw;
   opacity: 0;
@@ -589,13 +625,13 @@ footer {
   flex-direction: column;
 }
 
-/* line 473, main.scss */
+/* line 501, main.scss */
 .app-wrap.menu-open-true .slide-menu {
   transform: translate(0, 0);
   opacity: 1;
 }
 
-/* line 479, main.scss */
+/* line 507, main.scss */
 .slide-menu-item {
   background: white;
   padding: 10px 20px;
@@ -606,7 +642,7 @@ footer {
   text-align: right;
 }
 
-/* line 488, main.scss */
+/* line 516, main.scss */
 .slide-menu-close {
   -ms-align-self: flex-end;
   -webkit-align-self: flex-end;
@@ -615,21 +651,21 @@ footer {
   font-size: 20px;
 }
 
-/* line 493, main.scss */
+/* line 521, main.scss */
 .slide-menu-action {
   display: none;
 }
 
-/* line 497, main.scss */
+/* line 525, main.scss */
 .slide-menu-action-active .slide-menu-item {
   display: none;
 }
-/* line 500, main.scss */
+/* line 528, main.scss */
 .slide-menu-action-active .slide-menu-action.active {
   display: block;
 }
 
-/* line 504, main.scss */
+/* line 532, main.scss */
 .skater-list-item-wrap {
   display: -webkit-box;
   display: -moz-box;
@@ -642,26 +678,63 @@ footer {
   -ms-align-items: center;
   -webkit-align-items: center;
   align-items: center;
-  padding: 10px 0px;
-  border-bottom: 1px solid #707070;
+  padding: 10px 20px;
+  border-bottom: 2px solid black;
+  background: #9EC6C8;
+  height: 60px;
 }
 
-/* line 511, main.scss */
+/* line 541, main.scss */
+.skater-list-name {
+  color: black;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: flex-start;
+  -ms-justify-content: flex-start;
+  justify-content: flex-start;
+}
+/* line 545, main.scss */
+.skater-list-name > span {
+  display: inline-block;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+/* line 551, main.scss */
+.skater-list-count {
+  color: black;
+  text-align: left;
+  margin-left: 5px;
+}
+/* line 555, main.scss */
+.skater-list-count span {
+  display: inline-block;
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+/* line 561, main.scss */
 .skater-list-cta {
-  padding: 5px 10px;
+  width: 80px;
+  height: 30px;
+  line-height: 30px;
   text-align: center;
-  background: #707070;
-  color: white;
+  background: black;
+  color: #9EC6C8;
+  font-weight: bold;
   text-transform: uppercase;
   cursor: pointer;
   margin-right: 10px;
 }
-/* line 519, main.scss */
+/* line 572, main.scss */
 .skater-list-cta:last-child {
   margin-right: 0;
 }
 
-/* line 523, main.scss */
+/* line 576, main.scss */
 .mode-add-skater {
   display: -webkit-box;
   display: -moz-box;
@@ -674,45 +747,77 @@ footer {
   -ms-align-items: flex-start;
   -webkit-align-items: flex-start;
   align-items: flex-start;
-  border-bottom: 1px solid #707070;
-  padding-bottom: 10px;
+  -webkit-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  padding: 20px 20px 40px 20px;
+  background-image: url(../images/image2.jpg);
+  background-size: cover;
+  height: 35vh;
+  border-bottom: 2px solid black;
 }
-/* line 529, main.scss */
+/* line 586, main.scss */
 .mode-add-skater .form-wrap {
+  width: 100%;
+}
+/* line 587, main.scss */
+.mode-add-skater .form-wrap form {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
+  -webkit-justify-content: space-between;
+  -ms-justify-content: space-between;
+  justify-content: space-between;
 }
-/* line 531, main.scss */
+/* line 593, main.scss */
 .mode-add-skater .form-wrap input[type="text"] {
   height: 40px;
-  width: 120px;
-  border: 1px solid #707070;
+  width: calc(100% - 90px);
+  border: 2px solid black;
+  font-size: 15px;
+  text-indent: 5px;
 }
-/* line 536, main.scss */
+/* line 600, main.scss */
 .mode-add-skater .form-wrap button {
+  font-size: 15px;
   height: 40px;
+  width: 80px;
   padding: 0 10px;
-  background: #707070;
-  color: white;
-  margin-left: 20px;
+  background: black;
+  color: #9EC6C8;
   border: none;
   text-align: center;
   line-height: 40px;
   text-transform: uppercase;
 }
 
-/* line 550, main.scss */
+/* line 614, main.scss */
+.skater-list-cta-group {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-align-items: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+/* line 617, main.scss */
+.skater-list-cta-group .skater-list-cta {
+  margin-left: 20px;
+}
+
+/* line 621, main.scss */
 .skater-share-link {
   padding-top: 10px;
 }
-/* line 553, main.scss */
+/* line 624, main.scss */
 .skater-share-link > div {
   margin-bottom: 10px;
 }
-/* line 556, main.scss */
+/* line 627, main.scss */
 .skater-share-link .copy-link-wrap {
   display: -webkit-box;
   display: -moz-box;
@@ -723,7 +828,7 @@ footer {
   -ms-justify-content: space-between;
   justify-content: space-between;
 }
-/* line 559, main.scss */
+/* line 630, main.scss */
 .skater-share-link .copy-link-wrap #copy-link {
   width: calc(100% - 90px);
   padding: 5px;
@@ -731,7 +836,7 @@ footer {
   margin-bottom: 10px;
   height: 40px;
 }
-/* line 566, main.scss */
+/* line 637, main.scss */
 .skater-share-link .copy-link-wrap button {
   width: 80px;
   background: #707070;
