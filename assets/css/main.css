@@ -610,7 +610,7 @@ footer {
   position: fixed;
   left: 0;
   top: 0;
-  background: white;
+  background: black;
   border-bottom: 1px solid #707070;
   padding: 20px;
   transition: transform .3s ease, opacity .3s ease;
@@ -633,22 +633,22 @@ footer {
 
 /* line 507, main.scss */
 .slide-menu-item {
-  background: white;
   padding: 10px 20px;
   padding-right: 0;
   font-size: 18px;
-  color: #707070;
+  color: #9EC6C8;
   margin-bottom: 10px;
   text-align: right;
 }
 
-/* line 516, main.scss */
+/* line 515, main.scss */
 .slide-menu-close {
   -ms-align-self: flex-end;
   -webkit-align-self: flex-end;
   align-self: flex-end;
   margin-bottom: 20px;
   font-size: 20px;
+  color: #9EC6C8;
 }
 
 /* line 521, main.scss */
@@ -792,8 +792,47 @@ footer {
   line-height: 40px;
   text-transform: uppercase;
 }
+/* line 612, main.scss */
+.mode-add-skater .form-wrap .skater-type-radio {
+  background: black;
+  border: 2px solid black;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  position: absolute;
+  right: 0;
+  top: 10px;
+  background: #9EC6C8;
+}
+/* line 622, main.scss */
+.mode-add-skater .form-wrap .skater-type-radio > span {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: black;
+  display: none;
+}
+/* line 633, main.scss */
+.mode-add-skater .form-wrap .skater-type {
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  position: relative;
+  padding-right: 25px;
+}
+/* line 644, main.scss */
+.mode-add-skater .form-wrap .skater-type[data-selected="true"] .skater-type-radio > span {
+  display: block;
+}
 
-/* line 614, main.scss */
+/* line 652, main.scss */
 .skater-list-cta-group {
   display: -webkit-box;
   display: -moz-box;
@@ -804,20 +843,20 @@ footer {
   -webkit-align-items: center;
   align-items: center;
 }
-/* line 617, main.scss */
+/* line 655, main.scss */
 .skater-list-cta-group .skater-list-cta {
   margin-left: 20px;
 }
 
-/* line 621, main.scss */
+/* line 659, main.scss */
 .skater-share-link {
   padding-top: 10px;
 }
-/* line 624, main.scss */
+/* line 662, main.scss */
 .skater-share-link > div {
   margin-bottom: 10px;
 }
-/* line 627, main.scss */
+/* line 665, main.scss */
 .skater-share-link .copy-link-wrap {
   display: -webkit-box;
   display: -moz-box;
@@ -828,7 +867,7 @@ footer {
   -ms-justify-content: space-between;
   justify-content: space-between;
 }
-/* line 630, main.scss */
+/* line 668, main.scss */
 .skater-share-link .copy-link-wrap #copy-link {
   width: calc(100% - 90px);
   padding: 5px;
@@ -836,7 +875,7 @@ footer {
   margin-bottom: 10px;
   height: 40px;
 }
-/* line 637, main.scss */
+/* line 675, main.scss */
 .skater-share-link .copy-link-wrap button {
   width: 80px;
   background: #707070;

@@ -102,6 +102,7 @@ class App extends React.Component {
             }).then((response)=>{
                 try {
                     let data = JSON.parse(response);
+                    console.log(data);
                     this.setState({
                         skaters: data
                     });

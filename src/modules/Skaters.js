@@ -36,7 +36,7 @@ export class Skaters extends React.Component {
     }
     render(){
         const skatersList = this.props.skaters.map(item => 
-            <div key={item.crew_id} className="skater-list-item-wrap">
+            <div key={item.user_id} className="skater-list-item-wrap">
                 <div className="skater-list-name">
                     <span>{item.user_name}</span>
                 </div>

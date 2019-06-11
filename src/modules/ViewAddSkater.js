@@ -36,8 +36,9 @@ export class ViewAddSkater extends React.Component {
         });
     }
     handleCheckboxChange(event) {
+        console.log(event.target.name, event.target.checked);
         this.setState({
-            [event.target.name]: event.target.checked
+            [event.target.name]: event.target.value
         });
     }
     copyShareLink(){
@@ -48,6 +49,7 @@ export class ViewAddSkater extends React.Component {
         window.setTimeout(()=>this.setState({copyLinkText: 'Copy Link'}), 3000);
     }
     render() {
+        console.log('updating view add skater');
         return (
         <React.Fragment>
             <div className="mode-add-skater">
@@ -59,8 +61,34 @@ export class ViewAddSkater extends React.Component {
                 <div className="form-wrap">
                     <form className="mode-form view-add-skater-form" onSubmit={()=>this.handleAddNewSkater(this.props.crew_id)}>
                         <input name="skater_username" readOnly type="hidden" placeholder="Username" value={this.state.skater_username} onChange={this.handleChange} />
-                        <label htmlFor="skater_is_crew_leader">Crew Leader?</label>
-                        <input id="skater_is_crew_leader" type="checkbox" name="skater_is_crew_leader" checked={this.state.skater_is_crew_leader} onChange={this.handleCheckboxChange}/>
+
+                        <label 
+                        htmlFor="skater_is_skater"
+                        className="skater-type" data-selected={!this.state.skater_is_crew_leader}>
+                            Skater
+                            <span className="skater-type-radio"><span></span></span>
+                        </label>
+                        <input 
+                        id="skater_is_skater" 
+                        type="radio" 
+                        name="skater_is_crew_leader" 
+                        value={false}
+                        checked={true}
+                        onChange={this.handleCheckboxChange}/>
+
+                        <label 
+                        htmlFor="skater_is_crew_leader"
+                        className="skater-type" data-selected={this.state.skater_is_crew_leader}>
+                            Crew Leader
+                            <span className="skater-type-radio"><span></span></span>
+                        </label>
+                        <input 
+                        id="skater_is_crew_leader" 
+                        type="radio"
+                        name="skater_is_crew_leader" 
+                        value={true}
+                        onChange={this.handleCheckboxChange}/>
+
                         <button type="submit">Create</button>
                     </form>
                 </div>
