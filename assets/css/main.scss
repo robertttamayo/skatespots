@@ -1,59 +1,8 @@
-// @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap');
-// @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed|ZCOOL+KuaiLe&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Monoton|Roboto+Condensed&display=swap');
+@import './mixins.scss';
+@import './colors.scss';
 
-// $green: #71eeb8;
-$green: #9EC6C8;
-$compliment: #9EC6C8;
-// $green: #08313f;
-// $darkgreen: #0e546c;
-// $darkgreen: #083f31;
-$darkgreen: #707070;
-
-@mixin flex(){
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-}
-@mixin flex-wrap($wrap){
-    -webkit-flex-wrap: $wrap;
-    -ms-flex-wrap: $wrap;
-    flex-wrap: $wrap;
-}
-@mixin flex-direction($dir){
-    -webkit-flex-direction: $dir;
-    -ms-flex-direction: $dir;
-    flex-direction: $dir;
-}
-@mixin flex-shrink($dir){
-    -webkit-flex-shrink: $dir;
-    -ms-flex-shrink: $dir;
-    flex-shrink: $dir;
-}
-@mixin justify-content($justify){
-    -webkit-justify-content: $justify;
-    -ms-justify-content: $justify;
-    justify-content: $justify;
-}
-@mixin align-items($align){
-    -ms-align-items: $align;
-    -webkit-align-items: $align;
-    align-items: $align;
-}
-@mixin align-self($align){
-    -ms-align-self: $align;
-    -webkit-align-self: $align;
-    align-self: $align;
-}
-@mixin transform($transition...) {
-    -webkit-transform: $transition;
-    -moz-transform: $transition;
-    -ms-transform: $transition;
-    -o-transform: $transition;
-    transform: $transition;
-}
+@import './activate.scss';
 
 body {
     margin: 0;
@@ -646,7 +595,12 @@ footer {
                 }
             }
         }
-        // input[type="rs
+        input[type="radio"] {
+            width: .1px;
+            height: .1px;
+            position: absolute;
+            opacity: 0;
+        }
     }
 }
 .skater-list-cta-group {
@@ -658,28 +612,56 @@ footer {
 }
 .skater-share-link {
     padding-top: 10px; 
-
+    position: fixed;
+    width: 90vw;
+    left: 5vw;
+    top: 5vw;
+    background: $green;
+    color: black;
+    border: 2px solid black;
+    padding: 20px;
     > div {
-        margin-bottom: 10px;
+        margin-bottom: 20px;
     }
     .copy-link-wrap {
         @include flex();
         @include justify-content(space-between);
+        margin-bottom: 0;
         #copy-link {
             width: calc(100% - 90px);
             padding: 5px;
-            border: 1px solid $darkgreen;
-            margin-bottom: 10px;
+            border: 2px solid black;
             height: 40px;
         }
         button {
             width: 80px;
-            background: $darkgreen;
-            color: white;
+            background: black;
+            color: $green;
             border: none;
             text-transform: uppercase;
             height: 40px;
             cursor: pointer;
         }
+    }
+    .skater-share-title {
+        font-size: 18px;
+    }
+    .skater-share-instructions {
+        font-size: 14px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid black;
+    }
+    .share-links {
+        @include flex();
+        @include justify-content(space-between);
+        > a {
+            color: black;
+        }
+    }
+    .slide-menu-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color: black
     }
 }

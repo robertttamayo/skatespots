@@ -1,5 +1,10 @@
 
 import React from "react";
+import { library } from '@fortawesome/fontawesome-svg-core';
+import  {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faTimes);
 
 export class ViewAddSkater extends React.Component {
     constructor(props) {
@@ -7,36 +12,44 @@ export class ViewAddSkater extends React.Component {
         this.endpoint = this.props.endpoint;
         this.crew_id = this.props.crew_id;
         this.handleChange = this.handleChange.bind(this);
-        this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
         this.handleAddNewSkater = this.handleAddNewSkater.bind(this);
         this.copyShareLink = this.copyShareLink.bind(this);
+        this.handleRadioChange = this.handleRadioChange.bind(this);
+        this.onShareLinkClose = this.onShareLinkClose.bind(this);
         this.state = {
             skater_username: '',
             skater_password: '',
             skater_is_crew_leader: false,
+            skater_is_skater: true,
             crew_id: this.props.crew_id,
             copyLinkText: 'Copy Link',
+            shareLinkAvailable: true,
+            skater_type_created: 'Skater'
         };
     }
+    handleRadioChange(skater_is_crew_leader) {
+        this.setState({
+            skater_is_crew_leader,
+            skater_is_skater: !skater_is_crew_leader
+        });
+    }
+    onShareLinkClose() {
+        this.setState({shareLinkAvailable: false});
+    }
     handleChange(event) {
-        console.log(event.target);
         this.setState({
             [event.target.name]: event.target.name == 'skater_is_crew_leader' ? event.target.checked : event.target.value
         });
     }
     handleAddNewSkater(crew_id) {
-        console.log('adding new skater in crew ' + crew_id);
-        this.setState({crew_id});
-        console.log(this.state);
+        this.setState({
+            crew_id,
+            shareLinkAvailable: true,
+            skater_type_created: this.state.skater_is_crew_leader ? 'Crew Leader' : 'Skater',
+        });
         this.props.handleAddNewSkater(Object.assign({}, {...this.state}));
     }
     handleChange(event){
-        this.setState({
-            [event.target.name]: event.target.value
-        });
-    }
-    handleCheckboxChange(event) {
-        console.log(event.target.name, event.target.checked);
         this.setState({
             [event.target.name]: event.target.value
         });
@@ -49,7 +62,11 @@ export class ViewAddSkater extends React.Component {
         window.setTimeout(()=>this.setState({copyLinkText: 'Copy Link'}), 3000);
     }
     render() {
-        console.log('updating view add skater');
+        let shareLinkUrlEncoded = '';
+        if (this.props.shareLink != '') {
+            shareLinkUrlEncoded = encodeURIComponent(this.props.shareLink);
+        }
+        let shareLinkVisible = this.props.shareLink !== '' && this.state.shareLinkAvailable;
         return (
         <React.Fragment>
             <div className="mode-add-skater">
@@ -64,7 +81,7 @@ export class ViewAddSkater extends React.Component {
 
                         <label 
                         htmlFor="skater_is_skater"
-                        className="skater-type" data-selected={!this.state.skater_is_crew_leader}>
+                        className="skater-type" data-selected={this.state.skater_is_skater}>
                             Skater
                             <span className="skater-type-radio"><span></span></span>
                         </label>
@@ -73,8 +90,8 @@ export class ViewAddSkater extends React.Component {
                         type="radio" 
                         name="skater_is_crew_leader" 
                         value={false}
-                        checked={true}
-                        onChange={this.handleCheckboxChange}/>
+                        checked={this.skater_is_skater}
+                        onChange={()=>this.handleRadioChange(false)}/>
 
                         <label 
                         htmlFor="skater_is_crew_leader"
@@ -87,27 +104,32 @@ export class ViewAddSkater extends React.Component {
                         type="radio"
                         name="skater_is_crew_leader" 
                         value={true}
-                        onChange={this.handleCheckboxChange}/>
+                        checked={this.state.skater_is_crew_leader}
+                        onChange={()=>this.handleRadioChange(true)}/>
 
                         <button type="submit">Create</button>
                     </form>
                 </div>
                 )}
             </div>
-            {this.props.shareLink == '' ? (
+            {shareLinkVisible == '' ? (
                 ''
             ) : (
-            <div className="skater-share-link" data-visible={this.props.shareLink}>
-                <div>
-                    Success! Click on one of the options below to share the activation link:
+            <div className="skater-share-link" data-visible={shareLinkVisible}>
+                <div className="slide-menu-close" onClick={this.onShareLinkClose}>
+                    <FontAwesomeIcon icon="times" />
+                </div>
+                <div className="skater-share-title">
+                    {this.state.skater_type_created} Created
+                </div>
+                <div className="skater-share-instructions">
+                    Share the activation link with the new user. They will be able to create a username and password.
                 </div>
 
-                <div>
-                    <a className="sms-link" href={`sms:&body=${encodeURI(this.props.shareLink)}`}>Send SMS</a>
-                </div>
+                <div className="share-links">
+                    <a className="sms-link" href={`sms:&body=${shareLinkUrlEncoded}`}>Send SMS</a>
 
-                <div>
-                    <a className="email-link" href={`mailto:?body=${encodeURI(this.props.shareLink)}`}>Send via email</a>
+                    <a className="email-link" href={`mailto:?body=${shareLinkUrlEncoded}`}>Send email</a>
                 </div>
 
                 <div className="copy-link-wrap">

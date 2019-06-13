@@ -90,6 +90,11 @@ if (!$valid) {
 ?>
 <!DOCTYPE html>
 <head>
+<meta charset="utf-8">
+<title>Skate Spots – Create your account</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="stylesheet" href="/assets/css/main.css" />
     <link rel="stylesheet" href="/skate/assets/css/main.css" />
     <style>
@@ -112,26 +117,41 @@ if (!$valid) {
     </style>
 </head>
 <body>
-    <form class="activate-form" data-active-step="step-one" action="/" method="POST">
-        <input name="user_id" type="hidden" value="<?= $user_id ?>" />
-        <input name="crew_id" type="hidden" value="<?= $crew_id ?>" />
+    <div id="app">
+        <div class="app-wrap Main menu-open-false">
+        <header class="header-wrap"><div class="icon-button button-action-main"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-left" class="svg-inline--fa fa-arrow-left fa-w-14 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"></path></svg></div><div class="header-title"><span>skate</span></div><div class="icon-button button-action-menu"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" class="svg-inline--fa fa-bars fa-w-14 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path></svg></div><div class="slide-menu"><div class="slide-menu-close"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg></div><div class="slide-menu-item">Logout</div></div></header>
+            <form class="activate-form" data-active-step="step-one" action="/" method="POST">
+                <input name="user_id" type="hidden" value="<?= $user_id ?>" />
+                <input name="crew_id" type="hidden" value="<?= $crew_id ?>" />
 
-        <div class="step step-one">
-            <label for="user_name">Choose a Username:</label>
-            <input type="text" name="user_name" value="<?= $user_name ?>" placeholder="Enter a username"/>
-            <span class="error-message try-a-different-name">Name already taken. Try a different name.</span>
-            <button type="submit">Submit</button>
-        </div>
+                <div class="step step-one">
+                    <label for="user_name">Choose a Username</label>
+                    <div class="input-row">
+                        <div class="input-row-input">
+                            <input type="text" name="user_name" value="<?= $user_name ?>" placeholder="Enter a username"/>
+                            <span class="error-message try-a-different-name">Name already taken. Try a different name.</span>
+                        </div>
+                        <button type="submit">Next</button>
+                    </div>
+                </div>
 
-        <div class="step step-two">
-            <div class="">Welcome <span class="step-two-username"></span></div>
-            <label for="user_magicword">Choose a Password:</label>
-            <input type="password" name="user_magicword" value="" placeholder="Enter password" />
-            <input type="password" name="user_magicword_retype" value="" placeholder="Re-type password" />
-            <span class="error-message passwords-do-not-match">Passwords must match.</span>
-            <button type="submit">Submit</button> 
+                <div class="step step-two">
+                    <div class="welcome-new-user">Welcome <span class="step-two-username"></span></div>
+                    <label for="user_magicword">Choose a Password</label>
+
+                    <div class="input-row">
+                        <div class="input-row-input">
+                            <input type="password" name="user_magicword" value="" placeholder="Enter password" />
+                            <input type="password" name="user_magicword_retype" value="" placeholder="Re-type password" />
+                            <span class="error-message passwords-do-not-match">Passwords must match.</span>
+                            <button type="submit">Submit</button> 
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
         $('form.activate-form').on('submit', function(event){
