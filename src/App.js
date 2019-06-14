@@ -279,7 +279,8 @@ class App extends React.Component {
  
                         <div className="app-view app-view-add">
                             <Reporter 
-                            crew_id={this.state.crew_id}/>
+                            crew_id={this.state.crew_id}
+                            spot_added_by={this.state.user_id}/>
                         </div>
 
                         <div className="app-view app-view-locator">

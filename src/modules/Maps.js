@@ -17,6 +17,9 @@ export class Maps extends React.Component {
         this.key = "AIzaSyCqjAzVHf3SRY1HIr-yYTCyNhOCHV1p5AE";
         this.iconUrl = "https://www.roberttamayo.com/skate/assets/images/icon.svg";
 
+        this.markerRefs = [];
+        this.popupRefs = [];
+
         this.state = {
             items: this.props.items
         }
@@ -27,6 +30,15 @@ export class Maps extends React.Component {
             } else {
                 this.center(this.props.items);
             }
+        });
+        $(document).on('map_popup_open', (event, data) => {
+            let spot_id = data.spot_id;
+            console.log(spot_id);
+            this.markerRefs.forEach((marker)=>{
+                if (marker && marker.props && marker.props.spot_id == spot_id) {
+                    marker.leafletElement.openPopup();
+                }
+            });
         });
     }
     center(_items){
@@ -95,29 +107,40 @@ export class Maps extends React.Component {
                                 html: '<div class="center"></div>'
                             });
                             return (
-                                <Marker 
+                                <Marker
                                 key={item.spot_id}
                                 position={[item.spot_lat, item.spot_lng]} 
                                 icon={icon}
-                                // icon={L.DivIcon.dataMarkup({
-                                //     className:"cmOverlay" + (item.state || ''),
-                                //     iconSize: [35, 35],
-                                //     iconAnchor: [17.5, 17.5],
-                                //     lid: item.locationId, 
-                                //     lat: item.lat,
-                                //     lng: item.lng,
-                                //     visible: true,
-                                //     particleGroupNames: ['Location Type'],
-                                //     specialties: item.specialties,
-                                //     html: `
-                                //         <div class="circular-close"></div>
-                                //         <div class="circular">${listItems}</div>
-                                //         <div class="index count">${index + 1}</div>
-                                //         <div class="circular-close"></div>
-                                //         <div class="circular"></div>
-                                //     `
-                                // })}
-                                />
+                                spot_id={item.spot_id}
+                                ref={(marker) => {this.markerRefs.push(marker)}}
+                                autoPan={true}
+                                >
+                                    <Popup
+                                    ref={(popup) => {this.popupRefs.push(popup)}}
+                                    spot_id={item.spot_id}
+                                    keepInView={true}>
+                                        <div className="popup-wrap">
+                                            <div className="popup-image">
+                                                {(item.spot_image_url) ? (
+                                                    <img src={item.spot_image_url} alt="spot image"/>
+                                                ) : (
+                                                    <div className="no-image">No image for this spot</div>
+                                                )
+                                                }
+                                            </div>
+                                            <div className="popup-info">
+                                                <div className="popup-name">{item.spot_name}</div>
+                                                <div className="popup-description">{item.spot_description}</div>
+                                                <a 
+                                                target="_blank"
+                                                className="directions-link button-cta"
+                                                href={`https://www.google.com/maps?hl=en&saddr=current+location&daddr=${item.spot_lat},${item.spot_lng}`}>
+                                                    Directions
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </Popup>
+                                </Marker>
                             )
                         })}
                         <ZoomControl 
@@ -130,5 +153,10 @@ export class Maps extends React.Component {
     componentDidMount(){
         this.map = this.refs.map.leafletElement;
         this.center(this.props.items);
+    }
+    componentDidUpdate(){
+        this.markerRefs.forEach((marker) =>{
+            console.log(marker);
+        })
     }
 }

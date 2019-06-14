@@ -10,6 +10,7 @@ export class Lists extends React.Component {
         super(props);
         this.onNext = this.onNext.bind(this);
         this.onPrev = this.onPrev.bind(this);
+        this.onMapPinClick = this.onMapPinClick.bind(this);
         this.state = {
             count: this.props.items.length,
             index: 0,
@@ -23,6 +24,9 @@ export class Lists extends React.Component {
             index = 0;
         }
         this.setState({index});
+    }
+    onMapPinClick(spot_id) {
+        this.props.onMapPinClick(spot_id);
     }
     onPrev() {
         let index = this.state.index;
@@ -41,15 +45,23 @@ export class Lists extends React.Component {
                     <span className="spot-name-left">
                         {index + 1}. <span>{item.spot_name}</span>
                     </span>
-
-                    <span className="spot-name-right">
-                        <FontAwesomeIcon icon="camera" />
-                    </span>
+                    
+                    { (item.spot_image_url) ? (
+                        <span className="spot-name-right" onClick={()=>{this.onMapPinClick(item.spot_id)}}>
+                            <FontAwesomeIcon icon="camera" />
+                        </span>
+                    ) : ('')
+                    }
                 </div>
                 <div className="spot-description">
                     {item.spot_description}
                 </div>
-                <div className="directions-link button-cta">Directions</div>
+                <a 
+                target="_blank"
+                className="directions-link button-cta"
+                href={`https://www.google.com/maps?hl=en&saddr=current+location&daddr=${item.spot_lat},${item.spot_lng}`}>
+                    Directions
+                </a>
             </div>
         );
         let bubbleCounters = new Array(Math.ceil(this.props.items.length / 2)).fill(0);

@@ -9,10 +9,12 @@ export class Locator extends React.Component {
         this.endpoint = "https://www.roberttamayo.com/skate/api/down.php";
         this.gather = this.gather.bind(this);
         this.askUserLocation = this.askUserLocation.bind(this);
+        this.onMapPinClick = this.onMapPinClick.bind(this);
 
         this.crew_id = this.props.crew_id;
         this.state = {
             items: [],
+            activeSpotId: null,
         };
     }
     gather() {
@@ -33,6 +35,10 @@ export class Locator extends React.Component {
             });
         });
     }
+    onMapPinClick(spot_id) {
+        this.setState({activeSpotId: spot_id});
+        $(document).trigger('map_popup_open', {spot_id});
+    }
     askUserLocation() {
         return new Promise((resolve, reject)=> {
             if ("geolocation" in navigator) {
@@ -49,8 +55,13 @@ export class Locator extends React.Component {
     render() {
         return (
             <div className="locator-wrap">
-                <Maps items={this.state.items} />
-                <Lists items={this.state.items} />
+                <Maps items={this.state.items}
+                onMapPinClick={this.onMapPinClick} 
+                activeSpotId={this.state.activeSpotId}/>
+                <Lists 
+                items={this.state.items}
+                onMapPinClick={this.onMapPinClick}
+                activeSpotId={this.state.activeSpotId}/>
             </div>
         );
     }

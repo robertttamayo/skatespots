@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Monoton|Roboto+Condensed&display=swap');
 @import './mixins.scss';
 @import './colors.scss';
+@import './loaders.scss';
 
 @import './activate.scss';
 
@@ -102,6 +103,7 @@ footer {
         width: calc(100% - 20px);
         position: absolute;
         bottom: 10px;
+        text-decoration: none;
     }
 }
 .locator-list-control {
@@ -163,6 +165,7 @@ footer {
 }
 .reporter-wrap {
     margin-bottom: 20px;
+    position: relative;
 }
 .reporter-form {
     max-width: 320px;
@@ -663,5 +666,44 @@ footer {
         top: 10px;
         right: 10px;
         color: black
+    }
+}
+.loading-bg {
+    display: none;
+    width: 100%;
+    height: 100%;
+    background: $green-fade;
+    color: black;
+    position: absolute;
+    top: 0;
+    left: 0;
+    &[data-visible="true"] {
+        display: block;
+    }
+    .loading-animation {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        @include transform(translate(-50%, -50%));
+    }
+    .loading-message {
+        text-align: center;
+        margin-top: 70px;
+        font-size: 32px;
+        color: black;
+    }
+}
+.leaflet-popup-content {
+    margin: 5px;
+}
+.popup-wrap {
+    width: 220px;
+    .popup-image {
+        width: 100%;
+        min-height: 100px;
+        img {
+            height: auto;
+            width: 100%;
+        }
     }
 }

@@ -13,14 +13,19 @@ export class Reporter extends React.Component {
         this.compress = this.compress.bind(this);
         this.activate = this.activate.bind(this);
         this.getCoords = this.getCoords.bind(this);
+        this.uploadImage = this.uploadImage.bind(this);
 
         this.crew_id = this.props.crew_id;
+        this.image_url = '';
 
         this.coords = {
             lat: '123.9309230',
             lng: '99.30904290'
         }
-        this.endpoint = "https://www.roberttamayo.com/skate/up.php";
+        this.endpoints = {
+            spot: "https://www.roberttamayo.com/skate/api/up.php",
+            image: "https://www.roberttamayo.com/skate/api/image.php",
+        }
         this.state = {
             spot_name: '',
             spot_description: '',
@@ -28,7 +33,10 @@ export class Reporter extends React.Component {
             has_image: false,
             image_height: 300,
             image_width: 400,
-            active: false
+            active: false,
+            loading: false,
+            image_data_url: null,
+            loading_message: 'Uploading image...',
         };
     }
     getCoords() {
@@ -41,28 +49,85 @@ export class Reporter extends React.Component {
     generate(event){
         // TODO: update this section to upload the image file
         event.preventDefault();
+
+        this.setState({loading: true});
+
         if ("geolocation" in navigator) {
-            navigator.geolocation.getCurrentPosition((position) => {
-                console.log(position);
-                this.coords.lat = position.coords.latitude.toString();
-                this.coords.lng = position.coords.latitude.toString();
-                $.ajax(this.endpoint, {
-                    method: "POST",
-                    data: {
-                        lat: position.coords.latitude.toString(),
-                        lng: position.coords.longitude.toString(),
-                        spot_name: this.state.spot_name,
-                        crew_id: this.crew_id
-                    }   
-                }).then((response)=>{
-                    // TODO: update UI to reflect successful upload
-                    console.log(response);
+            this.uploadImage().then(()=>{
+                this.setState({loading_message: 'Uploading spot...'});
+                navigator.geolocation.getCurrentPosition((position) => {
+                    console.log(position);
+                    this.coords.lat = position.coords.latitude.toString();
+                    this.coords.lng = position.coords.latitude.toString();
+
+                    $.ajax(this.endpoints.spot, {
+                        method: "POST",
+                        data: {
+                            lat: position.coords.latitude.toString(),
+                            lng: position.coords.longitude.toString(),
+                            spot_name: this.state.spot_name,
+                            crew_id: this.props.crew_id,
+                            spot_added_by: this.props.spot_added_by,
+                            spot_description: this.state.spot_description,
+                            spot_image_url: this.image_url,
+                        }   
+                    }).then((response)=>{
+                        // TODO: update UI to reflect successful upload
+                        console.log(response);
+                        alert('Spot uploaded successfully');
+                        this.setState({
+                            spot_name: '',
+                            spot_description: '',
+                            image_file: null,
+                            has_image: false,
+                            image_height: 300,
+                            image_width: 400,
+                            active: false,
+                            loading: false,
+                            image_data_url: null,
+                            loading_message: 'Uploading image...',
+                        });
+                    });
+                    //do_something(position.coords.latitude, position.coords.longitude);
+                }, ()=>{
+                    alert(`Unable to determine your location. Spot not uploaded. Try changing your location settings for your browser`);
+                    this.setState({loading: false});
                 });
-                //do_something(position.coords.latitude, position.coords.longitude);
             });
         } else {
-            alert("You must allow location to report a spot");
+            alert(`Unable to determine your location. Spot not uploaded. Try changing your location settings for your browser`);
+            this.setState({loading: false});
         }
+    }
+    uploadImage(){
+        return new Promise((resolve, reject)=>{
+            if (!this.state.has_image) {
+                resolve();
+            }
+            let imgData = new FormData(document.getElementById("reporter-form"));
+            console.log(imgData);
+            var data = {
+                "imgdata": [imgData]
+            };
+            $.ajax({
+                url: this.endpoints.image,
+                type: "POST",
+                processData: false,
+                contentType: false,
+                data: imgData
+            }).done((_data) => {
+                console.log(_data);
+                var data = JSON.parse(_data);
+                console.log(data);
+                if (data.success){
+                    this.image_url = data.img_url;
+                    resolve();
+                } else {
+                    reject();
+                    alert(data.message);
+                }
+            });
+        });
     }
     handleChange(event){
         this.setState({
@@ -102,6 +167,9 @@ export class Reporter extends React.Component {
                         has_image: true,
                     });
                     ctx.drawImage(img, 0,0,width, height);
+                    // let dataurl = ctx.canvas.toDataURL("image/jpg");
+                    // this.dataurl = dataurl;
+                    
                 }, 'image/jpeg', 1);
             },
             reader.onerror = error => console.log(error);
@@ -140,7 +208,10 @@ export class Reporter extends React.Component {
 
                     <div className="reporter-title">Adding a Spot</div>
 
-                    <form className="reporter-form" onSubmit={this.generate}>
+                    <form className="reporter-form" onSubmit={this.generate} id="reporter-form">
+                        <input type="hidden" value={this.props.spot_added_by} name="spot_added_by" readOnly/>
+                        <input type="hidden" value={this.props.crew_id} name="crew_id" readOnly/>
+                    
                         <div>
                             <label className="standard-label" htmlFor="spot_name">Name</label>
                             <input type="text" onChange={this.handleChange} value={this.state.spot_name} placeholder="Name" id="spot_name" name="spot_name"/>
@@ -150,13 +221,20 @@ export class Reporter extends React.Component {
                             <textarea onChange={this.handleChange} value={this.state.spot_description} placeholder="Description" id="spot_description" name="spot_description"/>
                         </div>
                         <div className="form-button-section">
-                            <label htmlFor="image_file" className="file-label">Add an Image</label>
+                            <label htmlFor="image_file[]" className="file-label">Add an Image</label>
                             <button type="submit" className="button-cta">Post</button>
-                            <input id="image_file" name="image_file" onChange={this.compress} type="file" accept="image/*"/>
+                            <input id="image_file" name="image_file[]" onChange={this.compress} type="file" accept="image/*"/>
                         </div>
                         <div className="coords">
                         </div>
                     </form>
+
+                    <div className="loading-bg" data-visible={this.state.loading}>
+                        <div className="loading-message">{this.state.loading_message}</div>
+                        <div className="loading-animation">
+                            <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+                        </div>
+                    </div>
                 </div>
             );
         }
