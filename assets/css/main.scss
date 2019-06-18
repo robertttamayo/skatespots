@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Monoton|Roboto+Condensed&display=swap');
+// @import url('https://fonts.googleapis.com/css?family=Monoton|Roboto+Condensed&display=swap');
 @import './mixins.scss';
 @import './colors.scss';
 @import './loaders.scss';
 
 @import './activate.scss';
+@import './messages.scss';
 
 body {
     margin: 0;
@@ -313,6 +314,10 @@ footer {
 .button-action-menu {
     font-size: 20px;
     margin-top: 20px;
+    &[data-visible="false"] {
+        opacity: 0;
+        pointer-events: none;
+    }
 }
 .button-action-main {
     font-size: 20px;
@@ -424,6 +429,28 @@ footer {
     }
     .app-view {
         &:not(.app-view-crews) {
+            display: none;
+        }
+    }
+}
+.Messages {
+    .app-body {
+        margin-top: 0;
+        padding: 0;
+    }
+    .button-action-main {
+        color: $green;
+    }
+    .header-wrap {
+        color: $green !important;
+        background: black;
+        border-bottom: 1px solid $green;
+        .header-title {
+            color: $green;
+        }
+    }
+    .app-view {
+        &:not(.app-view-messages) {
             display: none;
         }
     }
@@ -693,11 +720,21 @@ footer {
         color: black;
     }
 }
+.leaflet-popup {
+    .leaflet-popup-tip {
+        border: 1px solid black;
+        background: $green;
+    }
+    .leaflet-popup-content-wrapper {
+        background: $green;
+    }
+}
 .leaflet-popup-content {
     margin: 5px;
 }
 .popup-wrap {
     width: 220px;
+    font-family: 'Roboto Condensed', sans-serif;
     .popup-image {
         width: 100%;
         min-height: 100px;
@@ -705,5 +742,28 @@ footer {
             height: auto;
             width: 100%;
         }
+    }
+    .popup-name {
+        margin: 5px 0;
+        font-size: 16px;
+        color: black;
+    }
+    .popup-description {
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+    .button-cta {
+        color: $green;
+        text-decoration: none;
+        height: 30px;
+        line-height: 30px;
+        display: block;
+        margin: auto;
+        width: 80%;
+    }
+}
+.app-view-skaters {
+    .skater-list-cta {
+        display: none;
     }
 }

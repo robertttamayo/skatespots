@@ -120,14 +120,15 @@ export class Maps extends React.Component {
                                     spot_id={item.spot_id}
                                     keepInView={true}>
                                         <div className="popup-wrap">
-                                            <div className="popup-image">
-                                                {(item.spot_image_url) ? (
+                                            {(item.spot_image_url) ? (
+                                                <div className="popup-image">
                                                     <img src={item.spot_image_url} alt="spot image"/>
+                                                </div>
                                                 ) : (
-                                                    <div className="no-image">No image for this spot</div>
+                                                  ''  
                                                 )
-                                                }
-                                            </div>
+                                            }
+                                            
                                             <div className="popup-info">
                                                 <div className="popup-name">{item.spot_name}</div>
                                                 <div className="popup-description">{item.spot_description}</div>
@@ -153,10 +154,5 @@ export class Maps extends React.Component {
     componentDidMount(){
         this.map = this.refs.map.leafletElement;
         this.center(this.props.items);
-    }
-    componentDidUpdate(){
-        this.markerRefs.forEach((marker) =>{
-            console.log(marker);
-        })
     }
 }

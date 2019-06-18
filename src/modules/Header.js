@@ -47,10 +47,13 @@ export class Header extends React.Component {
                     <FontAwesomeIcon icon="arrow-left" />
                 </div>
                 <div className="header-title">{this.props.headerTitle || (<span>skate</span>)}</div>
-                <div className="icon-button button-action-menu" onClick={this.onMenu}>
+                <div 
+                className="icon-button button-action-menu" 
+                onClick={this.onMenu}
+                data-visible={(this.props.user_data) ? 'true' : 'false'}>
                     <FontAwesomeIcon icon="bars" />
                 </div>
-                <div className="slide-menu">
+                <div className="slide-menu" >
                     <div className="slide-menu-close" onClick={this.onMenu}>
                         <FontAwesomeIcon icon="times" />
                     </div>

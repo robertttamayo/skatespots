@@ -78,7 +78,7 @@ export class Lists extends React.Component {
                     
                     <div className="bubbles">
                         {bubbleCounters.map((item, index) => 
-                            <div className={`bubble${index == this.state.index ? ' active' : ''}`}></div>)
+                            <div key={index} className={`bubble${index == this.state.index ? ' active' : ''}`}></div>)
                         }
                     </div>
                     <div className="move-right" onClick={this.onNext}>

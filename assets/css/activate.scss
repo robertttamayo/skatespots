@@ -6,6 +6,7 @@
     width: 90vw;
     padding: 20px;
     text-align: center;
+    
     .step-one {
         .error-message {
             text-align: left;
@@ -69,4 +70,14 @@
 }
 .step-two-username {
     font-weight: bold;
+}
+.login-form {
+    input {
+        margin-bottom: 20px;
+    }
+    label {
+        font-size: 18px;
+        text-align: left;
+        margin-bottom: 5px;
+    }
 }

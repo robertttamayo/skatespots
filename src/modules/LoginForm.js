@@ -25,10 +25,16 @@ export class LoginForm extends React.Component {
     }
     render(){
         return (
-            <form className="login-form" onSubmit={this.handleLogin}>
-                <input type="text" value={this.state.user_name} onChange={this.handleChange} name="user_name" placeholder="Username"/>
-                <input type="password" value={this.state.user_magicword} name="user_magicword" onChange={this.handleChange} placeholder="Password" />
-                <button type="submit">Login</button>
+            <form className="login-form activate-form" onSubmit={this.handleLogin}>
+                <div className="step-two">
+                    <div className="input-row-input">
+                        <label htmlFor="user_name">Username:</label>
+                        <input type="text" value={this.state.user_name} onChange={this.handleChange} name="user_name" placeholder="Username"/>
+                        <label htmlFor="user_magicword">Password:</label>
+                        <input type="password" value={this.state.user_magicword} name="user_magicword" onChange={this.handleChange} placeholder="Password" />
+                        <button type="submit">Login</button>
+                    </div>
+                </div>
             </form>
         );
     }

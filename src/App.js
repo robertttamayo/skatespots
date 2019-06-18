@@ -9,6 +9,7 @@ import {HomeMenu} from "./modules/HomeMenu";
 import {Messages} from "./modules/Messages";
 import {Skaters} from "./modules/Skaters";
 import {Crews} from "./modules/Crews";
+import {Loader} from "./modules/Loader";
 
 class App extends React.Component {
     constructor(props) {
@@ -61,7 +62,9 @@ class App extends React.Component {
             skaters: [],
             crews: [],
             headerTitle: '',
-            selected_crew_id: ''
+            selected_crew_id: '',
+            loading: false,
+            loading_message: 'Loading data...',
         };
     }
     fetchCrews() {
@@ -120,6 +123,7 @@ class App extends React.Component {
         });
     }
     handleLogin() {
+        this.setState({loading: true, loading_message: 'Logging in...'});
         $.ajax(this.endpoints.login, {
             method: "POST",
             data: {
@@ -137,20 +141,38 @@ class App extends React.Component {
                         crew_id: data.crew_id
                     });
                     setCookie('user_data', cookie_data_string);
+                    let loading_message = data.user_role == 0 ? 'Fetching crews...' : 'Fetching skaters...';
                     this.setState({
                         user_name: data.user_name,
                         user_id: data.user_id,
                         crew_id: data.crew_id,
                         user_role: data.user_role,
-                        signed_in: true
+                        signed_in: true,
+                        loading_message,
+                        user_data: getUserInfo(),
                     });
+                    if (data.user_role == 0) {
+                        this.fetchCrews().then((response) => {
+                            this.setState({loading: false});
+                        });
+                    } else {
+                        this.fetchSkaters(data.crew_id).then((response) => {
+                            this.setState({loading: false});
+                        });
+                    }
                 } else {
                     this.setState({
                         signed_in: false,
-                        failed: true
+                        failed: true,
+                        loading: false,
                     })
                 }
             } catch (e) {
+                this.setState({
+                    signed_in: false,
+                    failed: true,
+                    loading: false,
+                })
                 console.log(e, response);
             }
         });
@@ -244,39 +266,36 @@ class App extends React.Component {
         }
     }
     handleLogout(){
-        const cookie_data_string = JSON.stringify({
-            user_name: '',
-            user_id: '',
-            user_role: '',
-            crew_id: ''
-        });
+        const cookie_data_string = '';
         setCookie('user_data', cookie_data_string);
         this.setState({
             user_name: '',
             user_id: '',
             user_role: '',
             crew_id: '',
-            signed_in: false
+            signed_in: false,
+            menuOpen: false,
+            user_data: null,
         });
     }
     render() {
-        if (this.state.signed_in) {
-            return (
-                <div className={`app-wrap ${this.state.activeView} menu-open-${this.state.menuOpen}`}>
-                    <Header menuAction={this.menuAction} 
-                    user_data={this.state.user_data}
-                    toggleMenu={this.toggleMenu}
-                    menuOpen={this.state.menuOpen}
-                    logout={this.handleLogout}
-                    headerTitle={this.state.headerTitle}/>
+        return (    
+            <div className={`app-wrap ${this.state.activeView} menu-open-${this.state.menuOpen}`}>
+                <Header menuAction={this.menuAction} 
+                user_data={this.state.user_data}
+                toggleMenu={this.toggleMenu}
+                menuOpen={this.state.menuOpen}
+                logout={this.handleLogout}
+                headerTitle={this.state.headerTitle}/>
 
+                {(this.state.signed_in) ? (
                     <div className="app-body">
                         <div className="app-view app-view-main">
                             <HomeMenu 
                             menuAction={this.menuAction}
-                            user_admin={this.state.user_data.user_role == 0}/>
+                            user_admin={this.state.user_role == 0}/>
                         </div>
- 
+
                         <div className="app-view app-view-add">
                             <Reporter 
                             crew_id={this.state.crew_id}
@@ -289,7 +308,9 @@ class App extends React.Component {
                         </div>
 
                         <div className="app-view app-view-messages">
-                            <Messages />
+                            <Messages 
+                            user_id={this.state.user_id}
+                            crew_id={this.state.crew_id}/>
                         </div>
 
                         <div className="app-view app-view-skaters">
@@ -309,24 +330,30 @@ class App extends React.Component {
                             handleAddNewCrew={this.handleAddNewCrew}/>
                         </div>
                     </div>
+                ) : (
+                    <LoginForm onLogin={this.handleLogin}
+                    onLoginChange={this.handleLoginChange} 
+                    user_name={this.user_name} 
+                    user_magicword={this.user_magicword}/>
+                )
+                }
 
-                    <Footer />
-                </div>
-            );
-        } else {
-            return (
-                <LoginForm onLogin={this.handleLogin}
-                onLoginChange={this.handleLoginChange} 
-                user_name={this.user_name} 
-                user_magicword={this.user_magicword}/>
-            )
-        }
+                <Loader
+                loading={this.state.loading}
+                loading_message={this.state.loading_message}
+                />
+
+                <Footer />
+            </div>
+        );
     }
     componentDidMount(){
-        if (this.state.user_data.user_role == 0) {
-            this.fetchCrews();
-        } else if (this.state.user_data.user_role == 1) {
-            this.fetchSkaters(this.state.user_data.crew_id);
+        if (this.state.user_data) {
+            if (this.state.user_data.user_role == 0) {
+                this.fetchCrews();
+            } else {
+                this.fetchSkaters(this.state.user_data.crew_id);
+            }
         }
     }
 }

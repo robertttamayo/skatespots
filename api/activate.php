@@ -94,7 +94,7 @@ if (!$valid) {
 <title>Skate Spots – Create your account</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link href="https://fonts.googleapis.com/css?family=Monoton|Roboto+Condensed&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/main.css" />
     <link rel="stylesheet" href="/skate/assets/css/main.css" />
     <style>
@@ -119,7 +119,8 @@ if (!$valid) {
 <body>
     <div id="app">
         <div class="app-wrap Main menu-open-false">
-        <header class="header-wrap"><div class="icon-button button-action-main"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-left" class="svg-inline--fa fa-arrow-left fa-w-14 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"></path></svg></div><div class="header-title"><span>skate</span></div><div class="icon-button button-action-menu"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" class="svg-inline--fa fa-bars fa-w-14 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path></svg></div><div class="slide-menu"><div class="slide-menu-close"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg></div><div class="slide-menu-item">Logout</div></div></header>
+            <header class="header-wrap"><div class="icon-button button-action-main"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="arrow-left" class="svg-inline--fa fa-arrow-left fa-w-14 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M257.5 445.1l-22.2 22.2c-9.4 9.4-24.6 9.4-33.9 0L7 273c-9.4-9.4-9.4-24.6 0-33.9L201.4 44.7c9.4-9.4 24.6-9.4 33.9 0l22.2 22.2c9.5 9.5 9.3 25-.4 34.3L136.6 216H424c13.3 0 24 10.7 24 24v32c0 13.3-10.7 24-24 24H136.6l120.5 114.8c9.8 9.3 10 24.8.4 34.3z"></path></svg></div><div class="header-title"><span>skate</span></div><div class="icon-button button-action-menu"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars" class="svg-inline--fa fa-bars fa-w-14 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"></path></svg></div><div class="slide-menu"><div class="slide-menu-close"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="times" class="svg-inline--fa fa-times fa-w-11 " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 352 512"><path fill="currentColor" d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"></path></svg></div><div class="slide-menu-item">Logout</div></div></header>
+            
             <form class="activate-form" data-active-step="step-one" action="/" method="POST">
                 <input name="user_id" type="hidden" value="<?= $user_id ?>" />
                 <input name="crew_id" type="hidden" value="<?= $crew_id ?>" />
@@ -149,6 +150,13 @@ if (!$valid) {
                     </div>
                 </div>
             </form>
+
+            <div class="loading-bg" data-visible="false">
+                <div class="loading-message"></div>
+                <div class="loading-animation">
+                    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -157,6 +165,7 @@ if (!$valid) {
         $('form.activate-form').on('submit', function(event){
             event.preventDefault();
             if ($(this).attr('data-active-step') == 'step-one') {
+                loading(true, 'Checking username...');
                 let data = {
                     user_id: $('input[name="user_id"]').val(),
                     user_name: $('input[name="user_name"]').val(),
@@ -168,6 +177,7 @@ if (!$valid) {
                     data: data
                 }).then(function(response){
                     console.log(response);
+                    loading(false);
                     if (response == 'success') {
                         // move on to step two, choose a password
                         updateStepTwoUsername();
@@ -180,6 +190,7 @@ if (!$valid) {
                 });
             } else {
                 if (passwordsAreMatching()) {
+                    loading(true, 'Finishing up...');
                     let data = {
                         user_id: $('input[name="user_id"]').val(),
                         user_magicword: $('input[name="user_magicword"]').val(),
@@ -190,13 +201,21 @@ if (!$valid) {
                         data: data,
                         withCredentials: true
                     }).then(function(response){
+                        loading(false);
                         console.log(response);
                         if (response == 'success') {
-                            $('form.activate-form').attr('data-active-step', 'step-two');
+                            console.log("<?= APP_HOME_URL ?>");
+                            // var cookie_data_string = JSON.stringify({
+                            //     user_name: $('input[name="user_name"]').val(),
+                            //     user_id: $('input[name="user_id"]').val(),
+                            //     user_role: data.user_role,
+                            //     crew_id: $('input[name="crew_id"]').val()
+                            // });
+                            // setCookie('user_data', cookie_data_string);
+                            window.location.href = "<?= APP_HOME_URL ?>";
                         } else {
                             console.log(response);
-                            console.log("<?= APP_HOME_URL ?>");
-                            window.location.href = "<?= APP_HOME_URL ?>";
+                            alert('An error occurred');
                             // there was some kind of server error
                         }
                     });
@@ -211,6 +230,12 @@ if (!$valid) {
         }
         function passwordsAreMatching(){
             return $('input[name="user_magicword"]').val() == $('input[name="user_magicword_retype"]').val();
+        }
+        function loading(isLoading, loadingMessage) {
+            $('.loading-bg').attr('data-loading', isLoading);
+            if (loadingMessage) {
+                $('.loading-message').text(loadingMessage);
+            }
         }
         updateStepTwoUsername();
     </script>

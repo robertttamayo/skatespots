@@ -1,0 +1,32 @@
+.message-list {
+    padding: 10px;
+    background: black;
+    color: $green;
+}
+.message {
+    margin-bottom: 10px;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 3px;
+    background: $green;
+    color: black;
+    &[data-own="true"] {
+        // border: 1px solid $green;
+        // background: black;
+        // color: $green;
+        .message-meta {
+            margin-bottom: 10px;
+        }
+    }
+}
+.message-message {
+    margin-bottom: 10px;
+}
+.message-meta {
+    text-align: right;
+}
+.edit-message-options {
+    @include flex();
+    @include align-items(center);
+    @include justify-content(flex-end);
+}

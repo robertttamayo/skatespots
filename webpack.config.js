@@ -1,5 +1,5 @@
 const path = require('path');
-// import * as path from 'path';
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 
 const SRC_DIR = path.resolve(__dirname, 'src');
 const BUILD_DIR = path.resolve(__dirname, 'assets/js');
@@ -29,5 +29,15 @@ module.exports = {
                 use: ['style-loader', 'css-loader', 'sass-loader' ]
             }
         ]
-    }
+    },
+    plugins: [
+        // To strip all locales except “en”
+        new MomentLocalesPlugin(),
+
+        // Or: To strip all locales except “en”, “es-us” and “ru”
+        // (“en” is built into Moment and can’t be removed)
+        new MomentLocalesPlugin({
+            localesToKeep: ['es-us', 'ru'],
+        }),
+    ],
 };

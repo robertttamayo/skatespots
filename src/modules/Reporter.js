@@ -1,4 +1,5 @@
 import React from "react";
+import {Loader} from "./Loader";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import  {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
@@ -229,12 +230,10 @@ export class Reporter extends React.Component {
                         </div>
                     </form>
 
-                    <div className="loading-bg" data-visible={this.state.loading}>
-                        <div className="loading-message">{this.state.loading_message}</div>
-                        <div className="loading-animation">
-                            <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
-                        </div>
-                    </div>
+                    <Loader
+                    loading={this.state.loading}
+                    loading_message={this.state.loading_message}
+                    />
                 </div>
             );
         }

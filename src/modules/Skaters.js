@@ -1,5 +1,6 @@
 import React from "react";
 import {ViewAddSkater} from "./ViewAddSkater";
+import {Loader} from "./Loader";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import  {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
 import { faUser, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
@@ -69,6 +70,11 @@ export class Skaters extends React.Component {
                 <div className="skaters-list">
                     {skatersList}
                 </div>
+                
+                <Loader
+                loading={this.state.loading}
+                loading_message={this.state.loading_message}
+                />
             </div>
         );
     }

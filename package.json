@@ -40,6 +40,8 @@
         "webpack-cli": "^3.2.3",
         "@fortawesome/fontawesome-svg-core": "latest",
         "@fortawesome/free-solid-svg-icons": "latest",
-        "@fortawesome/react-fontawesome": "latest"
+        "@fortawesome/react-fontawesome": "latest",
+        "moment": "^2.24.0",
+        "moment-locales-webpack-plugin": "^1.0.7"
     }
 }
