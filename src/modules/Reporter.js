@@ -200,7 +200,7 @@ export class Reporter extends React.Component {
                     <div className="image-preview">
                         <canvas style={{display: this.state.has_image ? 'block' : 'none'}} width={this.state.image_width} height={this.state.image_height} id="image-preview-canvas"></canvas>
                         <div className="upload-an-image" style={{display: this.state.has_image ? 'none' : 'default'}}>
-                            <label htmlFor="image_file" className="upload-an-image-cta">
+                            <label htmlFor="image_file[]" className="upload-an-image-cta">
                                 <div><FontAwesomeIcon icon="camera" /></div>
                                 <div>Add an Image</div>
                             </label>
@@ -224,7 +224,7 @@ export class Reporter extends React.Component {
                         <div className="form-button-section">
                             <label htmlFor="image_file[]" className="file-label">Add an Image</label>
                             <button type="submit" className="button-cta">Post</button>
-                            <input id="image_file" name="image_file[]" onChange={this.compress} type="file" accept="image/*"/>
+                            <input id="image_file[]" name="image_file[]" onChange={this.compress} type="file" accept="image/*"/>
                         </div>
                         <div className="coords">
                         </div>

@@ -153,35 +153,37 @@
 /* line 1, messages.scss */
 .message-list {
   padding: 10px;
-  background: black;
+  background: #9EC6C8;
   color: #9EC6C8;
+  padding-bottom: 100px;
 }
 
-/* line 6, messages.scss */
+/* line 7, messages.scss */
 .message {
   margin-bottom: 10px;
   border: 1px solid black;
   padding: 10px;
   border-radius: 3px;
-  background: #9EC6C8;
+  background: #cfe3e4;
   color: black;
+  overflow-x: hidden;
 }
-/* line 17, messages.scss */
+/* line 19, messages.scss */
 .message[data-own="true"] .message-meta {
   margin-bottom: 10px;
 }
 
-/* line 22, messages.scss */
+/* line 24, messages.scss */
 .message-message {
   margin-bottom: 10px;
 }
 
-/* line 25, messages.scss */
+/* line 27, messages.scss */
 .message-meta {
   text-align: right;
 }
 
-/* line 28, messages.scss */
+/* line 31, messages.scss */
 .edit-message-options {
   display: -webkit-box;
   display: -moz-box;
@@ -191,9 +193,80 @@
   -ms-align-items: center;
   -webkit-align-items: center;
   align-items: center;
-  -webkit-justify-content: flex-end;
-  -ms-justify-content: flex-end;
-  justify-content: flex-end;
+  -webkit-justify-content: space-between;
+  -ms-justify-content: space-between;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid black;
+}
+
+/* line 38, messages.scss */
+.message-form {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-align-items: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  padding: 10px;
+}
+
+/* line 44, messages.scss */
+.message-text {
+  resize: none;
+  font-size: 14px;
+  height: 80px;
+  border: 1px solid black;
+  padding: 5px;
+  width: calc(100%);
+}
+
+/* line 52, messages.scss */
+.message-submit {
+  width: 75px;
+  height: 35px;
+  background: black;
+  color: #9EC6C8;
+  text-align: center;
+  border: none;
+  margin-left: 10px;
+  border: 1px solid #9EC6C8;
+}
+
+/* line 62, messages.scss */
+.message-create {
+  background: black;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  border-top: 1px solid black;
+}
+
+/* line 70, messages.scss */
+.app-view-messages {
+  height: calc(100vh - 65px);
+  overflow: auto;
+}
+
+/* line 75, messages.scss */
+.app-wrap.Messages footer {
+  display: none;
+}
+
+/* line 80, messages.scss */
+.message-action {
+  color: black;
+}
+/* line 82, messages.scss */
+.message-action span {
+  margin-right: 5px;
+  display: inline-block;
 }
 
 /* line 9, main.scss */
@@ -851,15 +924,16 @@ footer {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
+  z-index: 1000;
 }
 
-/* line 480, main.scss */
+/* line 481, main.scss */
 .app-wrap.menu-open-true .slide-menu {
   transform: translate(0, 0);
   opacity: 1;
 }
 
-/* line 486, main.scss */
+/* line 487, main.scss */
 .slide-menu-item {
   padding: 10px 20px;
   padding-right: 0;
@@ -869,7 +943,7 @@ footer {
   text-align: right;
 }
 
-/* line 494, main.scss */
+/* line 495, main.scss */
 .slide-menu-close {
   -ms-align-self: flex-end;
   -webkit-align-self: flex-end;
@@ -879,21 +953,21 @@ footer {
   color: #9EC6C8;
 }
 
-/* line 500, main.scss */
+/* line 501, main.scss */
 .slide-menu-action {
   display: none;
 }
 
-/* line 504, main.scss */
+/* line 505, main.scss */
 .slide-menu-action-active .slide-menu-item {
   display: none;
 }
-/* line 507, main.scss */
+/* line 508, main.scss */
 .slide-menu-action-active .slide-menu-action.active {
   display: block;
 }
 
-/* line 511, main.scss */
+/* line 512, main.scss */
 .skater-list-item-wrap {
   display: -webkit-box;
   display: -moz-box;
@@ -912,7 +986,7 @@ footer {
   height: 60px;
 }
 
-/* line 520, main.scss */
+/* line 521, main.scss */
 .skater-list-name {
   color: black;
   display: -webkit-box;
@@ -924,27 +998,27 @@ footer {
   -ms-justify-content: flex-start;
   justify-content: flex-start;
 }
-/* line 524, main.scss */
+/* line 525, main.scss */
 .skater-list-name > span {
   display: inline-block;
   margin-right: 10px;
   font-weight: bold;
 }
 
-/* line 530, main.scss */
+/* line 531, main.scss */
 .skater-list-count {
   color: black;
   text-align: left;
   margin-left: 5px;
 }
-/* line 534, main.scss */
+/* line 535, main.scss */
 .skater-list-count span {
   display: inline-block;
   margin-right: 5px;
   font-weight: bold;
 }
 
-/* line 540, main.scss */
+/* line 541, main.scss */
 .skater-list-cta {
   width: 80px;
   height: 30px;
@@ -957,12 +1031,12 @@ footer {
   cursor: pointer;
   margin-right: 10px;
 }
-/* line 551, main.scss */
+/* line 552, main.scss */
 .skater-list-cta:last-child {
   margin-right: 0;
 }
 
-/* line 555, main.scss */
+/* line 556, main.scss */
 .mode-add-skater {
   display: -webkit-box;
   display: -moz-box;
@@ -984,11 +1058,11 @@ footer {
   height: 35vh;
   border-bottom: 2px solid black;
 }
-/* line 565, main.scss */
+/* line 566, main.scss */
 .mode-add-skater .form-wrap {
   width: 100%;
 }
-/* line 566, main.scss */
+/* line 567, main.scss */
 .mode-add-skater .form-wrap form {
   display: -webkit-box;
   display: -moz-box;
@@ -999,7 +1073,7 @@ footer {
   -ms-justify-content: space-between;
   justify-content: space-between;
 }
-/* line 572, main.scss */
+/* line 573, main.scss */
 .mode-add-skater .form-wrap input[type="text"] {
   height: 40px;
   width: calc(100% - 90px);
@@ -1007,7 +1081,7 @@ footer {
   font-size: 15px;
   text-indent: 5px;
 }
-/* line 579, main.scss */
+/* line 580, main.scss */
 .mode-add-skater .form-wrap button {
   font-size: 15px;
   height: 40px;
@@ -1020,7 +1094,7 @@ footer {
   line-height: 40px;
   text-transform: uppercase;
 }
-/* line 591, main.scss */
+/* line 592, main.scss */
 .mode-add-skater .form-wrap .skater-type-radio {
   background: black;
   border: 2px solid black;
@@ -1032,7 +1106,7 @@ footer {
   top: 10px;
   background: #9EC6C8;
 }
-/* line 601, main.scss */
+/* line 602, main.scss */
 .mode-add-skater .form-wrap .skater-type-radio > span {
   position: absolute;
   top: 2px;
@@ -1043,7 +1117,7 @@ footer {
   background: black;
   display: none;
 }
-/* line 612, main.scss */
+/* line 613, main.scss */
 .mode-add-skater .form-wrap .skater-type {
   display: inline-block;
   height: 40px;
@@ -1055,11 +1129,11 @@ footer {
   position: relative;
   padding-right: 25px;
 }
-/* line 623, main.scss */
+/* line 624, main.scss */
 .mode-add-skater .form-wrap .skater-type[data-selected="true"] .skater-type-radio > span {
   display: block;
 }
-/* line 628, main.scss */
+/* line 629, main.scss */
 .mode-add-skater .form-wrap input[type="radio"] {
   width: .1px;
   height: .1px;
@@ -1067,7 +1141,7 @@ footer {
   opacity: 0;
 }
 
-/* line 636, main.scss */
+/* line 637, main.scss */
 .skater-list-cta-group {
   display: -webkit-box;
   display: -moz-box;
@@ -1078,12 +1152,12 @@ footer {
   -webkit-align-items: center;
   align-items: center;
 }
-/* line 639, main.scss */
+/* line 640, main.scss */
 .skater-list-cta-group .skater-list-cta {
   margin-left: 20px;
 }
 
-/* line 643, main.scss */
+/* line 644, main.scss */
 .skater-share-link {
   padding-top: 10px;
   position: fixed;
@@ -1095,11 +1169,11 @@ footer {
   border: 2px solid black;
   padding: 20px;
 }
-/* line 653, main.scss */
+/* line 654, main.scss */
 .skater-share-link > div {
   margin-bottom: 20px;
 }
-/* line 656, main.scss */
+/* line 657, main.scss */
 .skater-share-link .copy-link-wrap {
   display: -webkit-box;
   display: -moz-box;
@@ -1111,14 +1185,14 @@ footer {
   justify-content: space-between;
   margin-bottom: 0;
 }
-/* line 660, main.scss */
+/* line 661, main.scss */
 .skater-share-link .copy-link-wrap #copy-link {
   width: calc(100% - 90px);
   padding: 5px;
   border: 2px solid black;
   height: 40px;
 }
-/* line 666, main.scss */
+/* line 667, main.scss */
 .skater-share-link .copy-link-wrap button {
   width: 80px;
   background: black;
@@ -1128,17 +1202,17 @@ footer {
   height: 40px;
   cursor: pointer;
 }
-/* line 676, main.scss */
+/* line 677, main.scss */
 .skater-share-link .skater-share-title {
   font-size: 18px;
 }
-/* line 679, main.scss */
+/* line 680, main.scss */
 .skater-share-link .skater-share-instructions {
   font-size: 14px;
   padding-bottom: 20px;
   border-bottom: 2px solid black;
 }
-/* line 684, main.scss */
+/* line 685, main.scss */
 .skater-share-link .share-links {
   display: -webkit-box;
   display: -moz-box;
@@ -1149,11 +1223,11 @@ footer {
   -ms-justify-content: space-between;
   justify-content: space-between;
 }
-/* line 687, main.scss */
+/* line 688, main.scss */
 .skater-share-link .share-links > a {
   color: black;
 }
-/* line 691, main.scss */
+/* line 692, main.scss */
 .skater-share-link .slide-menu-close {
   position: absolute;
   top: 10px;
@@ -1161,22 +1235,22 @@ footer {
   color: black;
 }
 
-/* line 698, main.scss */
+/* line 699, main.scss */
 .loading-bg {
   display: none;
   width: 100%;
   height: 100%;
-  background: rgba(158, 198, 200, 0.75);
+  background: rgba(158, 198, 200, 0.85);
   color: black;
   position: absolute;
   top: 0;
   left: 0;
 }
-/* line 707, main.scss */
+/* line 708, main.scss */
 .loading-bg[data-visible="true"] {
   display: block;
 }
-/* line 710, main.scss */
+/* line 711, main.scss */
 .loading-bg .loading-animation {
   position: absolute;
   top: 50%;
@@ -1187,7 +1261,7 @@ footer {
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-/* line 716, main.scss */
+/* line 717, main.scss */
 .loading-bg .loading-message {
   text-align: center;
   margin-top: 70px;
@@ -1195,48 +1269,48 @@ footer {
   color: black;
 }
 
-/* line 724, main.scss */
+/* line 725, main.scss */
 .leaflet-popup .leaflet-popup-tip {
   border: 1px solid black;
   background: #9EC6C8;
 }
-/* line 728, main.scss */
+/* line 729, main.scss */
 .leaflet-popup .leaflet-popup-content-wrapper {
   background: #9EC6C8;
 }
 
-/* line 732, main.scss */
+/* line 733, main.scss */
 .leaflet-popup-content {
   margin: 5px;
 }
 
-/* line 735, main.scss */
+/* line 736, main.scss */
 .popup-wrap {
   width: 220px;
   font-family: 'Roboto Condensed', sans-serif;
 }
-/* line 738, main.scss */
+/* line 739, main.scss */
 .popup-wrap .popup-image {
   width: 100%;
   min-height: 100px;
 }
-/* line 741, main.scss */
+/* line 742, main.scss */
 .popup-wrap .popup-image img {
   height: auto;
   width: 100%;
 }
-/* line 746, main.scss */
+/* line 747, main.scss */
 .popup-wrap .popup-name {
   margin: 5px 0;
   font-size: 16px;
   color: black;
 }
-/* line 751, main.scss */
+/* line 752, main.scss */
 .popup-wrap .popup-description {
   font-size: 12px;
   margin-bottom: 5px;
 }
-/* line 755, main.scss */
+/* line 756, main.scss */
 .popup-wrap .button-cta {
   color: #9EC6C8;
   text-decoration: none;
@@ -1247,7 +1321,7 @@ footer {
   width: 80%;
 }
 
-/* line 766, main.scss */
+/* line 767, main.scss */
 .app-view-skaters .skater-list-cta {
   display: none;
 }

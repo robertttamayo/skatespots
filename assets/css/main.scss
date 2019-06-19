@@ -474,6 +474,7 @@ footer {
     transform: translate(100%, 0);
     @include flex();
     @include flex-direction(column);
+    z-index: 1000;
 }
 .app-wrap {
     &.menu-open-true {
