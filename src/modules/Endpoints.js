@@ -10,4 +10,6 @@ export const endpoints = {
     crew: `${baseUrl}crew.php`,
     activate: `${baseUrl}activate.php`,
     messages: `${baseUrl}messages.php`,
+    spot: `${baseUrl}up.php`,
+    image: `${baseUrl}image.php`,
 }

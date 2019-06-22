@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import {MenuActions} from "./modules/MenuActions";
 import {Header} from "./modules/Header"; 
 import {Reporter} from "./modules/Reporter"; 
 import {Locator} from "./modules/Locator"; 
@@ -228,6 +229,7 @@ class App extends React.Component {
         });
     }
     getHeaderTitleFromActionName(actionName){
+        console.log(actionName);
         let headerTitle = '';
         switch (actionName) {
             case "Add":
@@ -258,17 +260,19 @@ class App extends React.Component {
         let headerTitle = this.getHeaderTitleFromActionName(actionName);
         this.setState({
             activeView: actionName,
-            headerTitle
+            headerTitle,
+            menuOpen: false,
         });
         if (actionName == this.views.Locator) {
-            console.log('Locator view triggered');
             window.setTimeout(()=>$(document).trigger('center_map'), 200);
         }
     }
     handleLogout(){
-        const cookie_data_string = '';
-        setCookie('user_data', cookie_data_string);
+        deleteCookie('user_data');
+        let headerTitle = this.getHeaderTitleFromActionName(MenuActions.Main);
         this.setState({
+            activeView: MenuActions.Main,
+            headerTitle,
             user_name: '',
             user_id: '',
             user_role: '',
@@ -286,7 +290,8 @@ class App extends React.Component {
                 toggleMenu={this.toggleMenu}
                 menuOpen={this.state.menuOpen}
                 logout={this.handleLogout}
-                headerTitle={this.state.headerTitle}/>
+                headerTitle={this.state.headerTitle}
+                user_admin={this.state.user_role == 0}/>
 
                 {(this.state.signed_in) ? (
                     <div className="app-body">
@@ -404,4 +409,7 @@ function getCookie(cname) {
         }
     }
     return "";
+}
+function deleteCookie(cname) {
+    document.cookie = cname + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
 }

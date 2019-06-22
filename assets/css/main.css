@@ -241,7 +241,7 @@
 /* line 62, messages.scss */
 .message-create {
   background: black;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   height: 100px;
@@ -276,13 +276,17 @@ body {
   font-size: 15px;
   background: black;
 }
+/* line 14, main.scss */
+body button, body label, body input, body textarea {
+  font-family: 'Roboto Condensed', sans-serif;
+}
 
-/* line 15, main.scss */
+/* line 18, main.scss */
 body * {
   box-sizing: border-box;
 }
 
-/* line 19, main.scss */
+/* line 22, main.scss */
 header {
   width: 100%;
   padding: 5px 20px;
@@ -301,7 +305,7 @@ header {
   height: 65px;
 }
 
-/* line 28, main.scss */
+/* line 31, main.scss */
 .header-title {
   font-size: 18px;
   font-weight: normal;
@@ -310,7 +314,7 @@ header {
   letter-spacing: 5px;
   color: black;
 }
-/* line 35, main.scss */
+/* line 38, main.scss */
 .header-title span {
   font-size: 26px;
   text-transform: lowercase;
@@ -320,24 +324,24 @@ header {
   vertical-align: bottom;
 }
 
-/* line 44, main.scss */
+/* line 47, main.scss */
 header img {
   /* width: 50px; */
 }
 
-/* line 47, main.scss */
+/* line 50, main.scss */
 footer {
   width: 100%;
   padding: 20px;
 }
 
-/* line 51, main.scss */
+/* line 54, main.scss */
 .app-body {
   padding: 20px;
   margin-top: 30px;
 }
 
-/* line 55, main.scss */
+/* line 58, main.scss */
 .locator-wrap {
   height: calc(100vh - 65px);
   width: 100%;
@@ -351,13 +355,13 @@ footer {
   flex-direction: column;
 }
 
-/* line 61, main.scss */
+/* line 64, main.scss */
 .locator-list {
   height: 210px;
   overflow: hidden;
   position: relative;
 }
-/* line 65, main.scss */
+/* line 68, main.scss */
 .locator-list .location-list {
   width: auto;
   height: calc(100% - 50px);
@@ -371,7 +375,7 @@ footer {
   transition: margin-left .3s ease;
 }
 
-/* line 74, main.scss */
+/* line 77, main.scss */
 .list-item {
   border-bottom: 1px solid silver;
   width: calc(50vw - 15px);
@@ -383,7 +387,7 @@ footer {
   background: #9EC6C8;
   position: relative;
 }
-/* line 82, main.scss */
+/* line 85, main.scss */
 .list-item .spot-name {
   display: -webkit-box;
   display: -moz-box;
@@ -399,25 +403,25 @@ footer {
   margin-bottom: 15px;
   font-size: 16px;
 }
-/* line 88, main.scss */
+/* line 91, main.scss */
 .list-item .spot-name span {
   font-weight: bold;
 }
-/* line 91, main.scss */
+/* line 94, main.scss */
 .list-item .spot-name .spot-name-left {
   width: calc(100% - 25px);
 }
-/* line 95, main.scss */
+/* line 98, main.scss */
 .list-item .spot-description {
   margin-bottom: 15px;
   font-size: 14px;
 }
-/* line 99, main.scss */
+/* line 102, main.scss */
 .list-item .show-image {
   text-decoration: underline;
   margin-bottom: 15px;
 }
-/* line 103, main.scss */
+/* line 106, main.scss */
 .list-item .button-cta {
   width: calc(100% - 20px);
   position: absolute;
@@ -425,7 +429,7 @@ footer {
   text-decoration: none;
 }
 
-/* line 110, main.scss */
+/* line 113, main.scss */
 .locator-list-control {
   width: 100%;
   height: 50px;
@@ -444,7 +448,7 @@ footer {
   background: black;
   color: #9EC6C8;
 }
-/* line 120, main.scss */
+/* line 123, main.scss */
 .locator-list-control .move-left, .locator-list-control .move-right {
   border: 1px solid #9EC6C8;
   height: 30px;
@@ -452,7 +456,7 @@ footer {
   line-height: 30px;
   text-align: center;
 }
-/* line 127, main.scss */
+/* line 130, main.scss */
 .locator-list-control .bubbles {
   display: -webkit-box;
   display: -moz-box;
@@ -466,7 +470,7 @@ footer {
   -webkit-align-items: center;
   align-items: center;
 }
-/* line 131, main.scss */
+/* line 134, main.scss */
 .locator-list-control .bubbles .bubble {
   width: 10px;
   height: 10px;
@@ -475,31 +479,31 @@ footer {
   border-radius: 50%;
   background: black;
 }
-/* line 138, main.scss */
+/* line 141, main.scss */
 .locator-list-control .bubbles .bubble.active {
   background: #9EC6C8;
 }
 
-/* line 144, main.scss */
+/* line 147, main.scss */
 .locator-map {
   width: 100vw;
   height: calc(100vh - 275px);
 }
 
-/* line 148, main.scss */
+/* line 151, main.scss */
 #map {
   width: 100%;
   height: 100%;
 }
 
-/* line 152, main.scss */
+/* line 155, main.scss */
 .leaflet-div-icon {
   background-image: url(../images/pin.svg);
   background-size: cover;
   background-color: transparent;
   border: none;
 }
-/* line 157, main.scss */
+/* line 160, main.scss */
 .leaflet-div-icon .center {
   background: #9EC6C8;
   border-radius: 50%;
@@ -510,13 +514,13 @@ footer {
   left: 8px;
 }
 
-/* line 167, main.scss */
+/* line 170, main.scss */
 .reporter-wrap {
   margin-bottom: 20px;
   position: relative;
 }
 
-/* line 171, main.scss */
+/* line 174, main.scss */
 .reporter-form {
   max-width: 320px;
   margin: auto;
@@ -524,7 +528,13 @@ footer {
   width: calc(100% - 40px);
 }
 
-/* line 177, main.scss */
+/* line 181, main.scss */
+.clear-form-data[data-visible="false"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* line 186, main.scss */
 .image-preview {
   width: 100%;
   height: 35vh;
@@ -533,8 +543,15 @@ footer {
   border-bottom: 2px solid black;
   position: relative;
 }
-/* line 184, main.scss */
+/* line 193, main.scss */
 .image-preview .upload-an-image {
+  display: none;
+  width: 100%;
+  height: 100%;
+  color: black;
+}
+/* line 195, main.scss */
+.image-preview .upload-an-image[data-display="flex"] {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -549,16 +566,13 @@ footer {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
-  color: black;
 }
-/* line 192, main.scss */
+/* line 204, main.scss */
 .image-preview .upload-an-image .upload-an-image-cta {
   text-align: center;
 }
 
-/* line 197, main.scss */
+/* line 209, main.scss */
 .image-preview canvas {
   border: 2px solid black;
   margin: auto;
@@ -573,13 +587,13 @@ footer {
   max-height: 30vh;
 }
 
-/* line 206, main.scss */
+/* line 218, main.scss */
 .leaflet-google-mutant, .leaflet-map-pane, .leaflet-container {
   width: 100%;
   height: 100%;
 }
 
-/* line 211, main.scss */
+/* line 223, main.scss */
 .form-button-section {
   display: -webkit-box;
   display: -moz-box;
@@ -594,7 +608,7 @@ footer {
   align-items: center;
 }
 
-/* line 216, main.scss */
+/* line 228, main.scss */
 .reporter-title {
   display: none;
   padding-bottom: 10px;
@@ -602,7 +616,7 @@ footer {
   border-bottom: 1px solid silver;
 }
 
-/* line 222, main.scss */
+/* line 234, main.scss */
 .reporter-form input[type=text], .reporter-form textarea {
   padding: 0 10px;
   border: 2px solid black;
@@ -614,28 +628,28 @@ footer {
   font-size: 15px;
 }
 
-/* line 232, main.scss */
+/* line 244, main.scss */
 .reporter-form textarea {
   height: 100px;
 }
 
-/* line 235, main.scss */
+/* line 247, main.scss */
 .reporter-form input[type=file] {
   display: none;
 }
 
-/* line 238, main.scss */
+/* line 250, main.scss */
 .standard-label {
   display: inline-block;
   margin-bottom: 5px;
 }
 
-/* line 242, main.scss */
+/* line 254, main.scss */
 .reporter-form .file-label {
   background: #9EC6C8;
   padding: 0 20px;
   height: 40px;
-  line-height: 40px;
+  line-height: 36px;
   color: black;
   text-align: center;
   border: 2px solid black;
@@ -646,27 +660,26 @@ footer {
   width: calc(50% - 5px);
 }
 
-/* line 257, main.scss */
+/* line 269, main.scss */
 .button-cta {
   background: black;
   padding: 0 20px;
   height: 40px;
-  line-height: 40px;
   color: #9EC6C8;
   text-transform: uppercase;
   font-weight: bold;
   text-align: center;
-  border: none;
+  border: 2px solid black;
   display: inline-block;
   font-size: 15px;
 }
 
-/* line 270, main.scss */
+/* line 281, main.scss */
 .reporter-form .button-cta {
   width: calc(50% - 5px);
 }
 
-/* line 274, main.scss */
+/* line 285, main.scss */
 .home-menu-wrap {
   display: -webkit-box;
   display: -moz-box;
@@ -685,13 +698,13 @@ footer {
   width: 100%;
 }
 @media (min-width: 500px) {
-  /* line 274, main.scss */
+  /* line 285, main.scss */
   .home-menu-wrap {
     max-width: 360px;
     margin: auto;
   }
 }
-/* line 285, main.scss */
+/* line 296, main.scss */
 .home-menu-wrap .home-menu-button {
   cursor: pointer;
   width: calc(50vw - 30px);
@@ -720,14 +733,14 @@ footer {
   text-align: center;
   margin: 5px;
 }
-/* line 302, main.scss */
+/* line 313, main.scss */
 .home-menu-wrap .home-menu-button .icon {
   margin-bottom: 10px;
   display: inline-block;
   font-size: 32px;
 }
 @media (min-width: 500px) {
-  /* line 285, main.scss */
+  /* line 296, main.scss */
   .home-menu-wrap .home-menu-button {
     max-width: 150px;
     max-height: 150px;
@@ -735,18 +748,18 @@ footer {
   }
 }
 
-/* line 314, main.scss */
+/* line 325, main.scss */
 .button-action-menu {
   font-size: 20px;
   margin-top: 20px;
 }
-/* line 317, main.scss */
+/* line 328, main.scss */
 .button-action-menu[data-visible="false"] {
   opacity: 0;
   pointer-events: none;
 }
 
-/* line 322, main.scss */
+/* line 333, main.scss */
 .button-action-main {
   font-size: 20px;
   color: black;
@@ -755,155 +768,155 @@ footer {
   margin-top: 20px;
 }
 
-/* line 330, main.scss */
+/* line 341, main.scss */
 .app-wrap {
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
   background: #9EC6C8;
 }
-/* line 336, main.scss */
+/* line 347, main.scss */
 .app-wrap .header-wrap {
   padding-bottom: 20px;
 }
 
-/* line 340, main.scss */
+/* line 351, main.scss */
 .Main {
   background-image: url(../images/mobile1g2.jpg);
 }
-/* line 344, main.scss */
+/* line 355, main.scss */
 .Main .app-view:not(.app-view-main) {
   display: none;
 }
-/* line 348, main.scss */
+/* line 359, main.scss */
 .Main .button-action-main {
   visibility: hidden;
 }
 
-/* line 353, main.scss */
+/* line 364, main.scss */
 .Locator .button-action-main {
   color: #9EC6C8;
 }
-/* line 356, main.scss */
+/* line 367, main.scss */
 .Locator .header-wrap {
   color: #9EC6C8 !important;
   background: black;
 }
-/* line 359, main.scss */
+/* line 370, main.scss */
 .Locator .header-wrap .header-title {
   color: #9EC6C8;
 }
-/* line 363, main.scss */
+/* line 374, main.scss */
 .Locator .app-body {
   margin-top: 0;
   padding: 0;
 }
-/* line 368, main.scss */
+/* line 379, main.scss */
 .Locator .app-view:not(.app-view-locator) {
   display: none;
 }
 
-/* line 374, main.scss */
+/* line 385, main.scss */
 .Add .app-body {
   margin-top: 0;
   padding: 0;
 }
-/* line 378, main.scss */
+/* line 389, main.scss */
 .Add .button-action-main {
   color: #9EC6C8;
 }
-/* line 381, main.scss */
+/* line 392, main.scss */
 .Add .header-wrap {
   color: #9EC6C8 !important;
   background: black;
 }
-/* line 384, main.scss */
+/* line 395, main.scss */
 .Add .header-wrap .header-title {
   color: #9EC6C8;
 }
-/* line 389, main.scss */
+/* line 400, main.scss */
 .Add .app-view:not(.app-view-add) {
   display: none;
 }
 
-/* line 395, main.scss */
+/* line 406, main.scss */
 .Skaters .app-body, .Users .app-body {
   margin-top: 0;
   padding: 0;
 }
-/* line 399, main.scss */
+/* line 410, main.scss */
 .Skaters .button-action-main, .Users .button-action-main {
   color: #9EC6C8;
 }
-/* line 402, main.scss */
+/* line 413, main.scss */
 .Skaters .header-wrap, .Users .header-wrap {
   color: #9EC6C8 !important;
   background: black;
 }
-/* line 405, main.scss */
+/* line 416, main.scss */
 .Skaters .header-wrap .header-title, .Users .header-wrap .header-title {
   color: #9EC6C8;
 }
-/* line 410, main.scss */
+/* line 421, main.scss */
 .Skaters .app-view:not(.app-view-skaters), .Users .app-view:not(.app-view-skaters) {
   display: none;
 }
 
-/* line 416, main.scss */
+/* line 427, main.scss */
 .Crews .app-body {
   margin-top: 0;
   padding: 0;
 }
-/* line 420, main.scss */
+/* line 431, main.scss */
 .Crews .button-action-main {
   color: #9EC6C8;
 }
-/* line 423, main.scss */
+/* line 434, main.scss */
 .Crews .header-wrap {
   color: #9EC6C8 !important;
   background: black;
 }
-/* line 426, main.scss */
+/* line 437, main.scss */
 .Crews .header-wrap .header-title {
   color: #9EC6C8;
 }
-/* line 431, main.scss */
+/* line 442, main.scss */
 .Crews .app-view:not(.app-view-crews) {
   display: none;
 }
 
-/* line 437, main.scss */
+/* line 448, main.scss */
 .Messages .app-body {
   margin-top: 0;
   padding: 0;
 }
-/* line 441, main.scss */
+/* line 452, main.scss */
 .Messages .button-action-main {
   color: #9EC6C8;
 }
-/* line 444, main.scss */
+/* line 455, main.scss */
 .Messages .header-wrap {
   color: #9EC6C8 !important;
   background: black;
   border-bottom: 1px solid #9EC6C8;
 }
-/* line 448, main.scss */
+/* line 459, main.scss */
 .Messages .header-wrap .header-title {
   color: #9EC6C8;
 }
-/* line 453, main.scss */
+/* line 464, main.scss */
 .Messages .app-view:not(.app-view-messages) {
   display: none;
 }
 
-/* line 458, main.scss */
+/* line 469, main.scss */
 .coords {
   color: black;
   font-size: 15px;
   margin-top: 20px;
 }
 
-/* line 463, main.scss */
+/* line 474, main.scss */
 .slide-menu {
   width: 100vw;
   opacity: 0;
@@ -924,16 +937,16 @@ footer {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  z-index: 1000;
+  z-index: 10000;
 }
 
-/* line 481, main.scss */
+/* line 492, main.scss */
 .app-wrap.menu-open-true .slide-menu {
   transform: translate(0, 0);
   opacity: 1;
 }
 
-/* line 487, main.scss */
+/* line 498, main.scss */
 .slide-menu-item {
   padding: 10px 20px;
   padding-right: 0;
@@ -943,7 +956,7 @@ footer {
   text-align: right;
 }
 
-/* line 495, main.scss */
+/* line 506, main.scss */
 .slide-menu-close {
   -ms-align-self: flex-end;
   -webkit-align-self: flex-end;
@@ -953,21 +966,21 @@ footer {
   color: #9EC6C8;
 }
 
-/* line 501, main.scss */
+/* line 512, main.scss */
 .slide-menu-action {
   display: none;
 }
 
-/* line 505, main.scss */
+/* line 516, main.scss */
 .slide-menu-action-active .slide-menu-item {
   display: none;
 }
-/* line 508, main.scss */
+/* line 519, main.scss */
 .slide-menu-action-active .slide-menu-action.active {
   display: block;
 }
 
-/* line 512, main.scss */
+/* line 523, main.scss */
 .skater-list-item-wrap {
   display: -webkit-box;
   display: -moz-box;
@@ -986,7 +999,7 @@ footer {
   height: 60px;
 }
 
-/* line 521, main.scss */
+/* line 532, main.scss */
 .skater-list-name {
   color: black;
   display: -webkit-box;
@@ -998,27 +1011,27 @@ footer {
   -ms-justify-content: flex-start;
   justify-content: flex-start;
 }
-/* line 525, main.scss */
+/* line 536, main.scss */
 .skater-list-name > span {
   display: inline-block;
   margin-right: 10px;
   font-weight: bold;
 }
 
-/* line 531, main.scss */
+/* line 542, main.scss */
 .skater-list-count {
   color: black;
   text-align: left;
   margin-left: 5px;
 }
-/* line 535, main.scss */
+/* line 546, main.scss */
 .skater-list-count span {
   display: inline-block;
   margin-right: 5px;
   font-weight: bold;
 }
 
-/* line 541, main.scss */
+/* line 552, main.scss */
 .skater-list-cta {
   width: 80px;
   height: 30px;
@@ -1031,12 +1044,12 @@ footer {
   cursor: pointer;
   margin-right: 10px;
 }
-/* line 552, main.scss */
+/* line 563, main.scss */
 .skater-list-cta:last-child {
   margin-right: 0;
 }
 
-/* line 556, main.scss */
+/* line 567, main.scss */
 .mode-add-skater {
   display: -webkit-box;
   display: -moz-box;
@@ -1058,11 +1071,11 @@ footer {
   height: 35vh;
   border-bottom: 2px solid black;
 }
-/* line 566, main.scss */
+/* line 577, main.scss */
 .mode-add-skater .form-wrap {
   width: 100%;
 }
-/* line 567, main.scss */
+/* line 578, main.scss */
 .mode-add-skater .form-wrap form {
   display: -webkit-box;
   display: -moz-box;
@@ -1073,7 +1086,7 @@ footer {
   -ms-justify-content: space-between;
   justify-content: space-between;
 }
-/* line 573, main.scss */
+/* line 584, main.scss */
 .mode-add-skater .form-wrap input[type="text"] {
   height: 40px;
   width: calc(100% - 90px);
@@ -1081,7 +1094,7 @@ footer {
   font-size: 15px;
   text-indent: 5px;
 }
-/* line 580, main.scss */
+/* line 591, main.scss */
 .mode-add-skater .form-wrap button {
   font-size: 15px;
   height: 40px;
@@ -1094,7 +1107,7 @@ footer {
   line-height: 40px;
   text-transform: uppercase;
 }
-/* line 592, main.scss */
+/* line 603, main.scss */
 .mode-add-skater .form-wrap .skater-type-radio {
   background: black;
   border: 2px solid black;
@@ -1106,7 +1119,7 @@ footer {
   top: 10px;
   background: #9EC6C8;
 }
-/* line 602, main.scss */
+/* line 613, main.scss */
 .mode-add-skater .form-wrap .skater-type-radio > span {
   position: absolute;
   top: 2px;
@@ -1117,7 +1130,7 @@ footer {
   background: black;
   display: none;
 }
-/* line 613, main.scss */
+/* line 624, main.scss */
 .mode-add-skater .form-wrap .skater-type {
   display: inline-block;
   height: 40px;
@@ -1129,11 +1142,11 @@ footer {
   position: relative;
   padding-right: 25px;
 }
-/* line 624, main.scss */
+/* line 635, main.scss */
 .mode-add-skater .form-wrap .skater-type[data-selected="true"] .skater-type-radio > span {
   display: block;
 }
-/* line 629, main.scss */
+/* line 640, main.scss */
 .mode-add-skater .form-wrap input[type="radio"] {
   width: .1px;
   height: .1px;
@@ -1141,7 +1154,7 @@ footer {
   opacity: 0;
 }
 
-/* line 637, main.scss */
+/* line 648, main.scss */
 .skater-list-cta-group {
   display: -webkit-box;
   display: -moz-box;
@@ -1152,12 +1165,12 @@ footer {
   -webkit-align-items: center;
   align-items: center;
 }
-/* line 640, main.scss */
+/* line 651, main.scss */
 .skater-list-cta-group .skater-list-cta {
   margin-left: 20px;
 }
 
-/* line 644, main.scss */
+/* line 655, main.scss */
 .skater-share-link {
   padding-top: 10px;
   position: fixed;
@@ -1169,11 +1182,11 @@ footer {
   border: 2px solid black;
   padding: 20px;
 }
-/* line 654, main.scss */
+/* line 665, main.scss */
 .skater-share-link > div {
   margin-bottom: 20px;
 }
-/* line 657, main.scss */
+/* line 668, main.scss */
 .skater-share-link .copy-link-wrap {
   display: -webkit-box;
   display: -moz-box;
@@ -1185,14 +1198,14 @@ footer {
   justify-content: space-between;
   margin-bottom: 0;
 }
-/* line 661, main.scss */
+/* line 672, main.scss */
 .skater-share-link .copy-link-wrap #copy-link {
   width: calc(100% - 90px);
   padding: 5px;
   border: 2px solid black;
   height: 40px;
 }
-/* line 667, main.scss */
+/* line 678, main.scss */
 .skater-share-link .copy-link-wrap button {
   width: 80px;
   background: black;
@@ -1202,17 +1215,17 @@ footer {
   height: 40px;
   cursor: pointer;
 }
-/* line 677, main.scss */
+/* line 688, main.scss */
 .skater-share-link .skater-share-title {
   font-size: 18px;
 }
-/* line 680, main.scss */
+/* line 691, main.scss */
 .skater-share-link .skater-share-instructions {
   font-size: 14px;
   padding-bottom: 20px;
   border-bottom: 2px solid black;
 }
-/* line 685, main.scss */
+/* line 696, main.scss */
 .skater-share-link .share-links {
   display: -webkit-box;
   display: -moz-box;
@@ -1223,11 +1236,11 @@ footer {
   -ms-justify-content: space-between;
   justify-content: space-between;
 }
-/* line 688, main.scss */
+/* line 699, main.scss */
 .skater-share-link .share-links > a {
   color: black;
 }
-/* line 692, main.scss */
+/* line 703, main.scss */
 .skater-share-link .slide-menu-close {
   position: absolute;
   top: 10px;
@@ -1235,7 +1248,7 @@ footer {
   color: black;
 }
 
-/* line 699, main.scss */
+/* line 710, main.scss */
 .loading-bg {
   display: none;
   width: 100%;
@@ -1246,11 +1259,11 @@ footer {
   top: 0;
   left: 0;
 }
-/* line 708, main.scss */
+/* line 719, main.scss */
 .loading-bg[data-visible="true"] {
   display: block;
 }
-/* line 711, main.scss */
+/* line 722, main.scss */
 .loading-bg .loading-animation {
   position: absolute;
   top: 50%;
@@ -1261,7 +1274,7 @@ footer {
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-/* line 717, main.scss */
+/* line 728, main.scss */
 .loading-bg .loading-message {
   text-align: center;
   margin-top: 70px;
@@ -1269,48 +1282,48 @@ footer {
   color: black;
 }
 
-/* line 725, main.scss */
+/* line 736, main.scss */
 .leaflet-popup .leaflet-popup-tip {
   border: 1px solid black;
   background: #9EC6C8;
 }
-/* line 729, main.scss */
+/* line 740, main.scss */
 .leaflet-popup .leaflet-popup-content-wrapper {
   background: #9EC6C8;
 }
 
-/* line 733, main.scss */
+/* line 744, main.scss */
 .leaflet-popup-content {
   margin: 5px;
 }
 
-/* line 736, main.scss */
+/* line 747, main.scss */
 .popup-wrap {
   width: 220px;
   font-family: 'Roboto Condensed', sans-serif;
 }
-/* line 739, main.scss */
+/* line 750, main.scss */
 .popup-wrap .popup-image {
   width: 100%;
   min-height: 100px;
 }
-/* line 742, main.scss */
+/* line 753, main.scss */
 .popup-wrap .popup-image img {
   height: auto;
   width: 100%;
 }
-/* line 747, main.scss */
+/* line 758, main.scss */
 .popup-wrap .popup-name {
   margin: 5px 0;
   font-size: 16px;
   color: black;
 }
-/* line 752, main.scss */
+/* line 763, main.scss */
 .popup-wrap .popup-description {
   font-size: 12px;
   margin-bottom: 5px;
 }
-/* line 756, main.scss */
+/* line 767, main.scss */
 .popup-wrap .button-cta {
   color: #9EC6C8;
   text-decoration: none;
@@ -1321,7 +1334,7 @@ footer {
   width: 80%;
 }
 
-/* line 767, main.scss */
+/* line 778, main.scss */
 .app-view-skaters .skater-list-cta {
   display: none;
 }

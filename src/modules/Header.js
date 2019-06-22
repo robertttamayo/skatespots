@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {MenuAddCrew, MenuAddCrewLeader, MenuAddSkater} from "./SlideMenuActions";
+import { MenuActions } from "./MenuActions";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import  {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
 import { faBars, faArrowLeft, faTimes, faSnowboarding, faUsers } from '@fortawesome/free-solid-svg-icons';
@@ -12,9 +12,6 @@ export class Header extends React.Component {
         super(props);
         this.onBack = this.onBack.bind(this);
         this.onMenu = this.onMenu.bind(this);
-        this.menuAddCrew = this.menuAddCrew.bind(this);
-        this.menuAddCrewLeader = this.menuAddCrewLeader.bind(this);
-        this.menuAddSkater = this.menuAddSkater.bind(this);
         this.logout = this.logout.bind(this);
         this.state = {
             user_data: this.props.user_data
@@ -28,14 +25,9 @@ export class Header extends React.Component {
     onMenu() {
         this.props.toggleMenu();
     }
-    menuAddCrew() {
-        
-    }
-    menuAddSkater() {
-        
-    }
-    menuAddCrewLeader() {
-        
+    handleAction(actionType) {
+        console.log(actionType);
+        this.props.menuAction(actionType);
     }
     logout() {
         this.props.logout();
@@ -58,6 +50,24 @@ export class Header extends React.Component {
                         <FontAwesomeIcon icon="times" />
                     </div>
 
+                    <div className="slide-menu-item" onClick={()=>this.handleAction(MenuActions.Add)}>
+                        Add a Spot
+                    </div>
+                    <div className="slide-menu-item" onClick={()=>this.handleAction(MenuActions.Locator)}>
+                        Spots
+                    </div>
+                    <div className="slide-menu-item" onClick={()=>this.handleAction(MenuActions.Messages)}>
+                        Messages
+                    </div>
+                    {this.props.user_admin ? (
+                        <div className="slide-menu-item" onClick={()=>this.handleAction(MenuActions.Crews)}>
+                            Crews
+                        </div>
+                    ) : (
+                        <div className="slide-menu-item" onClick={()=>this.handleAction(MenuActions.Skaters)}>
+                            Skaters
+                        </div>
+                    )}
                     <div className="slide-menu-item" onClick={this.logout}>
                         Logout
                     </div>

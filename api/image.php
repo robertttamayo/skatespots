@@ -17,18 +17,24 @@ foreach ($_FILES["image_file"]["error"] as $key => $error) {
         $name = $_FILES["image_file"]["name"][$key];
         $original_name = $name;
         $name = $imgDir . $name;
-        
+        // echo "Name: $name\n\n";
         if (file_exists($name)) {
             $regex = "/\(([0-9])\)/";
             $nameparts = explode(".", $name);
-            
+            // echo json_encode($nameparts);
+            // echo "\n\n";
+            // echo "size of nameparts: " . sizeof($nameparts) . "\n\n";
             $shortname = "";
             $extension = "";
+            // $extension = $nameparts[sizeof($nameparts) - 1];
             if (sizeof($nameparts) > 1) {
+                $extension = '.' . $nameparts[sizeof($nameparts) - 1];
                 $shortname = $nameparts[0];
-                for ($i = 1; $i < sizeof($nameparts); $i++) {
-                    $extension = $extension . "." . $nameparts[$i];
+                for ($i = 1; $i < (sizeof($nameparts) - 1); $i++) {
+                    // $extension = $extension . "." . $nameparts[$i];
+                    $shortname = $shortname . '.' . $nameparts[$i];
                 }
+                // echo $shortname . "\n\n" . $extension . "\n\n";
             } else {
                 $shortname = $name;
             }
@@ -61,7 +67,7 @@ foreach ($_FILES["image_file"]["error"] as $key => $error) {
             
             $data["original_name"] = $original_name;
             $data["saved_as_name"] = $name;
-            $data["success"] = true;
+            $data["status"] = "success";
             $data["img_url"] = $img_url;
             $data["message"] = "Success!";
             
@@ -69,16 +75,15 @@ foreach ($_FILES["image_file"]["error"] as $key => $error) {
             echo json_encode($data);
         } else {
             $img_url = MEDIA_URL . $dateSuffix . $original_name;
-            $data["success"] = true;
+            $data["status"] = "success";
             $data["img_url"] = $img_url;
             $data["message"] = "Success!";
             move_uploaded_file($tmp_name, "$name");
             echo json_encode($data);
         }
     } else {
-        echo "we gotted here. this the else";
-        $data["success"] = false;
-        $data["message"] = "One or more images did not upload successfully.";
+        $data["status"] = "fail";
+        $data["message"] = "One or more images did not upload successfully. Error Status: $error";
         echo json_encode($data);
     }
 }

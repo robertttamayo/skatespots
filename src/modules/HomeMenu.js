@@ -1,4 +1,5 @@
 import React from "react";
+import { MenuActions } from "./MenuActions";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import  {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faPlus, faUsers, faCommentDots } from '@fortawesome/free-solid-svg-icons';
@@ -16,25 +17,25 @@ export class HomeMenu extends React.Component {
     render(){
         return (
             <div className="home-menu-wrap">
-                <div className="home-menu-button action-add" onClick={()=>this.handleAction('Add')}>
+                <div className="home-menu-button action-add" onClick={()=>this.handleAction(MenuActions.Add)}>
                     <span className="icon"><FontAwesomeIcon icon="plus" /></span>
                     <span>Add a Spot</span>
                 </div>
-                <div className="home-menu-button action-locator" onClick={()=>this.handleAction('Locator')}>
+                <div className="home-menu-button action-locator" onClick={()=>this.handleAction(MenuActions.Locator)}>
                     <span className="icon"><FontAwesomeIcon icon="map-marker-alt" /></span>
                     <span>Spots</span>
                 </div>
-                <div className="home-menu-button action-messages" onClick={()=>this.handleAction('Messages')}>
+                <div className="home-menu-button action-messages" onClick={()=>this.handleAction(MenuActions.Messages)}>
                     <span className="icon"><FontAwesomeIcon icon="comment-dots" /></span>
                     <span>Message<br/>Board</span>
                 </div>
                 {this.props.user_admin ?
-                    (<div className="home-menu-button action-crews" onClick={()=>this.handleAction('Crews')}>
+                    (<div className="home-menu-button action-crews" onClick={()=>this.handleAction(MenuActions.Crews)}>
                         <span className="icon"><FontAwesomeIcon icon="users" /></span>
                         <span>Crews</span>
                     </div>)
                     : 
-                    (<div className="home-menu-button action-skaters" onClick={()=>this.handleAction('Skaters')}>
+                    (<div className="home-menu-button action-skaters" onClick={()=>this.handleAction(MenuActions.Skaters)}>
                         <span className="icon"><FontAwesomeIcon icon="users" /></span>
                         <span>Skaters</span>
                     </div>

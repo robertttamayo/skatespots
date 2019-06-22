@@ -3,6 +3,7 @@ import {Loader} from "./Loader";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import  {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
+import {endpoints} from "./Endpoints";
 
 library.add(faCamera);
 
@@ -15,6 +16,7 @@ export class Reporter extends React.Component {
         this.activate = this.activate.bind(this);
         this.getCoords = this.getCoords.bind(this);
         this.uploadImage = this.uploadImage.bind(this);
+        this.clearFormData = this.clearFormData.bind(this);
 
         this.crew_id = this.props.crew_id;
         this.image_url = '';
@@ -23,10 +25,7 @@ export class Reporter extends React.Component {
             lat: '123.9309230',
             lng: '99.30904290'
         }
-        this.endpoints = {
-            spot: "https://www.roberttamayo.com/skate/api/up.php",
-            image: "https://www.roberttamayo.com/skate/api/image.php",
-        }
+
         this.state = {
             spot_name: '',
             spot_description: '',
@@ -39,6 +38,21 @@ export class Reporter extends React.Component {
             image_data_url: null,
             loading_message: 'Uploading image...',
         };
+    }
+    clearFormData() {
+        this.setState({
+            spot_name: '',
+            spot_description: '',
+            image_file: null,
+            has_image: false,
+            image_height: 300,
+            image_width: 400,
+            active: false,
+            loading: false,
+            image_data_url: null,
+            loading_message: 'Uploading image...',
+        });
+        document.getElementById("reporter-form").reset();
     }
     getCoords() {
         if (this.coords.lat != '') {
@@ -61,7 +75,7 @@ export class Reporter extends React.Component {
                     this.coords.lat = position.coords.latitude.toString();
                     this.coords.lng = position.coords.latitude.toString();
 
-                    $.ajax(this.endpoints.spot, {
+                    $.ajax(endpoints.spot, {
                         method: "POST",
                         data: {
                             lat: position.coords.latitude.toString(),
@@ -76,18 +90,7 @@ export class Reporter extends React.Component {
                         // TODO: update UI to reflect successful upload
                         console.log(response);
                         alert('Spot uploaded successfully');
-                        this.setState({
-                            spot_name: '',
-                            spot_description: '',
-                            image_file: null,
-                            has_image: false,
-                            image_height: 300,
-                            image_width: 400,
-                            active: false,
-                            loading: false,
-                            image_data_url: null,
-                            loading_message: 'Uploading image...',
-                        });
+                        this.clearFormData();
                     });
                     //do_something(position.coords.latitude, position.coords.longitude);
                 }, ()=>{
@@ -111,22 +114,30 @@ export class Reporter extends React.Component {
                 "imgdata": [imgData]
             };
             $.ajax({
-                url: this.endpoints.image,
+                url: endpoints.image,
                 type: "POST",
                 processData: false,
                 contentType: false,
                 data: imgData
-            }).done((_data) => {
-                console.log(_data);
-                var data = JSON.parse(_data);
-                console.log(data);
-                if (data.success){
-                    this.image_url = data.img_url;
-                    resolve();
-                } else {
+            }).done((response) => {
+                try {
+                    console.log(response);
+                    var data = JSON.parse(response);
+                    console.log(data);
+                    if (data.status == "success"){
+                        this.image_url = data.img_url;
+                        resolve();
+                    } else {
+                        reject();
+                        alert(data.message);
+                    }
+                } catch (e) {
+                    console.error(e);
                     reject();
-                    alert(data.message);
+                    alert('An error occurred while uploading the image');
+                    this.setState({loading: false});
                 }
+                
             });
         });
     }
@@ -199,7 +210,7 @@ export class Reporter extends React.Component {
                 <div className="reporter-wrap">
                     <div className="image-preview">
                         <canvas style={{display: this.state.has_image ? 'block' : 'none'}} width={this.state.image_width} height={this.state.image_height} id="image-preview-canvas"></canvas>
-                        <div className="upload-an-image" style={{display: this.state.has_image ? 'none' : 'default'}}>
+                        <div className="upload-an-image" data-display={this.state.has_image ? 'none' : 'flex'}>
                             <label htmlFor="image_file[]" className="upload-an-image-cta">
                                 <div><FontAwesomeIcon icon="camera" /></div>
                                 <div>Add an Image</div>
@@ -222,13 +233,18 @@ export class Reporter extends React.Component {
                             <textarea onChange={this.handleChange} value={this.state.spot_description} placeholder="Description" id="spot_description" name="spot_description"/>
                         </div>
                         <div className="form-button-section">
-                            <label htmlFor="image_file[]" className="file-label">Add an Image</label>
+                            <label 
+                            data-visible={(this.state.has_image || this.state.spot_name != '' || this.state.spot_description != '')} 
+                            className="file-label clear-form-data" onClick={this.clearFormData}>Reset</label>
+
                             <button type="submit" className="button-cta">Post</button>
                             <input id="image_file[]" name="image_file[]" onChange={this.compress} type="file" accept="image/*"/>
                         </div>
                         <div className="coords">
                         </div>
                     </form>
+
+                    
 
                     <Loader
                     loading={this.state.loading}
