@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { MenuActions } from "./MenuActions";
+import { MenuActions } from "../constants/MenuActions";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import  {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
 import { faBars, faArrowLeft, faTimes, faSnowboarding, faUsers } from '@fortawesome/free-solid-svg-icons';
@@ -16,7 +16,6 @@ export class Header extends React.Component {
         this.state = {
             user_data: this.props.user_data
         }
-        console.log(this.state.user_data);
     }
     onBack() {
         $(document).trigger("reset");
@@ -57,7 +56,7 @@ export class Header extends React.Component {
                         Spots
                     </div>
                     <div className="slide-menu-item" onClick={()=>this.handleAction(MenuActions.Messages)}>
-                        Messages
+                        Message Board
                     </div>
                     {this.props.user_admin ? (
                         <div className="slide-menu-item" onClick={()=>this.handleAction(MenuActions.Crews)}>

@@ -1,9 +1,10 @@
 import React from "react";
+import {endpoints} from "../constants/Endpoints";
 
 export class ViewAddCrew extends React.Component {
     constructor(props) {
         super(props);
-        this.endpoint = "https://www.roberttamayo.com/skate/add.php";
+        this.endpoint = endpoints.crew;
         this.handleChange = this.handleChange.bind(this);
         this.handleAddNewCrew = this.handleAddNewCrew.bind(this);
 

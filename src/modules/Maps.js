@@ -15,7 +15,7 @@ export class Maps extends React.Component {
         this.lng = -98.35;
         this.zoom = 4;
         this.key = "AIzaSyCqjAzVHf3SRY1HIr-yYTCyNhOCHV1p5AE";
-        this.iconUrl = "https://www.roberttamayo.com/skate/assets/images/icon.svg";
+        this.iconUrl = "/assets/images/icon.svg";
 
         this.markerRefs = [];
         this.popupRefs = [];

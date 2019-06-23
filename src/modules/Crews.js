@@ -15,8 +15,8 @@ export class Crews extends React.Component {
             loading: false
         }
     }
-    handleSelectCrew(crew_id){
-        this.props.handleSelectCrew(crew_id);
+    handleSelectCrew(crew_id, crew_name){
+        this.props.handleSelectCrew(crew_id, crew_name);
     }
     handleAddNewCrew(crew_name){
         this.setState({loading: true});
@@ -41,7 +41,7 @@ export class Crews extends React.Component {
                     </div>
                     
                     <div className="skater-list-cta"
-                    onClick={()=>this.handleSelectCrew(item.crew_id)}>
+                    onClick={()=>this.handleSelectCrew(item.crew_id, item.crew_name)}>
                         Select
                     </div>
                 </div>

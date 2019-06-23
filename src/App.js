@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {MenuActions} from "./modules/MenuActions";
+import {MenuActions} from "./constants/MenuActions";
 import {Header} from "./modules/Header"; 
 import {Reporter} from "./modules/Reporter"; 
 import {Locator} from "./modules/Locator"; 
@@ -11,6 +11,8 @@ import {Messages} from "./modules/Messages";
 import {Skaters} from "./modules/Skaters";
 import {Crews} from "./modules/Crews";
 import {Loader} from "./modules/Loader";
+import {getUserInfo, setCookie, getCookie, deleteCookie, CookieNames} from "./utils/Cookies";
+import {endpoints} from "./constants/Endpoints";
 
 class App extends React.Component {
     constructor(props) {
@@ -27,17 +29,6 @@ class App extends React.Component {
         this.handleAddNewCrew = this.handleAddNewCrew.bind(this);
         this.handleAddNewSkater = this.handleAddNewSkater.bind(this);
 
-        this.baseUrl = 'https://www.roberttamayo.com/skate/api/';
-        this.endpoints = {
-            login: `${this.baseUrl}login.php`,
-            skaters: `${this.baseUrl}skaters.php`,
-            crews: `${this.baseUrl}crews.php`,
-            spots: `${this.baseUrl}down.php`,
-            uploadSpot: `${this.baseUrl}up.php`,
-            user: `${this.baseUrl}user.php`,
-            crew: `${this.baseUrl}crew.php`,
-            activate: `${this.baseUrl}activate.php`,
-        }
         this.views = {
             Add: "Add",
             Locator: "Locator",
@@ -55,6 +46,7 @@ class App extends React.Component {
             user_name: this.props.user_name,
             user_id: this.props.user_id,
             crew_id: this.props.crew_id,
+            crew_name: this.props.crew_name,
             user_role: this.props.user_role,
             signed_in: this.props.signed_in,
             user_magicword: '',
@@ -64,13 +56,14 @@ class App extends React.Component {
             crews: [],
             headerTitle: '',
             selected_crew_id: '',
+            selected_crew_name: '',
             loading: false,
             loading_message: 'Loading data...',
         };
     }
     fetchCrews() {
         return new Promise((resolve, reject) => {
-            let endpoint = this.endpoints.crews;
+            let endpoint = endpoints.crews;
             $.ajax(endpoint, {
                 method: "POST",
                 data: {}
@@ -89,15 +82,19 @@ class App extends React.Component {
             });
         });
     }  
-    handleSelectCrew(crew_id) {
-        this.setState({selected_crew_id: crew_id});
+    handleSelectCrew(crew_id, crew_name) {
+        console.log(crew_name);
+        this.setState({
+            selected_crew_id: crew_id,
+            selected_crew_name: crew_name
+        });
         this.fetchSkaters(crew_id).then(()=>{
             this.menuAction('Users');
         });
     }
     fetchSkaters(crew_id){
         return new Promise((resolve, reject) => {
-            let endpoint = this.endpoints.skaters;
+            let endpoint = endpoints.skaters;
             $.ajax(endpoint, {
                 method: "POST",
                 data: {
@@ -108,7 +105,7 @@ class App extends React.Component {
                     let data = JSON.parse(response);
                     console.log(data);
                     this.setState({
-                        skaters: data
+                        skaters: data,
                     });
                     resolve();
                 } catch (e) {
@@ -125,28 +122,31 @@ class App extends React.Component {
     }
     handleLogin() {
         this.setState({loading: true, loading_message: 'Logging in...'});
-        $.ajax(this.endpoints.login, {
+        $.ajax(endpoints.login, {
             method: "POST",
             data: {
                 user_name: this.state.user_name,
                 user_magicword: this.state.user_magicword
-            }
+            },
+            withCredentials: true,
         }).then((response)=>{
             try {
                 let data = JSON.parse(response);
-                if (data.success) {
+                if (data.status == 'success') {
                     const cookie_data_string = JSON.stringify({
                         user_name: data.user_name,
                         user_id: data.user_id,
                         user_role: data.user_role,
-                        crew_id: data.crew_id
+                        crew_id: data.crew_id,
+                        crew_name: data.crew_name,
                     });
-                    setCookie('user_data', cookie_data_string);
+                    setCookie(CookieNames.server, cookie_data_string);
                     let loading_message = data.user_role == 0 ? 'Fetching crews...' : 'Fetching skaters...';
                     this.setState({
                         user_name: data.user_name,
                         user_id: data.user_id,
                         crew_id: data.crew_id,
+                        crew_name: data.crew_name,
                         user_role: data.user_role,
                         signed_in: true,
                         loading_message,
@@ -180,7 +180,7 @@ class App extends React.Component {
     }
     handleAddNewCrew(crew_name){
         return new Promise((resolve, reject)=>{
-            $.ajax(this.endpoints.crew, {
+            $.ajax(endpoints.crew, {
                 method: "POST",
                 data: {
                     crew_name,
@@ -204,7 +204,7 @@ class App extends React.Component {
     }
     handleAddNewSkater(skater_data) {
         return new Promise((resolve, reject) => {
-            $.ajax(this.endpoints.user, {
+            $.ajax(endpoints.user, {
                 method: "POST",
                 data: {
                     crew_id: this.state.selected_crew_id,
@@ -321,10 +321,12 @@ class App extends React.Component {
                         <div className="app-view app-view-skaters">
                             <Skaters 
                             skaters={this.state.skaters} 
-                            crew_id={this.state.selected_crew_id}
+                            crew_id={(this.state.user_role == 0) ? this.state.selected_crew_id : this.state.crew_id}
+                            crew_name={(this.state.user_role == 0) ? this.state.selected_crew_name : this.state.crew_name}
                             user_can_add={this.state.user_role <= 1} 
                             handleAddNewSkater={this.handleAddNewSkater} 
-                            activateEndpoint={this.endpoints.activate} />
+                            activateEndpoint={endpoints.activate} 
+                            />
                         </div>
 
                         <div className="app-view app-view-crews">
@@ -365,51 +367,14 @@ class App extends React.Component {
 
 let user_data = getUserInfo();
 let signed_in = (user_data != '');
+
 ReactDOM.render(
     <App user_name={user_data.user_name}
     user_id={user_data.user_id}
     crew_id={user_data.crew_id}
+    crew_name={user_data.crew_name}
     user_data={user_data}
     user_role={user_data.user_role}
     signed_in={signed_in}/>,
     document.getElementById('app')
 );
-
-function getUserInfo() {
-    let user_cookie = getCookie('user_data');
-    if (user_cookie != '') {
-        try {
-            let user_data = JSON.parse(user_cookie);
-            return user_data;
-        } catch (e) {
-            console.log("error with parsing cookie");
-        }
-    }
-    return false;
-}
-
-function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
-function deleteCookie(cname) {
-    document.cookie = cname + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-}

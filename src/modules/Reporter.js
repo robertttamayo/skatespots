@@ -3,7 +3,7 @@ import {Loader} from "./Loader";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import  {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
-import {endpoints} from "./Endpoints";
+import {endpoints} from "../constants/Endpoints";
 
 library.add(faCamera);
 
@@ -153,13 +153,12 @@ export class Reporter extends React.Component {
         reader.onload = event => {
             const img = new Image();
             img.src = event.target.result;
+            
             img.onload = () => {
                 const elem = document.createElement('canvas');
                 let width = Math.floor(window.innerWidth * .8);
                 let scaleFactor = width / img.width;
-                console.log(`scaleFactor: ${scaleFactor}`);
                 let height = Math.floor(img.height * scaleFactor);
-                console.log(`width: ${width}, height: ${height}`);
                 elem.width = width;
                 elem.height = height;
                 const ctx = elem.getContext('2d');

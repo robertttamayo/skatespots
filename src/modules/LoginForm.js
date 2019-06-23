@@ -3,7 +3,6 @@ import React from "react";
 export class LoginForm extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props);
         this.handleLogin = this.handleLogin.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.state = {

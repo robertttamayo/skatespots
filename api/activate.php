@@ -16,7 +16,6 @@ if (isset($_POST['user_id'])) {
         $sql = "SELECT COUNT(user_name) AS username_count
         FROM users 
         WHERE user_name = '$user_name' 
-        AND crew_id = $crew_id 
         AND user_id <> $user_id";
         $stmt = $con->prepare($sql);
         $stmt->execute();
@@ -39,7 +38,17 @@ if (isset($_POST['user_id'])) {
         $stmt = $con->prepare($sql);
         $stmt->execute();
         echo "success";
-        $sql = "SELECT user_name, user_id, user_role, crew_id FROM users WHERE user_id = $user_id";
+        $sql = "SELECT 
+        user_name, 
+        user_id, 
+        user_role, 
+        crew_id,
+        (SELECT crew_name 
+            FROM crews 
+            WHERE crew_id = $crew_id
+        ) AS crew_name
+        FROM users 
+        WHERE user_id = $user_id";
         $stmt = $con->prepare($sql);
         $stmt->execute();
         $data = $stmt->fetchAll();
@@ -47,9 +56,10 @@ if (isset($_POST['user_id'])) {
             'user_name' => $data[0]['user_name'],
             'user_id' => $data[0]['user_id'],
             'user_role' => $data[0]['user_role'],
-            'crew_id' => $data[0]['crew_id']
+            'crew_id' => $data[0]['crew_id'],
+            'crew_name' => $data[0]['crew_name']
         ]);
-        setcookie('user_data', $cookie_value, time() + (86400 * 365), "/");
+        util_set_user_data_cookie($cookie_value);
         exit;
     }
 } else if (isset($_GET['user_id'])) {
@@ -71,7 +81,6 @@ if (isset($_POST['user_id'])) {
         $user_id = $data[0]['user_id'];
         $crew_id = $data[0]['crew_id'];
         $user_activate_key = $data[0]['user_activate_key'];
-        $user_name = $data[0]['user_name'];
         $user_name = $data[0]['user_name'];
     } else {
         $valid = false;

@@ -1,6 +1,6 @@
 import React from "react";
 import {Loader} from "./Loader";
-import {endpoints} from "./Endpoints";
+import {endpoints} from "../constants/Endpoints";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import  {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';

@@ -14,7 +14,7 @@ export class Skaters extends React.Component {
         this.state = {
             loading: false,
             shareLink: '',
-            addSkaterHeaderText: 'Add New Skater',
+            addSkaterHeaderText: `Add New Skater`,
         }
 
         this.originalState = Object.assign({}, {...this.state});
@@ -61,10 +61,13 @@ export class Skaters extends React.Component {
                     handleAddNewSkater={this.handleAddNewSkater}
                     loading={this.state.loading}
                     crew_id={this.props.crew_id}
+                    crew_name={this.props.crew_name}
                     shareLink={this.state.shareLink}
                     headerText={this.state.addSkaterHeaderText}/>
                 ) : (
-                    ''
+                    <div className="mode-add-skater">
+                        <h2 className="skaters-crew-name">{this.props.crew_name}</h2>
+                    </div>
                 )}
                 
                 <div className="skaters-list">

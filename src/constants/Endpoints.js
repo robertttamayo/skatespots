@@ -1,4 +1,4 @@
-const baseUrl = 'https://www.roberttamayo.com/skate/api/';
+const baseUrl = `https://www.skateat.com/api/`;
 
 export const endpoints = {
     login: `${baseUrl}login.php`,

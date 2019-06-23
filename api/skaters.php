@@ -17,7 +17,11 @@ $sql = "SELECT *,
     FROM spots 
     WHERE spots.spot_added_by = users.user_id
     AND spots.crew_id = $crew_id
-) AS user_spots_added_count
+) AS user_spots_added_count,
+(SELECT crew_name 
+    FROM crews 
+    WHERE crew_id = $crew_id
+) AS crew_name
 FROM users
 WHERE crew_id = $crew_id
 AND user_is_active = 1";
@@ -34,6 +38,7 @@ foreach($data as $datum) {
         'user_is_active' => $datum['user_is_active'],
         'user_role' => $datum['user_role'],
         'crew_id' => $datum['crew_id'],
+        'crew_name' => $datum['crew_name'],
         'user_spots_added_count' => $datum['user_spots_added_count']
     ];
     $users[] = $user;

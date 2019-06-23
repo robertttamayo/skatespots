@@ -1,5 +1,5 @@
 import React from "react";
-import { MenuActions } from "./MenuActions";
+import { MenuActions } from "../constants/MenuActions";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import  {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
 import { faMapMarkerAlt, faPlus, faUsers, faCommentDots } from '@fortawesome/free-solid-svg-icons';

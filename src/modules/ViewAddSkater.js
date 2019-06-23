@@ -16,16 +16,21 @@ export class ViewAddSkater extends React.Component {
         this.copyShareLink = this.copyShareLink.bind(this);
         this.handleRadioChange = this.handleRadioChange.bind(this);
         this.onShareLinkClose = this.onShareLinkClose.bind(this);
+        this.getEmailSubject = this.getEmailSubject.bind(this);
         this.state = {
             skater_username: '',
             skater_password: '',
             skater_is_crew_leader: false,
             skater_is_skater: true,
             crew_id: this.props.crew_id,
+            crew_name: this.props.crew_name,
             copyLinkText: 'Copy Link',
             shareLinkAvailable: true,
             skater_type_created: 'Skater'
         };
+    }
+    getEmailSubject(crew_name) {
+        return `You're invited to join the Skate At crew "${crew_name}"`;
     }
     handleRadioChange(skater_is_crew_leader) {
         this.setState({
@@ -64,12 +69,15 @@ export class ViewAddSkater extends React.Component {
     render() {
         let shareLinkUrlEncoded = '';
         if (this.props.shareLink != '') {
-            shareLinkUrlEncoded = encodeURIComponent(this.props.shareLink);
+            shareLinkUrlEncoded = encodeURIComponent(`<a href="${this.props.shareLink}">Click to join</a>`);
+            shareLinkUrlEncoded = encodeURIComponent(`${this.props.shareLink}`);
         }
         let shareLinkVisible = this.props.shareLink !== '' && this.state.shareLinkAvailable;
         return (
         <React.Fragment>
             <div className="mode-add-skater">
+                <h2 className="skaters-crew-name with-border">{this.props.crew_name}</h2>
+
                 <h3>{this.props.headerText}</h3>
                 {this.props.loading ? (
                     <div className="loading-inline">Loading</div>
@@ -129,7 +137,7 @@ export class ViewAddSkater extends React.Component {
                 <div className="share-links">
                     <a className="sms-link" href={`sms:&body=${shareLinkUrlEncoded}`}>Send SMS</a>
 
-                    <a className="email-link" href={`mailto:?body=${shareLinkUrlEncoded}`}>Send email</a>
+                    <a className="email-link" href={`mailto:?subject=${encodeURIComponent(this.getEmailSubject(this.props.crew_name))}&body=${shareLinkUrlEncoded}`}>Send email</a>
                 </div>
 
                 <div className="copy-link-wrap">

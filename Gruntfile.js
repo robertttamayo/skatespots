@@ -47,7 +47,7 @@ module.exports = function(grunt) {
             web: {
                 files: [
                     'src/*.js',
-                    'src/modules/*.js'
+                    'src/*/*.js'
                 ],
                 tasks: [
                     'webpack'

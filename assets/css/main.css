@@ -954,9 +954,10 @@ footer {
   color: #9EC6C8;
   margin-bottom: 10px;
   text-align: right;
+  cursor: pointer;
 }
 
-/* line 506, main.scss */
+/* line 507, main.scss */
 .slide-menu-close {
   -ms-align-self: flex-end;
   -webkit-align-self: flex-end;
@@ -966,21 +967,21 @@ footer {
   color: #9EC6C8;
 }
 
-/* line 512, main.scss */
+/* line 513, main.scss */
 .slide-menu-action {
   display: none;
 }
 
-/* line 516, main.scss */
+/* line 517, main.scss */
 .slide-menu-action-active .slide-menu-item {
   display: none;
 }
-/* line 519, main.scss */
+/* line 520, main.scss */
 .slide-menu-action-active .slide-menu-action.active {
   display: block;
 }
 
-/* line 523, main.scss */
+/* line 524, main.scss */
 .skater-list-item-wrap {
   display: -webkit-box;
   display: -moz-box;
@@ -999,7 +1000,7 @@ footer {
   height: 60px;
 }
 
-/* line 532, main.scss */
+/* line 533, main.scss */
 .skater-list-name {
   color: black;
   display: -webkit-box;
@@ -1011,27 +1012,27 @@ footer {
   -ms-justify-content: flex-start;
   justify-content: flex-start;
 }
-/* line 536, main.scss */
+/* line 537, main.scss */
 .skater-list-name > span {
   display: inline-block;
   margin-right: 10px;
   font-weight: bold;
 }
 
-/* line 542, main.scss */
+/* line 543, main.scss */
 .skater-list-count {
   color: black;
   text-align: left;
   margin-left: 5px;
 }
-/* line 546, main.scss */
+/* line 547, main.scss */
 .skater-list-count span {
   display: inline-block;
   margin-right: 5px;
   font-weight: bold;
 }
 
-/* line 552, main.scss */
+/* line 553, main.scss */
 .skater-list-cta {
   width: 80px;
   height: 30px;
@@ -1044,12 +1045,12 @@ footer {
   cursor: pointer;
   margin-right: 10px;
 }
-/* line 563, main.scss */
+/* line 564, main.scss */
 .skater-list-cta:last-child {
   margin-right: 0;
 }
 
-/* line 567, main.scss */
+/* line 568, main.scss */
 .mode-add-skater {
   display: -webkit-box;
   display: -moz-box;
@@ -1071,11 +1072,22 @@ footer {
   height: 35vh;
   border-bottom: 2px solid black;
 }
-/* line 577, main.scss */
+/* line 578, main.scss */
+.mode-add-skater .skaters-crew-name {
+  text-align: center;
+  width: 100%;
+}
+/* line 581, main.scss */
+.mode-add-skater .skaters-crew-name.with-border {
+  padding-bottom: 20px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid black;
+}
+/* line 587, main.scss */
 .mode-add-skater .form-wrap {
   width: 100%;
 }
-/* line 578, main.scss */
+/* line 588, main.scss */
 .mode-add-skater .form-wrap form {
   display: -webkit-box;
   display: -moz-box;
@@ -1086,7 +1098,7 @@ footer {
   -ms-justify-content: space-between;
   justify-content: space-between;
 }
-/* line 584, main.scss */
+/* line 594, main.scss */
 .mode-add-skater .form-wrap input[type="text"] {
   height: 40px;
   width: calc(100% - 90px);
@@ -1094,7 +1106,7 @@ footer {
   font-size: 15px;
   text-indent: 5px;
 }
-/* line 591, main.scss */
+/* line 601, main.scss */
 .mode-add-skater .form-wrap button {
   font-size: 15px;
   height: 40px;
@@ -1107,7 +1119,7 @@ footer {
   line-height: 40px;
   text-transform: uppercase;
 }
-/* line 603, main.scss */
+/* line 613, main.scss */
 .mode-add-skater .form-wrap .skater-type-radio {
   background: black;
   border: 2px solid black;
@@ -1119,7 +1131,7 @@ footer {
   top: 10px;
   background: #9EC6C8;
 }
-/* line 613, main.scss */
+/* line 623, main.scss */
 .mode-add-skater .form-wrap .skater-type-radio > span {
   position: absolute;
   top: 2px;
@@ -1130,7 +1142,7 @@ footer {
   background: black;
   display: none;
 }
-/* line 624, main.scss */
+/* line 634, main.scss */
 .mode-add-skater .form-wrap .skater-type {
   display: inline-block;
   height: 40px;
@@ -1142,11 +1154,11 @@ footer {
   position: relative;
   padding-right: 25px;
 }
-/* line 635, main.scss */
+/* line 645, main.scss */
 .mode-add-skater .form-wrap .skater-type[data-selected="true"] .skater-type-radio > span {
   display: block;
 }
-/* line 640, main.scss */
+/* line 650, main.scss */
 .mode-add-skater .form-wrap input[type="radio"] {
   width: .1px;
   height: .1px;
@@ -1154,7 +1166,7 @@ footer {
   opacity: 0;
 }
 
-/* line 648, main.scss */
+/* line 658, main.scss */
 .skater-list-cta-group {
   display: -webkit-box;
   display: -moz-box;
@@ -1165,12 +1177,12 @@ footer {
   -webkit-align-items: center;
   align-items: center;
 }
-/* line 651, main.scss */
+/* line 661, main.scss */
 .skater-list-cta-group .skater-list-cta {
   margin-left: 20px;
 }
 
-/* line 655, main.scss */
+/* line 665, main.scss */
 .skater-share-link {
   padding-top: 10px;
   position: fixed;
@@ -1182,11 +1194,11 @@ footer {
   border: 2px solid black;
   padding: 20px;
 }
-/* line 665, main.scss */
+/* line 675, main.scss */
 .skater-share-link > div {
   margin-bottom: 20px;
 }
-/* line 668, main.scss */
+/* line 678, main.scss */
 .skater-share-link .copy-link-wrap {
   display: -webkit-box;
   display: -moz-box;
@@ -1198,14 +1210,14 @@ footer {
   justify-content: space-between;
   margin-bottom: 0;
 }
-/* line 672, main.scss */
+/* line 682, main.scss */
 .skater-share-link .copy-link-wrap #copy-link {
   width: calc(100% - 90px);
   padding: 5px;
   border: 2px solid black;
   height: 40px;
 }
-/* line 678, main.scss */
+/* line 688, main.scss */
 .skater-share-link .copy-link-wrap button {
   width: 80px;
   background: black;
@@ -1215,17 +1227,17 @@ footer {
   height: 40px;
   cursor: pointer;
 }
-/* line 688, main.scss */
+/* line 698, main.scss */
 .skater-share-link .skater-share-title {
   font-size: 18px;
 }
-/* line 691, main.scss */
+/* line 701, main.scss */
 .skater-share-link .skater-share-instructions {
   font-size: 14px;
   padding-bottom: 20px;
   border-bottom: 2px solid black;
 }
-/* line 696, main.scss */
+/* line 706, main.scss */
 .skater-share-link .share-links {
   display: -webkit-box;
   display: -moz-box;
@@ -1236,11 +1248,11 @@ footer {
   -ms-justify-content: space-between;
   justify-content: space-between;
 }
-/* line 699, main.scss */
+/* line 709, main.scss */
 .skater-share-link .share-links > a {
   color: black;
 }
-/* line 703, main.scss */
+/* line 713, main.scss */
 .skater-share-link .slide-menu-close {
   position: absolute;
   top: 10px;
@@ -1248,7 +1260,7 @@ footer {
   color: black;
 }
 
-/* line 710, main.scss */
+/* line 720, main.scss */
 .loading-bg {
   display: none;
   width: 100%;
@@ -1259,11 +1271,11 @@ footer {
   top: 0;
   left: 0;
 }
-/* line 719, main.scss */
+/* line 729, main.scss */
 .loading-bg[data-visible="true"] {
   display: block;
 }
-/* line 722, main.scss */
+/* line 732, main.scss */
 .loading-bg .loading-animation {
   position: absolute;
   top: 50%;
@@ -1274,7 +1286,7 @@ footer {
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-/* line 728, main.scss */
+/* line 738, main.scss */
 .loading-bg .loading-message {
   text-align: center;
   margin-top: 70px;
@@ -1282,48 +1294,48 @@ footer {
   color: black;
 }
 
-/* line 736, main.scss */
+/* line 746, main.scss */
 .leaflet-popup .leaflet-popup-tip {
   border: 1px solid black;
   background: #9EC6C8;
 }
-/* line 740, main.scss */
+/* line 750, main.scss */
 .leaflet-popup .leaflet-popup-content-wrapper {
   background: #9EC6C8;
 }
 
-/* line 744, main.scss */
+/* line 754, main.scss */
 .leaflet-popup-content {
   margin: 5px;
 }
 
-/* line 747, main.scss */
+/* line 757, main.scss */
 .popup-wrap {
   width: 220px;
   font-family: 'Roboto Condensed', sans-serif;
 }
-/* line 750, main.scss */
+/* line 760, main.scss */
 .popup-wrap .popup-image {
   width: 100%;
   min-height: 100px;
 }
-/* line 753, main.scss */
+/* line 763, main.scss */
 .popup-wrap .popup-image img {
   height: auto;
   width: 100%;
 }
-/* line 758, main.scss */
+/* line 768, main.scss */
 .popup-wrap .popup-name {
   margin: 5px 0;
   font-size: 16px;
   color: black;
 }
-/* line 763, main.scss */
+/* line 773, main.scss */
 .popup-wrap .popup-description {
   font-size: 12px;
   margin-bottom: 5px;
 }
-/* line 767, main.scss */
+/* line 777, main.scss */
 .popup-wrap .button-cta {
   color: #9EC6C8;
   text-decoration: none;
@@ -1334,7 +1346,7 @@ footer {
   width: 80%;
 }
 
-/* line 778, main.scss */
+/* line 788, main.scss */
 .app-view-skaters .skater-list-cta {
   display: none;
 }

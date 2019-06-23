@@ -1,12 +1,13 @@
 import React from "react";
 
+import {endpoints} from "../constants/Endpoints";
 import {Lists} from "./Lists";
 import {Maps} from "./Maps";
 
 export class Locator extends React.Component {
     constructor(props) {
         super(props);
-        this.endpoint = "https://www.roberttamayo.com/skate/api/down.php";
+        this.endpoint = endpoints.spots;
         this.gather = this.gather.bind(this);
         this.askUserLocation = this.askUserLocation.bind(this);
         this.onMapPinClick = this.onMapPinClick.bind(this);
