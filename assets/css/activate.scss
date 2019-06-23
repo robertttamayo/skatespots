@@ -1,8 +1,12 @@
+.login-wrapper {
+    height: calc(100vh - 65px);
+    position: relative;
+}
 .activate-form {
-    position: fixed;
-    top: 35%;
+    position: absolute;
+    top: 50px;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0%);
     width: 90vw;
     padding: 20px;
     text-align: center;

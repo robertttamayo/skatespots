@@ -11,10 +11,35 @@ export class Lists extends React.Component {
         this.onNext = this.onNext.bind(this);
         this.onPrev = this.onPrev.bind(this);
         this.onMapPinClick = this.onMapPinClick.bind(this);
+        this.onSwipeStart = this.onSwipeStart.bind(this);
+        this.onSwipeStop = this.onSwipeStop.bind(this);
+        this.onTouchUpdate = this.onTouchUpdate.bind(this);
+        this.onMouseMoveEnd = this.onMouseMoveEnd.bind(this);
         this.state = {
             count: this.props.items.length,
             index: 0,
             pageCount: 0,
+        }
+        this.swipeStart = 0;
+        this.swipeStop = 0;
+    }
+    onSwipeStart(event){
+        this.swipeStart = event.touches[0].screenX;
+    }
+    onTouchUpdate(event){
+        this.swipeStop = event.touches[0].screenX;
+    }
+    onMouseMoveEnd(event) {
+        this.swipeStop = event.screenX;
+        this.onSwipeStop();
+    }
+    onSwipeStop(){
+        if (Math.abs(this.swipeStart - this.swipeStop) > window.innerWidth / 4) {
+            if (this.swipeStart < this.swipeStop) {
+                this.onPrev();
+            } else {
+                this.onNext();
+            }
         }
     }
     onNext() {
@@ -35,7 +60,6 @@ export class Lists extends React.Component {
             index = Math.ceil(this.props.items.length / 2) - 1;
         }
         this.setState({index});
-        console.log(this.state);
     }
     render(){
         // use props to render the list instead of state
@@ -67,7 +91,10 @@ export class Lists extends React.Component {
         let bubbleCounters = new Array(Math.ceil(this.props.items.length / 2)).fill(0);
         return(
             <div className="locator-list" data-active-index={this.state.index}>
-                <div className="location-list" style={{marginLeft: `calc(${(-1) * this.state.index * 100}vw + ${this.state.index * 10}px`}}>
+                <div className="location-list" 
+                onTouchStart={this.onSwipeStart} onTouchEnd={this.onSwipeStop} onTouchMove={this.onTouchUpdate}
+                onMouseDown={this.onSwipeStart} onMouseUp={this.onMouseMoveEnd}
+                style={{marginLeft: `calc(${(-1) * this.state.index * 100}vw + ${this.state.index * 10}px`}}>
                     {listItems}
                 </div>
 

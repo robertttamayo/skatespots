@@ -4,6 +4,8 @@ export const CookieNames = {
     client: 'skate_data',
 }
 
+const cookieDomain = ".skateat.com";
+
 export function validateCookies(){
     let cookiesDoMatch = true;
 
@@ -55,7 +57,7 @@ export function setCookie(cname, cvalue, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
     var expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    document.cookie = `${cname}=${cvalue}; domain=${cookieDomain}; ${expires};path=/`;
 }
 
 export function getCookie(cname) {
@@ -74,5 +76,5 @@ export function getCookie(cname) {
     return "";
 }
 export function deleteCookie(cname) {
-    document.cookie = cname + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+    document.cookie = `${cname}=; domain=${cookieDomain}; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
 }

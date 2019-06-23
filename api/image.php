@@ -8,8 +8,49 @@ if (!file_exists($imgDir)) {
     mkdir($imgDir, 0777, true);
 }
 
-$data = [];
+$response = [];
+// echo json_encode($_POST);die;
+if (isset($_POST['imgBase64'])) {
+    $name = $_POST['fileName'];
+    $image_data = $_POST['imgBase64'];
+    $extension = ".jpg";
+    $test_name = $imgDir . $name . $extension;
+    if (file_exists($test_name)) {
+        $prefix = $imgDir . $name;
+        $suffix = ' (1)';
+        if (file_exists($prefix . $suffix . $extension)) {
+            $count = 2;
+            $badname = true;
+            while($badname) {
+                $suffix = " ($count)";
+                $test = $prefix . $suffix . $extension;
+                if (!file_exists($test)){
+                    $badname = false;
+                } else {
+                    $count++;
+                }
+            }
+            $name .= $suffix;
+        } 
 
+        $test_name = $prefix . $suffix . $extension;
+    } 
+    
+    $img_url = MEDIA_URL . $dateSuffix . $name . $extension;
+    $response["status"] = "success";
+    $response["img_url"] = $img_url;
+    $response["message"] = "Success!";
+    $response["test_name"] = $test_name;
+
+    list($type, $image_data) = explode(';', $image_data);
+    list(, $image_data)      = explode(',', $image_data);
+    $bits = base64_decode($image_data);
+    file_put_contents($test_name, $bits);
+    echo json_encode($response);
+} else {
+    fail();
+}
+exit;
 foreach ($_FILES["image_file"]["error"] as $key => $error) {
     
     if ($error == UPLOAD_ERR_OK) {
@@ -86,4 +127,9 @@ foreach ($_FILES["image_file"]["error"] as $key => $error) {
         $data["message"] = "One or more images did not upload successfully. Error Status: $error";
         echo json_encode($data);
     }
+}
+function fail(){
+    $data["status"] = "fail";
+    $data["message"] = "One or more images did not upload successfully. Error Status: $error";
+    echo json_encode($data);
 }

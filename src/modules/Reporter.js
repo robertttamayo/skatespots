@@ -2,10 +2,10 @@ import React from "react";
 import {Loader} from "./Loader";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import  {FontAwesomeIcon}  from '@fortawesome/react-fontawesome';
-import { faCamera } from '@fortawesome/free-solid-svg-icons';
+import { faCamera, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 import {endpoints} from "../constants/Endpoints";
 
-library.add(faCamera);
+library.add(faCamera, faSyncAlt);
 
 export class Reporter extends React.Component {
     constructor(props) {
@@ -17,9 +17,11 @@ export class Reporter extends React.Component {
         this.getCoords = this.getCoords.bind(this);
         this.uploadImage = this.uploadImage.bind(this);
         this.clearFormData = this.clearFormData.bind(this);
+        this.onRotateImage = this.onRotateImage.bind(this);
 
         this.crew_id = this.props.crew_id;
         this.image_url = '';
+        this.dataurl = '';
 
         this.coords = {
             lat: '123.9309230',
@@ -37,7 +39,26 @@ export class Reporter extends React.Component {
             loading: false,
             image_data_url: null,
             loading_message: 'Uploading image...',
+
+            rotating: false,
+            rotated: false,
+            imageRotation: 0,
         };
+    }
+    onRotateImage(){
+        this.setState((prevState, props) => {
+            return {
+                imageRotation: prevState.imageRotation + 1,
+                rotating: true,
+                rotated: false,
+            }
+        });
+        window.setTimeout(()=>{
+            this.setState({
+                rotating: false,
+                rotated: true
+            });
+        }, 205);
     }
     clearFormData() {
         this.setState({
@@ -116,9 +137,13 @@ export class Reporter extends React.Component {
             $.ajax({
                 url: endpoints.image,
                 type: "POST",
-                processData: false,
-                contentType: false,
-                data: imgData
+                // processData: false,
+                // contentType: false,
+                // data: imgData
+                data: {
+                    fileName: this.state.spot_name,
+                    imgBase64: this.dataurl,
+                }
             }).done((response) => {
                 try {
                     console.log(response);
@@ -130,6 +155,7 @@ export class Reporter extends React.Component {
                     } else {
                         reject();
                         alert(data.message);
+                        this.setState({loading: false});
                     }
                 } catch (e) {
                     console.error(e);
@@ -164,6 +190,7 @@ export class Reporter extends React.Component {
                 const ctx = elem.getContext('2d');
                 ctx.drawImage(img, 0, 0, img.width, img.height);
                 ctx.drawImage(elem, 0, 0, width, height);
+
                 ctx.canvas.toBlob((blob) => {
                     const file = new File([blob], fileName, {
                         type: 'image/jpeg',
@@ -177,9 +204,14 @@ export class Reporter extends React.Component {
                         image_width: width,
                         has_image: true,
                     });
-                    ctx.drawImage(img, 0,0,width, height);
-                    // let dataurl = ctx.canvas.toDataURL("image/jpg");
-                    // this.dataurl = dataurl;
+
+                    let angle = this.state.imageRotation*Math.PI/2;
+                    ctx.setTransform(Math.cos(angle), Math.sin(angle), -Math.sin(angle), Math.cos(angle), width/2, height/2);
+                    ctx.drawImage(img, -width/2, -height/2,width, height);
+                    
+                    // drawImage(ctx, img, 0, 0, 1, Math.PI/2, width, height);
+                    let dataurl = ctx.canvas.toDataURL();
+                    this.dataurl = dataurl;
                     
                 }, 'image/jpeg', 1);
             },
@@ -214,6 +246,15 @@ export class Reporter extends React.Component {
                                 <div><FontAwesomeIcon icon="camera" /></div>
                                 <div>Add an Image</div>
                             </label>
+                        </div>
+
+                        <div className="rotate-image" 
+                        data-display={this.state.has_image ? 'flex' : 'none'}
+                        onClick={this.onRotateImage}
+                        data-rotating={this.state.rotating}
+                        data-rotated={this.state.rotated}
+                        >
+                            <FontAwesomeIcon icon="sync-alt"/>
                         </div>
                     </div>
 

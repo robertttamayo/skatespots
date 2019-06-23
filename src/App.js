@@ -338,10 +338,12 @@ class App extends React.Component {
                         </div>
                     </div>
                 ) : (
-                    <LoginForm onLogin={this.handleLogin}
-                    onLoginChange={this.handleLoginChange} 
-                    user_name={this.user_name} 
-                    user_magicword={this.user_magicword}/>
+                    <div className="login-wrapper">
+                        <LoginForm onLogin={this.handleLogin}
+                        onLoginChange={this.handleLoginChange} 
+                        user_name={this.user_name} 
+                        user_magicword={this.user_magicword}/>
+                    </div>
                 )
                 }
 

@@ -191,6 +191,7 @@ footer {
     background-size: cover;
     border-bottom: 2px solid black;
     position: relative;
+
     .upload-an-image {
         display: none;
         &[data-display="flex"] {
@@ -204,6 +205,31 @@ footer {
         color: black;
         .upload-an-image-cta {
             text-align: center;
+        }
+    }
+
+    .rotate-image {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        width: 42px;
+        height: 42px;
+        border: 2px solid black;
+        background: $green;
+        border-radius: 50%;
+        @include flex();
+        @include align-items(center);
+        @include justify-content(center);
+        transition: transform .2s linear;
+
+        &[data-display="none"] {
+            display: none;
+        }
+        &[data-rotating="true"] {
+            @include transform(rotate(180deg));
+        }
+        &[data-rotated="true"] {
+            transition: none;
         }
     }
 }
