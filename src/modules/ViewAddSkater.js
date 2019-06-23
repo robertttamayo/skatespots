@@ -70,7 +70,7 @@ export class ViewAddSkater extends React.Component {
         let shareLinkUrlEncoded = '';
         if (this.props.shareLink != '') {
             shareLinkUrlEncoded = encodeURIComponent(`<a href="${this.props.shareLink}">Click to join</a>`);
-            shareLinkUrlEncoded = encodeURIComponent(`${this.props.shareLink}`);
+            shareLinkUrlEncoded = encodeURIComponent(this.props.shareLink);
         }
         let shareLinkVisible = this.props.shareLink !== '' && this.state.shareLinkAvailable;
         return (
@@ -135,9 +135,10 @@ export class ViewAddSkater extends React.Component {
                 </div>
 
                 <div className="share-links">
-                    <a className="sms-link" href={`sms:&body=${shareLinkUrlEncoded}`}>Send SMS</a>
+                    <a className="sms-link android" data-crew-name={this.props.crew_name} href={`sms:&body=${shareLinkUrlEncoded}`}>Send SMS</a>
+                    <a className="sms-link ios" data-crew-name={this.props.crew_name} href={`sms:?&body=${shareLinkUrlEncoded}`}>Send SMS</a>
 
-                    <a className="email-link" href={`mailto:?subject=${encodeURIComponent(this.getEmailSubject(this.props.crew_name))}&body=${shareLinkUrlEncoded}`}>Send email</a>
+                    <a className="email-link" href={`mailto:?subject=${encodeURIComponent(this.getEmailSubject(this.props.crew_name))}&body=${encodeURIComponent('Click to activate your account: ')}${shareLinkUrlEncoded}`}>Send email</a>
                 </div>
 
                 <div className="copy-link-wrap">

@@ -37,9 +37,10 @@ header {
     color: black;
     span {
         font-size: 26px;
+        font-size: 36px;
         text-transform: lowercase;
         font-family: 'Monoton', cursive;
-        line-height: 1;
+        line-height: 24px;
         font-weight: normal;
         vertical-align: bottom;
     }
@@ -706,6 +707,9 @@ footer {
     .share-links {
         @include flex();
         @include justify-content(space-between);
+        .sms-link {
+            display: none;
+        }
         > a {
             color: black;
         }

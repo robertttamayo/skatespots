@@ -45,7 +45,7 @@ if (isset($_POST['user_id'])) {
         crew_id,
         (SELECT crew_name 
             FROM crews 
-            WHERE crew_id = $crew_id
+            WHERE crew_id = (SELECT crew_id FROM users WHERE user_id = $user_id)
         ) AS crew_name
         FROM users 
         WHERE user_id = $user_id";
