@@ -59,6 +59,7 @@ export class Reporter extends React.Component {
                 rotated: true
             });
         }, 205);
+        this.compress();
     }
     clearFormData() {
         this.setState({
@@ -72,6 +73,9 @@ export class Reporter extends React.Component {
             loading: false,
             image_data_url: null,
             loading_message: 'Uploading image...',
+            rotating: false,
+            rotated: false,
+            imageRotation: 0,
         });
         document.getElementById("reporter-form").reset();
     }
@@ -130,15 +134,14 @@ export class Reporter extends React.Component {
                 resolve();
             }
             let imgData = new FormData(document.getElementById("reporter-form"));
-            console.log(imgData);
-            var data = {
-                "imgdata": [imgData]
-            };
+
+            // this.setState({loading: false});
+            // return;
             $.ajax({
                 url: endpoints.image,
                 type: "POST",
                 // processData: false,
-                // contentType: false,
+                // contentType: 'text/plain', 
                 // data: imgData
                 data: {
                     fileName: this.state.spot_name,
@@ -172,10 +175,11 @@ export class Reporter extends React.Component {
             [event.target.name]: event.target.value
         });
     }
-    compress(event) {
-        const fileName = event.target.files[0].name;
+    compress() {
+        let formImage = document.getElementById('image_file[]');
+        const fileName = formImage.files[0].name;
         const reader = new FileReader();
-        reader.readAsDataURL(event.target.files[0]);
+        reader.readAsDataURL(formImage.files[0]);
         reader.onload = event => {
             const img = new Image();
             img.src = event.target.result;
@@ -188,6 +192,18 @@ export class Reporter extends React.Component {
                 elem.width = width;
                 elem.height = height;
                 const ctx = elem.getContext('2d');
+
+                let angle = this.state.imageRotation * Math.PI/2;
+
+                if (this.state.imageRotation % 2 != 0) {
+                    width = width + height;
+                    height = width - height;
+                    width = width - height;
+                    elem.width = width;
+                    elem.height = height;
+                }
+                ctx.setTransform(Math.cos(angle), Math.sin(angle), -Math.sin(angle), Math.cos(angle), width/2, height/2);
+
                 ctx.drawImage(img, 0, 0, img.width, img.height);
                 ctx.drawImage(elem, 0, 0, width, height);
 
@@ -198,16 +214,20 @@ export class Reporter extends React.Component {
                     });
                     let image_preview_canvas = document.getElementById('image-preview-canvas');
                     let ctx = image_preview_canvas.getContext('2d');
+                    
                     this.setState({
                         image_file: file,
                         image_height: height,
                         image_width: width,
                         has_image: true,
                     });
-
-                    let angle = this.state.imageRotation*Math.PI/2;
                     ctx.setTransform(Math.cos(angle), Math.sin(angle), -Math.sin(angle), Math.cos(angle), width/2, height/2);
-                    ctx.drawImage(img, -width/2, -height/2,width, height);
+
+                    if (this.state.imageRotation % 2 == 0) {
+                        ctx.drawImage(img, -width/2, -height/2,width, height);
+                    } else {
+                        ctx.drawImage(img, -height/2, -width/2,height, width);
+                    }
                     
                     // drawImage(ctx, img, 0, 0, 1, Math.PI/2, width, height);
                     let dataurl = ctx.canvas.toDataURL();
@@ -219,7 +239,6 @@ export class Reporter extends React.Component {
         };
     }
     activate() {
-        console.log('activating form');
         this.setState({
             active: true
         })

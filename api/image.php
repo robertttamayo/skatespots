@@ -46,6 +46,7 @@ if (isset($_POST['imgBase64'])) {
     list(, $image_data)      = explode(',', $image_data);
     $bits = base64_decode($image_data);
     file_put_contents($test_name, $bits);
+    // file_put_contents($test_name, $image_data);
     echo json_encode($response);
 } else {
     fail();
